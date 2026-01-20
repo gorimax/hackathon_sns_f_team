@@ -9,12 +9,14 @@
     <div class="hamburger-menu">
         <nav>
             <ul>
-                <!-- hrefの後ろは不確定 -->
-                <li><a href="{{ url_for('main.home') }}">タイムライン</a></li>
-                <li><a href="{{ url_for('user.profile') }}">プロフィール</a></li>
-                <li><a href="{{ url_for('post.create_post') }}">新規投稿画面</a></li>
-                <li><a href="{{ url_for('auth.logout') }}">ログアウト</a></li>
+                <!-- hrefの後ろは不確定 （相対パスで指定してる）-->
+                <li><a href="../auth/timeline.html">ホーム</a></li>
+                <li><a href="../auth/bookmark.html">ブックマーク</a></li>
+                <li><a href="../auth/mypage.html">自身の投稿</a></li>
+                <li><a href="../auth/profile.html">プロフィール</a></li>
+                <li><a href="../auth/followers.html">フォロワー</a></li>
             </ul>
         </nav>
+        <button class="logoutbutton" onclick="location.href='../auth/login.html'">ログアウト</button>
     </div>
 </body>
