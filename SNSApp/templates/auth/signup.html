@@ -1,1 +1,55 @@
-<h1>新規登録</h1>
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新規登録</title>
+</head>
+<!-- {% extends "base.html" %} -->
+
+<!--{%block title %}-->
+<title>新規登録 - TechShare</title>
+<!-- {% endblock %} -->
+
+<!-- {% page_css %} -->
+<!-- <link rel="stylesheet" href="../..//static/css/auth.css"> -->
+
+<body>
+    <!-- {% block content %} -->
+    <div>
+        <h2>新規作成</h2>
+    </div>
+    <form method="post">
+        <input type="hidden" name="">
+        <div>
+            <label>ユーザー名</label>
+            <input type="text" placeholder="ユーザー名" name="name" />
+        </div>
+
+        <div>
+            <label>メールアドレス</label>
+            <input type="text" placeholder="メールアドレス" name="email" />
+        </div>
+
+        <div>
+            <label>パスワード</label>
+            <input type="password" placeholder="パスワード" name="password" />
+        </div>
+
+        <!-- <div>
+            <label>パスワード(確認用)</label>
+            <input type="password" placeholder="パスワード(確認用)" name="password" />
+        </div> -->
+
+        <div>
+            <button type="submit">新規登録</button>
+            <!-- <a href="{{url_for login_view(仮)}}">
+            ログインはこちら
+        </a> -->
+        </div>
+    </form>
+    <!-- {% endblock %} -->
+</body>
+
+</html>
