@@ -1,0 +1,18 @@
+:root {
+  --shadow-soft: 0 16px 40px rgba(15, 23, 42, 0.12);
+}
+main {
+    min-height: 100vh;
+    min-width: 100vh;
+}
+
+.card-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    background-color: rgb(187, 187, 187);
+    border-radius: 11px;
+}
