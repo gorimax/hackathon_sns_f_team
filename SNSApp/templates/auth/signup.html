@@ -17,10 +17,11 @@
 
 <body>
     <!-- {% block content %} -->
-    <div>
-        <h2>新規作成</h2>
-    </div>
-    <form method="post">
+    <div class="main">
+        <div class="card-container">
+            <div class="card">
+            <h2 class="auth-title">新規作成</h2>
+            <form method="post">
         <input type="hidden" name="">
         <div>
             <label>ユーザー名</label>
@@ -37,10 +38,10 @@
             <input type="password" placeholder="パスワード" name="password" />
         </div>
 
-        <!-- <div>
+        <div> 
             <label>パスワード(確認用)</label>
             <input type="password" placeholder="パスワード(確認用)" name="password" />
-        </div> -->
+        </div>
 
         <div>
             <button type="submit">新規登録</button>
@@ -49,6 +50,10 @@
         </a> -->
         </div>
     </form>
+</div>
+</div>
+</div>
+
     <!-- {% endblock %} -->
 </body>
 
