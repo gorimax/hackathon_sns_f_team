@@ -9,7 +9,7 @@ body {
 
 .logo {
     font-weight: 700;
-    font-size: 18px;
+    font-size: 17px;
     text-decoration: none;
     text-align: center;
     font-family: HackGen;
@@ -25,6 +25,13 @@ header {
 }
 
 header-inner {
+    /* コンテンツの最大幅を1200pxに制限し、中央に配置 */
+    max-width: 1200px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
+}
+
+footer {
+    margin: 0 auto;
 }
