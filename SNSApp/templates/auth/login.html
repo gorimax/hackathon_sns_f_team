@@ -1,22 +1,14 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../..//static/css/auth.css">
-</head>
-    <!-- {% extends 'base.html' %}
-    <head>
-    {% block title %}Login - TechShare{% endblock %}
-    </head> -->
+{% extends 'post/base.html' %}
 
-<body>
-    <!-- {% block content %} -->
-    <!-- ロゴの確認用 -->
-        <!-- <div class="logo">
-            <h1>TechShare</h1>
-        </div> -->
-    <!--  -->
+{% block title %}Login - TechShare{% endblock %}
+
+
+{% block page_css %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/auth.css')}}">
+{% endblock %}
+
+{% block content %}
+
 <div class="main">
     <div class="card-container">
         <div class="card">
@@ -34,15 +26,13 @@
                     <input type="password" placeholder="パスワード" name="password">
                 </div>
 
-                <!-- <div class="auth-button-container"> もし入力する欄と同じ間隔で配置する場合いらない-->
-                <button class="auth-button"type="submit">LOGIN</button>
-                <!-- </div> -->
+                <div class="auth-button-container"> もし入力する欄と同じ間隔で配置する場合いらない
+                    <button class="auth-button" type="submit">LOGIN</button>
+                </div>
 
                 <a class="auth-link" href="signup.html">新規登録はこちら</a>
             </form>
         </div>
     </div>
 </div>
-
-    <!-- {% endblock %} -->
-</body>
+{% endblock %}
