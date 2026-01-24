@@ -2,12 +2,12 @@
 
 {% block title %}Login - TechShare{% endblock %}
 
-{% block content %}
-<!-- ロゴの確認用 -->
-<!-- <div class="logo">
-    <h1>TechShare</h1>
-</div> -->
 
+{% block page_css %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/auth.css')}}">
+{% endblock %}
+
+{% block content %}
 <div class="main">
     <div class="card-container">
         <div class="card">
@@ -34,5 +34,4 @@
         </div>
     </div>
 </div>
-
 {% endblock %}
