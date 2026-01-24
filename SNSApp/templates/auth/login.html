@@ -1,22 +1,22 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../..//static/css/auth.css">
+    <link rel="stylesheet" href="../..//static/css/base.css">
+</head> -->
+{% extends 'base.html' %}
+<head>
+{% block title %}Login - TechShare{% endblock %}
 </head>
-    <!-- {% extends 'base.html' %}
-    <head>
-    {% block title %}Login - TechShare{% endblock %}
-    </head> -->
 
-<body>
-    <!-- {% block content %} -->
+<!-- <body> -->
+
     <!-- ロゴの確認用 -->
         <!-- <div class="logo">
             <h1>TechShare</h1>
         </div> -->
-    <!--  -->
+{% block content %}
 <div class="main">
     <div class="card-container">
         <div class="card">
@@ -44,5 +44,5 @@
     </div>
 </div>
 
-    <!-- {% endblock %} -->
-</body>
+{% endblock %}
+<!-- </body> -->
