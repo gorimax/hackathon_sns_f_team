@@ -2,12 +2,17 @@
     --shadow-soft: 0 16px 40px rgba(15, 23, 42, 0.12);
 }
 
+
+main {
+    min-height: 100vh
+}
+
 /* カードの位置調整 */
 .card-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 85vh;
+    height: 85vh;
     padding: 24px 16px 55px;
 }
 
@@ -40,7 +45,7 @@
     gap: 14px;
 }
 
-.auth-form > div {
+.auth-form>div {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
@@ -62,11 +67,12 @@
     font-size: 14px;
 }
 
-.auth-button-container{
+.auth-button-container {
     display: flex;
     justify-content: center;
     margin-top: 24px;
 }
+
 .auth-button {
     width: 320px;
     height: 45px;
@@ -80,6 +86,7 @@
     border: none;
     cursor: pointer;
 }
+
 .auth-link {
     display: block;
     text-align: center;
