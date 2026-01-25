@@ -14,3 +14,7 @@ def login():
 @app.route("/signup", methods=["GET"])
 def signup():
     return render_template("auth/signup.html")
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
