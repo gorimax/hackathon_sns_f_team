@@ -74,7 +74,7 @@ main {
 .auth-button-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    margin: 0 auto;
 }
 
 .auth-form label {
@@ -84,7 +84,7 @@ main {
 
 /* ボタンのデザイン調整 */
 .auth-button {
-    padding: 12px 100px;
+    /* padding: 12px 100px; */
     color: black;
     background-color: #92B294;
     font-size: 20px;
@@ -92,7 +92,7 @@ main {
     border-radius: 30px;
     border: none;
     cursor: pointer;
-    margin: 15px auto 0;
+    margin-top: 15px;
 }
 
 .auth-button:hover {
