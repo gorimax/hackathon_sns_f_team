@@ -11,9 +11,16 @@
 
 <body>
     {%include 'common/header.html'%}
-    {%block content %}{% endblock %}
+    <div class="layout">
+        {% if request.endpoint not in ['login','signup'] %}
+        {% include 'common/hamburger.html' %}
+        {% endif %}
+        <main class="content">
+            {%block content %}{% endblock %}
+        </main>
+    </div>
     {%include 'common/footer.html'%}
-    
+
 </body>
 
 </html>
