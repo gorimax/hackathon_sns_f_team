@@ -26,6 +26,8 @@ main {
 .card {
     background-color: rgb(187, 187, 187);
     border-radius: 11px;
+    /* 影をつける */
+    box-shadow: 2px 2px 2px blue;
 }
 
 /* カード内のログイン、新規登録のデザイン調整 */
@@ -36,6 +38,8 @@ main {
     padding-top: 25px;
     margin-bottom: 25px;
     margin-top: 0;
+    /* 文字に影 */
+    text-shadow: 2px 2px 2px blue;
 }
 
 .auth-form {
