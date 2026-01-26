@@ -19,7 +19,8 @@ main {
 /* カードの横幅 */
 .auth-wrapper {
     width: 100%;
-    max-width: 520px;
+    width: 520px;
+    margin: 0 auto;
 }
 
 /* カードの見た目調整 */
