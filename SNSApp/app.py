@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+from flask import Flask, redirect ,render_template, session, flash, url_for
+
 
 app = Flask(__name__)
 
@@ -15,6 +16,20 @@ def login():
 def signup():
     return render_template("auth/signup.html")
 
+@app.route("/profile",methods=["GET"])
+def profile():
+    return render_template("auth/profile.html")
 
+@app.route("/mypage",methods=["GET"])
+def mypage():
+    return render_template("auth/mypage.html")
+
+@app.route("/bookmark",methods=["GET"])
+def bookmark():
+    return render_template("auth/bookmark.html")
+
+@app.route("/followers",methods=["GET"])
+def followers():
+    return render_template("auth/followers.html")
 if __name__ == "__main__":
     app.run(debug=True)
