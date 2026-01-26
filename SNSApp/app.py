@@ -20,5 +20,16 @@ def signup():
 def profile():
     return render_template("auth/profile.html")
 
+@app.route("/mypage",methods=["GET"])
+def mypage():
+    return render_template("auth/mypage.html")
+
+@app.route("/bookmark",methods=["GET"])
+def bookmark():
+    return render_template("auth/bookmark.html")
+
+@app.route("/followers",methods=["GET"])
+def followers():
+    return render_template("auth/followers.html")
 if __name__ == "__main__":
     app.run(debug=True)
