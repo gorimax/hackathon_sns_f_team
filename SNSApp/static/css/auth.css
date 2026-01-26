@@ -4,7 +4,7 @@
 
 
 main {
-    min-height: 100vh
+    max-height: 85vh;
 }
 
 /* カードの位置調整 */
@@ -84,7 +84,7 @@ main {
 
 /* ボタンのデザイン調整 */
 .auth-button {
-    /* padding: 12px 100px; */
+    padding: 12px 100px;
     color: black;
     background-color: #92B294;
     font-size: 20px;
@@ -100,6 +100,7 @@ main {
 }
 
 .auth-link {
+    text-align: center;
     margin-top: 25px;
     margin-bottom: 20px;
     font-size: 14px;
