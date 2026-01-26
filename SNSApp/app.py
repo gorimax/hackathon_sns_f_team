@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+from flask import Flask, redirect ,render_template, session, flash, url_for
+
 
 app = Flask(__name__)
 
@@ -15,6 +16,9 @@ def login():
 def signup():
     return render_template("auth/signup.html")
 
+@app.route("/profile",methods=["GET"])
+def profile():
+    return render_template("auth/profile.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
