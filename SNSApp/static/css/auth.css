@@ -24,7 +24,7 @@ main {
 
 /* カードの見た目調整 */
 .card {
-    background-color: rgb(187, 187, 187);
+    background-color: rgb(250, 248, 248);
     border-radius: 11px;
     /* 影をつける */
     box-shadow: 2px 2px 2px blue;
