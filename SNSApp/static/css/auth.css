@@ -2,11 +2,6 @@
     --shadow-soft: 0 16px 40px rgba(15, 23, 42, 0.12);
 }
 
-
-main {
-    min-height: 100vh
-}
-
 /* カードの位置調整 */
 .card-container {
     display: flex;
@@ -28,33 +23,53 @@ main {
     background-color: rgb(187, 187, 187);
     border-radius: 11px;
     /* 影をつける */
-    box-shadow: 2px 2px 2px blue;
+    box-shadow: 0 0 20px gray;
 }
 
 /* カード内のログイン、新規登録のデザイン調整 */
 .auth-title {
     text-align: center;
     font-size: 1.5rem;
-    color: blue;
+    font-weight: 700;
+    color: black;
     padding-top: 25px;
     margin-bottom: 25px;
     margin-top: 0;
     /* 文字に影 */
-    text-shadow: 2px 2px 2px blue;
+    /* text-shadow: 2px 2px 2px blue; */
 }
+
+/* ===== auth form ===== */
 
 .auth-form {
     display: flex;
-    justify-content: center;
     flex-direction: column;
     gap: 14px;
+    width: 70%;
+    margin: 0 auto;
 }
 
 .auth-form>div {
     display: flex;
+    /* flex-direction: column; */
+    gap: 6px;
+    
+}
+
+
+/* 入力欄のデザイン調整 */
+.auth-form input[type="text"],
+.auth-form input[type="password"] {
+    padding: 8px 12px;
+    border: 1px solid #92B294;
+    border-radius: 11px;
+    font-size: 14px;
+}
+
+.auth-button-container {
+    display: flex;
     flex-direction: column;
     margin: 0 auto;
-    gap: 6px;
 }
 
 .auth-form label {
@@ -62,41 +77,27 @@ main {
     color: #bd004f;
 }
 
-.auth-form input[type="text"],
-.auth-form input[type="password"] {
-    height: 40px;
-    width: 450px;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 11px;
-    font-size: 14px;
-}
-
-.auth-button-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 24px;
-}
-
+/* ボタンのデザイン調整 */
 .auth-button {
-    width: 320px;
-    height: 45px;
-    padding: 12px 24px;
-    margin-top: 20px;
+    padding: 12px 100px;
     color: black;
     font-weight: bold;
     font-size: 20px;
-    background-color: white;
+    font-weight: 600;
     border-radius: 30px;
     border: none;
     cursor: pointer;
+    margin-top: 15px;
+}
+
+.auth-button:hover {
+    background-color: #626873;
 }
 
 .auth-link {
-    display: block;
     text-align: center;
-    margin-top: 16px;
-    margin-bottom: 10px;
+    margin-top: 25px;
+    margin-bottom: 20px;
     font-size: 14px;
     color: #374151;
 }
