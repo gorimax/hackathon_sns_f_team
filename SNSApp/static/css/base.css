@@ -36,12 +36,6 @@ header {
     justify-content: center;
     align-items: flex-start;
 }
-/* 
-.layout {
-    display: flex;
-    justify-content: flex-start;
-    min-height: 100vh;
-} */
 
 /* あまりの画面いっぱいにしたい広がる */
 main {
