@@ -7,8 +7,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 85vh;
-    padding: 24px 16px 60px;
+    min-height: 85vh;
+    padding: 24px 16px 55px;
 }
 
 /* カードの横幅 */
@@ -20,7 +20,7 @@
 
 /* カードの見た目調整 */
 .card {
-    background-color: #ffffff;
+    background-color: rgb(187, 187, 187);
     border-radius: 11px;
     /* 影をつける */
     box-shadow: 0 0 20px gray;
@@ -81,7 +81,7 @@
 .auth-button {
     padding: 12px 100px;
     color: black;
-    background-color: #92B294;
+    font-weight: bold;
     font-size: 20px;
     font-weight: 600;
     border-radius: 30px;
