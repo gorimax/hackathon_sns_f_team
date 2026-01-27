@@ -16,12 +16,6 @@ def login():
 def signup():
     return render_template("auth/signup.html")
 
-
-@app.route("/timeline", methods=["GET"])
-def timeline():
-    return render_template("auth/timeline.html")
-
-
 @app.route("/profile",methods=["GET"])
 def profile():
     return render_template("auth/profile.html")
