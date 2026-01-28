@@ -19,11 +19,11 @@ def signup():
 
 @app.route("/posts", methods=["GET"])
 def posts():
-    return render_template("auth/posts.html")
+    return render_template("post/posts.html")
 
 @app.route("/post_detail", methods=["GET"])
 def post_detail():
-    return render_template("auth/post_detail.html")
+    return render_template("post/post_detail.html")
 
 
 @app.route("/profile",methods=["GET"])
