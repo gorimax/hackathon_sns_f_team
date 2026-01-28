@@ -7,30 +7,28 @@
 {% endblock %}
 
 {% block content %}
-<!-- <div class="main"> -->
-    <div class="card-container">
-        <div class="auth-wrapper">
-            <div class="card">
-                <h2 class="auth-title">ログイン</h2>
-                    <form class="auth-form" method="post">
-                        <input type="hidden" name="">
-                        <div>
-                            <label>メールアドレス</label>
-                            <input type="text" placeholder="メールアドレス" name="email">
-                        </div>
+<div class="card-container">
+    <div class="auth-wrapper">
+        <div class="card">
+            <h2 class="auth-title">ログイン</h2>
+                <form class="auth-form" method="post">
+                    <input type="hidden" name="">
+                    <div>
+                        <label>メールアドレス</label>
+                        <input type="text" placeholder="メールアドレス" name="email">
+                    </div>
 
-                        <div>
-                            <label>パスワード</label>
-                            <input type="password" placeholder="パスワード" name="password">
-                        </div>
-                        <div class="auth-button-container"> 
-                            <button class="auth-button" type="submit">LOGIN</button>
-                            <a class="auth-link" href="{{url_for('signup')}}">新規登録はこちら</a>
-                        </div>
-                    </form>
-                </div>
+                    <div>
+                        <label>パスワード</label>
+                        <input type="password" placeholder="パスワード" name="password">
+                    </div>
+                    <div class="auth-button-container"> 
+                        <button class="auth-button" type="submit">LOGIN</button>
+                        <a class="auth-link" href="{{url_for('signup')}}">新規登録はこちら</a>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-<!-- </div> -->
+</div>
 {% endblock %}
