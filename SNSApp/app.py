@@ -6,7 +6,7 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     # ここは login を見せたいなら login に飛ばすのもアリ
-    return render_template("post/base.html")
+    return render_template("base.html")
 
 @app.route("/login", methods=["GET"])
 def login():
@@ -17,9 +17,13 @@ def signup():
     return render_template("auth/signup.html")
 
 
-@app.route("/timeline", methods=["GET"])
-def timeline():
-    return render_template("auth/timeline.html")
+@app.route("/posts", methods=["GET"])
+def posts():
+    return render_template("auth/posts.html")
+
+@app.route("/post_detail", methods=["GET"])
+def post_detail():
+    return render_template("auth/post_detail.html")
 
 
 @app.route("/profile",methods=["GET"])
