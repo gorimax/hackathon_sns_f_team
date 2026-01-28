@@ -3,11 +3,11 @@
         <nav>
             <ul>
                 <!-- hrefの後ろは不確定 （相対パスで指定してる）-->
-                <li><a href="../auth/timeline.html">ホーム</a></li>
-                <li><a href="../auth/bookmark.html">ブックマーク</a></li>
-                <li><a href="../auth/mypage.html">自身の投稿</a></li>
-                <li><a href="../auth/profile.html">プロフィール</a></li>
-                <li><a href="../auth/followers.html">フォロワー</a></li>
+                <li><a href="{{ url_for('posts')}}">ホーム</a></li>
+                <li><a href="{{ url_for('bookmark')}}">ブックマーク</a></li>
+                <li><a href="{{ url_for('mypage')}}">自身の投稿</a></li>
+                <li><a href="{{ url_for('profile')}}">プロフィール</a></li>
+                <li><a href="{{ url_for('followers')}}">フォロワー</a></li>
             </ul>
         </nav>
     </main>
