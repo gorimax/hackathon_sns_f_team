@@ -1,3 +1,13 @@
 :root {
-    --text-color: #495B4A;
+    --text-color: #374151;
+    --button-bg: #92B294;
+    /* --bg: #f5f5f7;
+    --card-bg: #ffffff;
+    --accent: #2563eb;
+    --accent-soft: rgba(37, 99, 235, 0.08);
+    --text-main: #271117;
+    --text-sub: #6b7280;
+    --border-soft: #e5e7eb;
+    --danger: #ef4444;
+    --radius-lg: 16px; */
 }

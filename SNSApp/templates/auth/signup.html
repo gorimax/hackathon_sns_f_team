@@ -1,10 +1,10 @@
-{% extends "base.html" %}
+{% extends "post/base.html" %}
 
 {%block title %}
-<title>新規登録 - TechShare</title>
+<title>signup - TechShare</title>
 {% endblock %}
 
-{% page_css %}
+{% block page_css %}
 <link rel="stylesheet" href="{{url_for('static', filename='css/auth.css')}}">
 {% endblock %}
 
@@ -12,39 +12,38 @@
 
 <div class="main">
     <div class="card-container">
-        <div class="card">
-            <h2 class="auth-title">新規作成</h2>
-            <form method="post">
-                <input type="hidden" name="">
-                <div>
-                    <label>ユーザー名</label>
-                    <input type="text" placeholder="ユーザー名" name="name" />
-                </div>
+        <div class="auth-wrapper">
+            <div class="card">
+                <h2 class="auth-title">サインアップ</h2>
+                <form class="auth-form" method="post">
+                    <input type="hidden" name="">
+                    <div>
+                        <label>ユーザー名</label>
+                        <input type="text" placeholder="ユーザー名" name="name">
+                    </div>
 
-                <div>
-                    <label>メールアドレス</label>
-                    <input type="text" placeholder="メールアドレス" name="email" />
-                </div>
+                    <div>
+                        <label>メールアドレス</label>
+                        <input type="text" placeholder="メールアドレス" name="email">
+                    </div>
 
-                <div>
-                    <label>パスワード</label>
-                    <input type="password" placeholder="パスワード" name="password" />
-                </div>
+                    <div>
+                        <label>パスワード</label>
+                        <input type="password" placeholder="パスワード" name="password">
+                    </div>
 
-                <div>
-                    <label>パスワード(確認用)</label>
-                    <input type="password" placeholder="パスワード(確認用)" name="password" />
-                </div>
+                    <div>
+                        <label>パスワード(確認用)</label>
+                        <input type="password" placeholder="パスワード(確認用)" name="password">
+                    </div>
 
-                <div>
-                    <button type="submit">新規登録</button>
-                    <!-- <a href="{{url_for login_view(仮)}}">
-            ログインはこちら
-        </a> -->
-                </div>
-            </form>
+                    <div class="auth-button-container">
+                        <button class="auth-button" type="submit">SIGNUP</button>
+
+                        <a class="auth-link" href="{{url_for('login')}}">ログインはこちら</a>
+                </form>
+            </div>
         </div>
     </div>
 </div>
-
 {% endblock %}
