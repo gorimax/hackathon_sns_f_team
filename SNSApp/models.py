@@ -2,10 +2,9 @@
 class User:
 
     # << 列名はドスターさんに要確認 >>
-    # Email, パスワードは個人情報なので他のアカウント設定などで分けた方がいい？
+    # Email, パスワードは個人情報のアカウント設定も一緒のページ
 
-    target_info = ['name', 'introduction', 'updated_timestamp', 'registered_timestamp']
-    target_info_to_create = ['name', 'introduction', 'updated_timestamp']
+    target_info = ['name', 'email', 'password', 'introduction', 'updated_timestamp', 'registered_timestamp']
 
     @classmethod
     def create(cls, name, email, password):
@@ -50,10 +49,10 @@ class User:
         try:
             with conn.cursor() as cur:
                 for token in kwargs.keys():
-                    if not token in cls.target_info_to_create:
+                    if not token in cls.target_info:
                         raise ValueError('トークン名が一致していません')
                     
-                    if kwargs[token]:
+                    if kwargs[token] and token != 'registered_timestamp':
                         sql = f"INSERT INTO users ({token}) VALUES ({kwargs[token]});"
                         cur.execute(sql)
                         conn.commit()
