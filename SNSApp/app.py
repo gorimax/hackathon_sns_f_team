@@ -35,7 +35,6 @@ def signup_view():
         return redirect(url_for('posts_view'))
     return render_template('auth/signup.html')
 
-
 # サインアップ処理
 @app.route('/signup', methods=['POST'])
 def signup_process():
