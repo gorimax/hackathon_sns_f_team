@@ -15,8 +15,8 @@
         <div class="auth-wrapper">
             <div class="card">
                 <h2 class="auth-title">サインアップ</h2>
-                <form class="auth-form" method="post">
-                    <input type="hidden" name="">
+                <form class="auth-form" method="post" action="{{ url_for('signup_process') }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                     <div>
                         <label>ユーザー名</label>
                         <input type="text" placeholder="ユーザー名" name="name">
@@ -34,7 +34,7 @@
 
                     <div>
                         <label>パスワード(確認用)</label>
-                        <input type="password" placeholder="パスワード(確認用)" name="password">
+                        <input type="password" placeholder="パスワード(確認用)" name="password_confirmation">
                     </div>
 
                     <div class="auth-button-container">

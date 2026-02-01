@@ -12,7 +12,7 @@
         <div class="card">
             <h2 class="auth-title">ログイン</h2>
                 <form class="auth-form" method="post">
-                    <input type="hidden" name="">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                     <div>
                         <label>メールアドレス</label>
                         <input type="text" placeholder="メールアドレス" name="email">
