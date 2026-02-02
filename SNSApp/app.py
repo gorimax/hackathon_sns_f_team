@@ -6,8 +6,10 @@ import uuid
 import re
 import os
 
-from models import User , Post, Comment
 
+# from models import User, Post, Comment
+# temp 
+from models import User
 
 # 定数定義
 EMAIL_PATTERN = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
