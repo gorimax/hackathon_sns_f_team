@@ -1,0 +1,173 @@
+* {
+    box-sizing: border-box;
+}
+
+.post-list {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    /* margin-top: 20px; */
+}
+
+.post-whole {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.name {
+    width: auto;
+    /* background-color: rgb(194, 194, 212); */
+    padding: 0 0 0 20px;
+}
+
+/* このpタグは後消す。デザイン確かめるだけのもの */
+p {
+    margin: 0;
+}
+
+/* フォームの見た目*/
+.post-card {
+    display: flex;
+    background-color: #ffffff;
+    border-radius: 27px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 14px 16px 12px;
+}
+
+.post-content {
+    display: flex;
+    flex: 1;
+    gap: 5px;
+}
+
+.post-menu {
+    display: flex;
+    flex-direction: column;
+    background-color: aqua;
+    width: 10%;
+    margin: 0 auto;
+}
+
+.post-top {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding:5px 16px 5px;;
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+}
+/* 
+.post-time {
+} */
+
+.bookmark {
+    justify-content: flex-end;
+}
+
+.post-body {
+    font-size: 15px;
+    text-align: left;
+    line-height: 1.6;
+    /* テキストの折り返し設定 */
+    overflow-wrap: anywhere;
+}
+
+
+
+/* ここから投稿ボタン、投稿画面について */
+/* チェックボックスを非表示にする */
+
+.post-button {
+    position: fixed;
+    bottom: 10%;
+    right: 10%;
+}
+
+.modal-toggle {
+    display: none;
+}
+
+/* 投稿ボタンの見た目 */
+.open-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* モーダルの背景（初期状態：非表示） */
+.modal {
+    display: none; /* 非表示 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+
+/* オーバーレイ（半透明の黒背景） */
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* モーダルの中身（投稿フォーム） */
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    box-sizing: border-box;
+}
+
+/* フォームの要素 */
+.modal-content h2 { margin-top: 0; }
+.modal-content input, .modal-content textarea {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.modal-content button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* 閉じるボタン（×印） */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #888;
+}
+
+/* ★★★ チェックボックスがONになったらモーダルを表示する ★★★ */
+.modal-toggle:checked ~ .modal {
+    display: block;
+}
