@@ -3,9 +3,56 @@
 {% block title %}Login - TechShare{% endblock %}
 
 {% block page_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/posts.css') }}">
 {% endblock %}
 
 {% block content %}
-<h1>ホーム</h1>
+<div class="page-post">
+    <main>
+        <section class="post-list">
+            <div class="post-whole">
+                <div class="name"><p>ゴリラ</p></div>
+                <div class="post-card">
+                    <div class="post-content">
+                        <div class="post-menu">
+                            <p>ぷる</p>
+                        </div>
+                        <div class="post-top">
+                            <div class="post-header">
+                                <div class="post-time"><p>投稿時間</p></div>
+                                <button type="submit">⭐︎</button>
+                            </div>
+                            <div class="post-body">
+                            <p>投稿内容</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="post-button">
+            <input type="checkbox" id="new-post" class="modal-toggle">
+
+            <!-- 投稿フォームを開くボタン (label) -->
+            <label for="new-post" class="open-btn">投稿する</label>
+
+            <!-- モーダルウィンドウ本体 -->
+            <div class="modal">
+                <!-- 背景（閉じるボタンの役割も兼ねる） -->
+                <label for="new-post" class="modal-overlay"></label>
+                
+                <div class="modal-content">
+                    <h2>投稿フォーム</h2>
+                    <form>
+                        <input type="text" placeholder="タイトル" required>
+                        <textarea placeholder="内容を入力してください" rows="5"></textarea>
+                        <button type="submit">送信</button>
+                    </form>
+                    <!-- 閉じるボタン（×印） -->
+                    <label for="new-post" class="close-btn">&times;</label>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
 {% endblock %}
