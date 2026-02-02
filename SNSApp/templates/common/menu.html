@@ -1,7 +1,7 @@
-<div class="menu">
-    <main class="menu-content">
+<div class="menu-content">
+    <aside class="menu">
         <nav>
-            <ul>
+            <ul class="list">
                 <!-- hrefの後ろは不確定 （相対パスで指定してる）-->
                 <li><a href="{{ url_for('posts')}}">ホーム</a></li>
                 <li><a href="{{ url_for('bookmark')}}">ブックマーク</a></li>
@@ -10,6 +10,6 @@
                 <li><a href="{{ url_for('followers')}}">フォロワー</a></li>
             </ul>
         </nav>
-    </main>
-    <button class="logoutbutton" onclick="location.href='../auth/login.html'">ログアウト</button>
+    </aside>
+    <button class="logout" onclick="location.href='../auth/login.html'">ログアウト</button>   
 </div>
