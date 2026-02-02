@@ -6,6 +6,12 @@ import uuid
 import re
 import os
 
+from models import User , Post, Comment
+
+
+# 定数定義
+EMAIL_PATTERN = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+SESSION_DAYS = 30
 
 # from models import User, Post, Comment
 # temp 
