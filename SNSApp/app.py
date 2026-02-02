@@ -118,14 +118,15 @@ def logout():
 # 投稿一覧ページの表示
 @app.route('/posts', methods=['GET'])
 def posts_view():
-    user_id = session.get('user_id')
-    if user_id is None:
-        return redirect(url_for('login'))
-    else:
-        posts = Post.get_all()
-        for post in posts:
-            post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M')
-            post['user_name'] = User.get_name_by_id(post['user_id'])
+        # posts.htmlの動きを見るためコントアウト
+    # user_id = session.get('user_id')
+    # if user_id is None:
+    #     return redirect(url_for('login'))
+    # else:
+    #     posts = Post.get_all()
+    #     for post in posts:
+    #         post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M')
+    #         post['user_name'] = User.get_name_by_id(post['user_id'])
 
         return render_template('post/posts.html', posts=posts, user_id=user_id)
 
