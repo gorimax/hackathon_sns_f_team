@@ -9,7 +9,7 @@ import os
 
 # from models import User, Post, Comment
 # temp 
-from models import User
+from models import User, Post
 
 # 定数定義
 EMAIL_PATTERN = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
@@ -103,7 +103,7 @@ def login_process():
             if hashPassword != user["password"]:
                 flash('メールアドレスorパスワードが違います','error')
             else:
-                session['user_id'] = user["id"]
+                session['user_id'] = user["user_id"]
                 return redirect(url_for('posts_view'))
     return redirect(url_for('login'))
 
