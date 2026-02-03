@@ -81,7 +81,6 @@ class User:
             print(f'エラーが発生しています：{e}')
             abort(500)
         finally:
-<<<<<<< HEAD
             db_pool.release(conn)
 
     @classmethod
@@ -157,6 +156,4 @@ class Post:
             print(f'エラーが発生しています：{e}')
             abort(500)
         finally:
-=======
->>>>>>> front
             db_pool.release(conn)

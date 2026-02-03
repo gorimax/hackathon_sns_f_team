@@ -1,4 +1,4 @@
-{% extends "post/base.html" %}
+{% extends "base.html" %}
 
 {% block title %}500エラー{% endblock %}
 
@@ -13,7 +13,7 @@
 
     <div class="error-description">
       <p>エラーが発生しました。<br>管理者にお問い合わせください。</p>
-      <a href="{{ url_for('posts_view') }}">戻る</a>
+      <a href="{{ url_for('posts') }}">戻る</a>
     </div>
   </div>
 </div>

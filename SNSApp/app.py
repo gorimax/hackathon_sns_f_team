@@ -6,14 +6,8 @@ import uuid
 import re
 import os
 
-
 # from models import User, Post, Comment
-# temp 
-<<<<<<< HEAD
 from models import User, Post
-=======
-from models import User
->>>>>>> front
 
 # 定数定義
 EMAIL_PATTERN = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
@@ -31,14 +25,14 @@ def index():
     user_id = session.get('user_id')
     if user_id is None:
         return redirect(url_for('login'))
-    return redirect(url_for('posts_view'))
+    return redirect(url_for('posts'))
 
 
 # サインアップページの表示
 @app.route('/signup', methods=['GET'])
 def signup():
     if session.get('user_id') is not None:
-        return redirect(url_for('posts_view'))
+        return redirect(url_for('posts'))
     return render_template('auth/signup.html')
 
 
@@ -79,14 +73,14 @@ def signup_process():
 
     session['user_id'] = user_id
 
-    return redirect(url_for('posts_view'))
+    return redirect(url_for('posts'))
 
 
 # ログインページの表示
 @app.route('/login', methods=['GET'])
 def login():
     if session.get('user_id') is not None:
-        return redirect(url_for('posts_view'))
+        return redirect(url_for('posts'))
     return render_template('auth/login.html')
 
 
@@ -108,7 +102,7 @@ def login_process():
                 flash('メールアドレスorパスワードが違います','error')
             else:
                 session['user_id'] = user["user_id"]
-                return redirect(url_for('posts_view'))
+                return redirect(url_for('posts'))
     return redirect(url_for('login'))
 
 
@@ -121,7 +115,7 @@ def logout():
 
 # 投稿一覧ページの表示
 @app.route('/posts', methods=['GET'])
-def posts_view():
+def posts():
     user_id = session.get('user_id')
     if user_id is None:
         return redirect(url_for('login'))
@@ -143,10 +137,10 @@ def create_post():
     content = request.form.get('content', '').strip()
     if content == '':
         flash('投稿内容が空です','error')
-        return redirect(url_for('posts_view'))
+        return redirect(url_for('posts'))
     Post.create(user_id, content)
     flash('投稿が完了しました','success')
-    return redirect(url_for('posts_view'))
+    return redirect(url_for('posts'))
 
 # 投稿削除処理
 @app.route('/posts/<int:post_id>/delete', methods=['POST'])
@@ -161,11 +155,11 @@ def delete_post(post_id):
 
     if post['user_id'] != user_id:
         flash('この投稿を削除することはできません', 'error')
-        return redirect(url_for('posts_view'))
+        return redirect(url_for('posts'))
 
     Post.delete(post_id)
     flash('投稿が削除されました','success')
-    return redirect(url_for('posts_view'))
+    return redirect(url_for('posts'))
 
 # 投稿詳細ページの表示
 @app.route('/posts/<int:post_id>', methods=['GET'])
