@@ -11,14 +11,20 @@
 
 <body>
     {%include 'common/header.html'%}
-    {% if request.path != "/login" and request.path != "/signup" %}
-    {%include 'common/menu.html'%}
-    {% endif %}
-    <main>
-        {%block content %}{% endblock %}
+    <main class="main-content">
+        {% if request.path != "/login" and request.path != "/signup" %}
+        <div class="menu-content">
+            <div class="side">
+                {%include 'common/menu.html'%}
+            </div>
+        </div>
+        {% endif %}
+        
+        <div class="main-page">
+            {%block content %}{% endblock %}
+        </div>
     </main>
     {%include 'common/footer.html'%}
-
 </body>
 
 </html>
