@@ -9,7 +9,7 @@ import os
 
 # from models import User, Post, Comment
 # temp 
-from models import User
+from models import User, Post
 
 # 定数定義
 EMAIL_PATTERN = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
@@ -230,4 +230,4 @@ def internal_server_error(error):
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
