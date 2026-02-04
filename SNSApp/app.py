@@ -6,12 +6,6 @@ import uuid
 import re
 import os
 
-from models import User , Post, Comment
-
-
-# 定数定義
-EMAIL_PATTERN = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
-SESSION_DAYS = 30
 
 # from models import User, Post, Comment
 # temp 
@@ -124,15 +118,14 @@ def logout():
 # 投稿一覧ページの表示
 @app.route('/posts', methods=['GET'])
 def posts_view():
-        # posts.htmlの動きを見るためコントアウト
-    # user_id = session.get('user_id')
-    # if user_id is None:
-    #     return redirect(url_for('login'))
-    # else:
-    #     posts = Post.get_all()
-    #     for post in posts:
-    #         post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M')
-    #         post['user_name'] = User.get_name_by_id(post['user_id'])
+    user_id = session.get('user_id')
+    if user_id is None:
+        return redirect(url_for('login'))
+    else:
+        posts = Post.get_all()
+        for post in posts:
+            post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M')
+            post['user_name'] = User.get_name_by_id(post['user_id'])
 
         return render_template('post/posts.html', posts=posts, user_id=user_id)
 
