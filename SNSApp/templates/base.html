@@ -9,17 +9,23 @@
     {%block page_css %}{% endblock %}
 </head>
 
-<body>
-    {%include 'common/header.html'%}
-    <main>
-    {% if request.path != "/login" and request.path != "/signup" %}
-    {%include 'common/menu.html'%}
-    {% endif %}
-
-    {%block content %}{% endblock %}
-    </main>
-    {%include 'common/footer.html'%}
-
+<body class="{% block body_class %}{% endblock %}">
+    <div class="all">
+        {% if request.path != "/login" and request.path != "/signup" %}
+        <div class="menu-content">
+            <div class="side">
+                {%include 'common/menu.html'%}
+            </div>
+        </div>
+        {% endif %}
+        <div class="main-container">
+            {%include 'common/header.html'%}
+            <main class="main-content">
+                {%block content %}{% endblock %}
+            </main>
+            {%include 'common/footer.html'%}
+        </div>
+    </div>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
 
 {% block title %}Login - TechShare{% endblock %}
 
@@ -6,13 +6,15 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
 {% endblock %}
 
+{% block body_class %}no-scroll{% endblock %}
+
 {% block content %}
 <div class="card-container">
     <div class="auth-wrapper">
         <div class="card">
             <h2 class="auth-title">ログイン</h2>
                 <form class="auth-form" method="post">
-                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="" value="">
                     <div>
                         <label>メールアドレス</label>
                         <input type="text" placeholder="メールアドレス" name="email">
