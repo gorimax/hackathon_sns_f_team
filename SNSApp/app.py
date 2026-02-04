@@ -192,15 +192,38 @@ def create_comment(post_id):
     flash('コメントの投稿が完了しました','success')
     return redirect(url_for('post_detail_view', post_id=post_id))
 
+# コメント削除機能
+@app.route('/comments/<int:comment_id>/delete', methods=['POST']) # 削除時はPOSTメソッドを使う
+def delete_comment(comment_id): # comment_idを引数に渡しメソッドでコメントを探す時user_idに紐づいた
+    user_id = session.get('user_id') # ログインチェック
+    if user_id is None:
+        return redirect(url_for('login_view'))
+
+    comment = Comment.find_by_id(comment_id) # コメントの存在チェック
+    if comment is None:
+        abort(404) # コメントが見つからなければ404エラー
+
+    # 権限チェック: ログインユーザーがコメントの投稿者であるか
+    if comment['user_id'] != user_id:
+        flash('このコメントを削除することはできません', 'error')
+        # どこにリダイレクトするかは、コメントが削除される前のページ（例: 投稿詳細ページ）が良い
+        return redirect(url_for('post_detail_view', post_id=comment['post_id']))
+
+    Comment.delete(comment_id) # コメントの削除
+    flash('コメントが削除されました','success')
+    return redirect(url_for('post_detail_view', post_id=comment['post_id'])) # 投稿詳細ページにリダイレクト
+
+# プロフィール機能
 @app.route('/profile', methods=['GET'])
 def profile_view():
     user_id = session.get('user_id') # ここでセッションからuser_idを取得
     if user_id is None: # ログインしてないなら
         return redirect(url_for('login_view')) # ログイン画面に飛ばす
     user = User.find_by_id(user_id) # user変数にUserテーブルから(user_id)ログインしてるユーザと同じIDのデータを代入する。
-    return render_template('profile/profile.html', user=user) # テンプレートフォルダを探しその中のprofileディレクトリ内の指定したhtmlを読み込みuser変数の情報をhtml内でuserという名前で使える
+    return render_template('auth/profile.html', user=user) # テンプレートフォルダを探しその中のprofileディレクトリ内の指定したhtmlを読み込みuser変数の情報をhtml内でuserという名前で使える
 
-@app.route('/myposts', methods=['GET'])
+# 自身の投稿一覧
+@app.route('/mypage', methods=['GET'])
 def myposts_view():
     user_id = session.get('user_id') # ここでセッションからuser_idを取得
     if user_id is None:
@@ -209,7 +232,49 @@ def myposts_view():
     posts = Post.get_by_user_id(user_id) # posts変数にPostテーブルから(user_id)ログインしてるユーザと同じIDのデータを代入する。
     for post in posts:
         post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M')# for文処理がないと/postsと同じ表示にならない
-    return render_template('post/myposts.html', myposts=posts) # テンプレートフォルダ内のpostディレクトリ配下のmypost.htmlを読み込みposts変数の情報をhtml内でmypostsという名前で使える
+    return render_template('post/mypage.html', myposts=posts) # テンプレートフォルダ内のpostディレクトリ配下のmypost.htmlを読み込みposts変数の情報をhtml内でmypostsという名前で使える
+
+# ブックマーク機能
+@app.route('/bookmark', methods=['GET'])
+def my_bookmark():
+    user_id = session.get('user_id') # ここでセッションからuser_idを取得
+    if user_id is None: # ログインしてないなら
+        return redirect(url_for('login_view')) # ログイン画面に飛ばす
+    bookmark_records = Bookmark.get_by_user_id(user_id)# ブックマークをレコード('bookmark_id': 1,user_id: 3,post_id: 1)で管理する。その情報を bookmark_recordsに代入する。
+    bookmarked_posts = []#レコードの入れ物を作成する。
+    for record in bookmark_records:
+        # 各ブックマークレコードからpost_idを取得し、Postテーブルから投稿の詳細を取得
+        post = Post.find_by_id(record['post_id'])
+        # if postでpostが存在してるかを問い、post.get('deleted_at') is None:でdeleted_atカラムがnull (未削除) であることを確認
+        if post and post.get('deleted_at') is None: # post.get('deleted_at')でdeleted_atカラムの値を取得
+            post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M') # 日付の整形
+            bookmarked_posts.append(post) # 整形した投稿情報をリストに追加
+    # テンプレートに整形済みの投稿リストを渡す
+    return render_template('auth/bookmark.html', my_bookmarks=bookmarked_posts, user_id=user_id)
+
+# フォロワー一覧画面
+@app.route('/followers', methods=['GET'])
+def my_followers():
+    user_id = session.get('user_id')
+    if user_id is None:
+        return redirect(url_for('login_view'))
+
+    # 1. ログインユーザーがフォローしているユーザーのリストを取得
+    following_users = Follow.get_following_users(user_id) # models.pyのメソッド[get_following_users]を呼び出しfollowing_usersに代入する。
+#get_following_usersはログインユーザがフォローしているユーザのfollow_idに紐づいたIDをuserテーブルから取得する
+    # 2. ログインユーザーをフォローしているユーザーのリストを取得
+    followers_of_user = Follow.get_followers_of_user(user_id) # models.pyのメソッドを呼び出しfollowers_of_userに代入する。
+#get_followers_of_userはログインユーザをフォローしているユーザの一覧を返す。
+    # 必要であれば、ここで取得したユーザーリストの整形（例: 日付フォーマットは不要だが、表示名など）を行う
+
+    # テンプレートに両方のリストを渡す
+    return render_template(
+        'auth/followers.html', # テンプレートのパスは適宜調整
+        following_users=following_users, # 自分がフォローしている人たち
+        followers_of_user=followers_of_user, # 自分をフォローしている人たち
+        user_id=user_id # ログインユーザーのID
+    )
+
 
 @app.errorhandler(400)
 def bad_request(error):
