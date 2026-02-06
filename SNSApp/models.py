@@ -34,7 +34,7 @@ class User:
         conn = db_pool.get_conn()
         try:
             with conn.cursor() as cur:
-                sql = "SELECT * FROM users WHERE id=%s;"
+                sql = "SELECT * FROM users WHERE user_id=%s;"
                 cur.execute(sql, (user_id,))
                 user = cur.fetchone()
                 info = []
@@ -88,10 +88,10 @@ class User:
         conn = db_pool.get_conn()
         try:
             with conn.cursor() as cur:
-                sql = "SELECT name FROM users WHERE id=%s;"
+                sql = "SELECT user_name FROM users WHERE user_id=%s;"
                 cur.execute(sql, (user_id,))
                 user = cur.fetchone()
-            return user['name'] if user else None
+            return user['user_name'] if user else None
         except pymysql.Error as e:
             print(f'エラーが発生しています：{e}')
             abort(500)
@@ -134,7 +134,7 @@ class Post:
     #     conn = db_pool.get_conn()
     #     try:
     #         with conn.cursor() as cur:
-    #             sql = "UPDATE posts SET deleted_at = NOW() WHERE id = %s;"
+    #             sql = "UPDATE posts SET deleted_at = NOW() WHERE user_id = %s;"
     #             cur.execute(sql, (post_id))
     #             conn.commit()
     #     except pymysql.Error as e:
@@ -148,7 +148,7 @@ class Post:
         conn = db_pool.get_conn()
         try:
             with conn.cursor() as cur:
-                sql = "SELECT * FROM posts WHERE id=%s AND deleted_at IS NULL;"
+                sql = "SELECT * FROM posts WHERE user_id=%s AND deleted_at IS NULL;"
                 cur.execute(sql, (post_id,))
                 post = cur.fetchone()
             return post
