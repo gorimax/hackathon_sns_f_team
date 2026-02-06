@@ -3,12 +3,8 @@
     <nav>
         <ul class="list">
             <!-- hrefの後ろは不確定 （相対パスで指定してる）-->
-            <li><a href="{{ url_for('posts')}}">ホーム</a></li>
-            <li><a href="{{ url_for('bookmark')}}">ブックマーク</a></li>
-            <li><a href="{{ url_for('mypage')}}">自身の投稿</a></li>
-            <li><a href="{{ url_for('profile')}}">プロフィール</a></li>
-            <li><a href="{{ url_for('followers')}}">フォロワー</a></li>
+            <li><a href="{{ url_for('posts_view')}}">ホーム</a></li>
         </ul>
     </nav>
-    <button class="logout" onclick="location.href='../auth/login.html'">ログアウト</button>   
+    <button class="logout" onclick="location.href='{{url_for('logout')}}'">ログアウト</button>   
 </aside>
