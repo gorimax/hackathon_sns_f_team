@@ -1,15 +1,10 @@
-<div class="menu">
-    <main class="menu-content">
-        <nav>
-            <ul>
-                <!-- hrefの後ろは不確定 （相対パスで指定してる）-->
-                <li><a href="../auth/timeline.html">ホーム</a></li>
-                <li><a href="../auth/bookmark.html">ブックマーク</a></li>
-                <li><a href="../auth/mypage.html">自身の投稿</a></li>
-                <li><a href="../auth/profile.html">プロフィール</a></li>
-                <li><a href="../auth/followers.html">フォロワー</a></li>
-            </ul>
-        </nav>
-    </main>
-    <button class="logoutbutton" onclick="location.href='../auth/login.html'">ログアウト</button>
-</div>
+
+<aside class="menu">
+    <nav>
+        <ul class="list">
+            <!-- hrefの後ろは不確定 （相対パスで指定してる）-->
+            <li><a href="{{ url_for('posts_view')}}">ホーム</a></li>
+        </ul>
+    </nav>
+    <button class="logout" onclick="location.href='{{url_for('logout')}}'">ログアウト</button>   
+</aside>

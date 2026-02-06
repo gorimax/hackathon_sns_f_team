@@ -10,7 +10,7 @@ CREATE DATABASE IF NOT EXISTS snsapp_f_team
   DEFAULT COLLATE utf8mb4_unicode_ci;
 
 
-GRANT ALL PRIVILEGES ON snsapp.* TO 'testuser'@'%';
+GRANT ALL PRIVILEGES ON snsapp_f_team.* TO 'testuser'@'%';
 
 FLUSH PRIVILEGES;
 
