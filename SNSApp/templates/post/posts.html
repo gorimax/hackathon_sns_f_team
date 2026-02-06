@@ -8,51 +8,59 @@
 
 {% block content %}
 <div class="page-post">
-    <main>
-        <section class="post-list">
-            <div class="post-whole">
-                <div class="name"><p>ゴリラ</p></div>
-                <div class="post-card">
-                    <div class="post-content">
-                        <div class="post-menu">
-                            <p>ぷる</p>
+    {% if posts and posts|length > 0 %}
+    <section class="post-list">
+        {% for post in posts %}
+        <div class="post-whole">
+            <div class="name">
+                <span class="user">{{ post.user_name }}</span>
+            </div>
+            <div class="post-card">
+                <div class="post-content">
+                    <div class="post-menu">
+                        <p>ぷる</p>
+                    </div>
+                    <div class="post-top">
+                        <div class="post-header">
+                            <div class="post-time">{{ post.created_at }}</div>
+                            <button type="submit">⭐︎</button>
                         </div>
-                        <div class="post-top">
-                            <div class="post-header">
-                                <div class="post-time"><p>投稿時間</p></div>
-                                <button type="submit">⭐︎</button>
-                            </div>
-                            <div class="post-body">
-                            <p>投稿内容</p>
-                            </div>
+                        <div class="post-body">
+                            {{ post.content }}
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <section class="post-button">
-            <input type="checkbox" id="new-post" class="modal-toggle">
+        </div>
+        {% endfor %}
+    </section>
+    {% else %}
+    <div class="empty">
+        <p>投稿がありません。</p>
+    </div>
+    {% endif %}
+    <section class="post-button">
+        <input type="checkbox" id="new-post" class="modal-toggle">
 
-            <!-- 投稿フォームを開くボタン (label) -->
-            <label for="new-post" class="open-btn">投稿する</label>
+        <!-- 投稿フォームを開くボタン (label) -->
+        <label for="new-post" class="open-btn">投稿する</label>
 
-            <!-- モーダルウィンドウ本体 -->
-            <div class="modal">
-                <!-- 背景（閉じるボタンの役割も兼ねる） -->
-                <label for="new-post" class="modal-overlay"></label>
-                
-                <div class="modal-content">
-                    <h2>投稿フォーム</h2>
-                    <form>
-                        <input type="text" placeholder="タイトル" required>
-                        <textarea placeholder="内容を入力してください" rows="5"></textarea>
-                        <button type="submit">送信</button>
-                    </form>
-                    <!-- 閉じるボタン（×印） -->
-                    <label for="new-post" class="close-btn">&times;</label>
-                </div>
+        <!-- モーダルウィンドウ本体 -->
+        <div class="modal">
+            <!-- 背景（閉じるボタンの役割も兼ねる） -->
+            <label for="new-post" class="modal-overlay"></label>
+            
+            <div class="modal-content">
+                <h2>投稿フォーム</h2>
+                <form action="/posts" method="post">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <textarea name="content" placeholder="内容を入力してください"></textarea>
+                    <button type="submit">送信</button>
+                </form>
+                <!-- 閉じるボタン（×印） -->
+                <label for="new-post" class="close-btn">&times;</label>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 </div>
 {% endblock %}
