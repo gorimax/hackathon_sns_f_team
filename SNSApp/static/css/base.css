@@ -3,18 +3,11 @@
 }
 
 body {
-    background-image: url('../image/background.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
     margin: 0 !important;
-    /* font-familyの中身変更する */
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    /* この設定でコンテンツが長ければ伸びるようになる */
     min-height: 100vh;
-    /* color: var(--text-color); */
-    padding-bottom: 60px;
-    /* footerの高さと同じ分だけ空ける */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .logo {
@@ -28,30 +21,96 @@ body {
 
 header {
     width: 100%;
+    height: 83px;
     font-family: COPPERPLATE GOTHIC;
     color: #45ddbc;
     text-shadow: 1px 1px 1px #b5fae9, -1px -1px 1px #1a6656;
 }
 
 .header-inner {
+    background-color: #1a6656;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-}
-
-/* あまりの画面いっぱいにしたい広がる */
-main {
-    flex: 1;
+    width: 100%;
+    height: 83px;
+    position: fixed;
 }
 
 footer {
     display: flex;
     justify-content: center;
     align-items: end;
-    min-height: 20px;
+    height: 20px;
     position: fixed;
-    bottom: 0;
+    bottom: 5px;
     width: 100%;
-    height: 60px;
-    /* 必要であれば高さを固定 */
+}
+
+/* あまりの画面いっぱいにしたい広がる */
+.main-content {
+    display: flex;
+    flex: 1;
+    padding-bottom: 25px;
+}
+
+
+.main-page {
+    flex: 1;
+    min-height: 100vh;
+    background-image: url('../image/background.png');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* サイドメニュー */
+
+.menu-content {
+    display: flex;
+    flex-direction: column; 
+    width: 15%;
+    height: 100vh;
+}
+
+.side {
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* menu内の要素（ログアウトボタン除く）全体の配置 */
+.menu {
+    display: flex;
+    flex-direction: column;
+    padding-top: 40px;
+    height: 100%;
+}
+
+nav {
+    height: 70%;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    list-style: none;
+}
+
+li {
+    font-size: 17px;
+}
+
+.logout {
+    margin: auto;
+    border-radius: 30px;
+    border: 1px;
+    cursor: pointer;
 }

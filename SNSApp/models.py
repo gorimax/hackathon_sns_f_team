@@ -88,10 +88,10 @@ class User:
         conn = db_pool.get_conn()
         try:
             with conn.cursor() as cur:
-                sql = "SELECT name FROM users WHERE id=%s;"
+                sql = "SELECT user_name FROM users WHERE user_id=%s;"
                 cur.execute(sql, (user_id,))
                 user = cur.fetchone()
-            return user['name'] if user else None
+            return user['user_name'] if user else None
         except pymysql.Error as e:
             print(f'エラーが発生しています：{e}')
             abort(500)
