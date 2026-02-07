@@ -16,7 +16,7 @@
             <div class="card">
                 <h2 class="auth-title">サインアップ</h2>
                 <form class="auth-form" method="post" action="">
-                    <input type="hidden" name="" value="">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                     <div>
                         <label>ユーザー名</label>
                         <input type="text" placeholder="ユーザー名" name="name">
