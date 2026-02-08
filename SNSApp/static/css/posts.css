@@ -4,14 +4,13 @@
 
 .post-list {
     max-width: 800px;
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
-    overflow-y: scroll;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: 16px;
-    margin-top: 40px;
+    padding-top: 60px;
 }
 
 .post-whole {

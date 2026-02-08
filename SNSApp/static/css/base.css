@@ -28,18 +28,18 @@ body {
 }
 
 header {
-    background-color: #1a6656;
-    width: 100%;
-    height: 83px;
-    position: fixed;
-}
-
-.header-inner {
     width: 100%;
     height: 83px;
     font-family: COPPERPLATE GOTHIC;
     color: #45ddbc;
     text-shadow: 1px 1px 1px #b5fae9, -1px -1px 1px #1a6656;
+}
+
+.header-inner {
+    background-color: #1a6656;
+    width: 100%;
+    height: 83px;
+    position: fixed;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -49,6 +49,7 @@ footer {
     display: flex;
     justify-content: center;
     align-items: end;
+    margin-top: 20px;
     width: 100%;
 }
 
@@ -57,7 +58,6 @@ footer {
     display: flex;
     flex: 1;
     /* min-height: 100vh; */
-    margin-top: 83px;
 }
 
 
@@ -114,6 +114,7 @@ nav {
 .list {
     display: flex;
     flex-direction: column;
+    margin-top: 30px;
     gap: 20px;
     list-style: none;
 }
@@ -128,8 +129,3 @@ li {
     border: 1px;
     cursor: pointer;
 }
-/* 
-.no-scroll {
-    overflow: hidden;
-    height: 100vh;
-} */
