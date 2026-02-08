@@ -1,4 +1,4 @@
-{% extends "base2.html" %}
+{% extends "base.html" %}
 
 {%block title %}
 <title>signup - TechShare</title>
@@ -11,42 +11,38 @@
 {% block content %}
 
 <!-- <div class="main"> -->
-    <div class="card-container">
-        <div class="auth-wrapper">
-            <div class="card">
-                <h2 class="auth-title">サインアップ</h2>
-                <form class="auth-form" method="post" action="">
-<<<<<<< HEAD
-                    <input type="hidden" name="" value="">
-=======
-                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
->>>>>>> 6130d75f6072696f356c2d449f134129a28b3534
-                    <div>
-                        <label>ユーザー名</label>
-                        <input type="text" placeholder="ユーザー名" name="name">
-                    </div>
+<div class="card-container">
+    <div class="auth-wrapper">
+        <div class="card">
+            <h2 class="auth-title">サインアップ</h2>
+            <form class="auth-form" method="post" action="">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <div>
+                    <label>ユーザー名</label>
+                    <input type="text" placeholder="ユーザー名" name="name">
+                </div>
 
-                    <div>
-                        <label>メールアドレス</label>
-                        <input type="text" placeholder="メールアドレス" name="email">
-                    </div>
+                <div>
+                    <label>メールアドレス</label>
+                    <input type="text" placeholder="メールアドレス" name="email">
+                </div>
 
-                    <div>
-                        <label>パスワード</label>
-                        <input type="password" placeholder="パスワード" name="password">
-                    </div>
+                <div>
+                    <label>パスワード</label>
+                    <input type="password" placeholder="パスワード" name="password">
+                </div>
 
-                    <div>
-                        <label>パスワード(確認用)</label>
-                        <input type="password" placeholder="パスワード(確認用)" name="password_confirmation">
-                    </div>
+                <div>
+                    <label>パスワード(確認用)</label>
+                    <input type="password" placeholder="パスワード(確認用)" name="password_confirmation">
+                </div>
 
-                    <div class="auth-button-container">
-                        <button class="auth-button" type="submit">SIGNUP</button>
+                <div class="auth-button-container">
+                    <button class="auth-button" type="submit">SIGNUP</button>
 
-                        <a class="auth-link" href="{{url_for('login')}}">ログインはこちら</a>
-                </form>
-            </div>
+                    <a class="auth-link" href="{{url_for('login')}}">ログインはこちら</a>
+                </div>
+            </form>
         </div>
     </div>
 </div>
