@@ -16,7 +16,11 @@
             <div class="card">
                 <h2 class="auth-title">サインアップ</h2>
                 <form class="auth-form" method="post" action="">
+<<<<<<< HEAD
                     <input type="hidden" name="" value="">
+=======
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+>>>>>>> 6130d75f6072696f356c2d449f134129a28b3534
                     <div>
                         <label>ユーザー名</label>
                         <input type="text" placeholder="ユーザー名" name="name">
@@ -45,5 +49,5 @@
             </div>
         </div>
     </div>
-<!-- </div> -->
+</div>
 {% endblock %}

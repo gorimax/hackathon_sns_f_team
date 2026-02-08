@@ -8,9 +8,13 @@
 
 {% block content %}
 <div class="page-post">
+    {% if posts and posts|length > 0 %}
     <section class="post-list">
+        {% for post in posts %}
         <div class="post-whole">
-            <div class="name"><p>ゴリラ</p></div>
+            <div class="name">
+                <span class="user">{{ post.user_name }}</span>
+            </div>
             <div class="post-card">
                 <div class="post-content">
                     <div class="post-menu">
@@ -18,17 +22,23 @@
                     </div>
                     <div class="post-top">
                         <div class="post-header">
-                            <div class="post-time"><p>投稿時間</p></div>
-                            <button type="submit">⭐︎</button>
+                            <div class="post-time">{{ post.created_at }}</div>
+                            <button type="submit" class="bookmark">⭐︎</button>
                         </div>
                         <div class="post-body">
-                        <p>投稿内容</p>
+                            {{ post.content }}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        {% endfor %}
     </section>
+    {% else %}
+    <div class="empty">
+        <p>投稿がありません。</p>
+    </div>
+    {% endif %}
     <section class="post-button">
         <input type="checkbox" id="new-post" class="modal-toggle">
 
@@ -42,9 +52,9 @@
             
             <div class="modal-content">
                 <h2>投稿フォーム</h2>
-                <form>
-                    <input type="text" placeholder="タイトル" required>
-                    <textarea placeholder="内容を入力してください" rows="5"></textarea>
+                <form action="/posts" method="post">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <textarea name="content" placeholder="内容を入力してください"></textarea>
                     <button type="submit">送信</button>
                 </form>
                 <!-- 閉じるボタン（×印） -->

@@ -9,8 +9,9 @@
     {%block page_css %}{% endblock %}
 </head>
 
-<body class="{% block body_class %}{% endblock %}">
-    <div class="all">
+<body>
+    {%include 'common/header.html'%}
+    <main class="main-content">
         {% if request.path != "/login" and request.path != "/signup" %}
         <div class="menu-content">
             <div class="side">
@@ -18,14 +19,12 @@
             </div>
         </div>
         {% endif %}
-        <div class="main-container">
-            {%include 'common/header.html'%}
-            <main class="main-content">
-                {%block content %}{% endblock %}
-            </main>
-            {%include 'common/footer.html'%}
+        
+        <div class="main-page">
+            {%block content %}{% endblock %}
         </div>
-    </div>
+    </main>
+    {%include 'common/footer.html'%}
 </body>
 
 </html>

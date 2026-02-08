@@ -3,28 +3,20 @@
 }
 
 body {
+    display: flex;
+    flex-direction: column;
     margin: 0 !important;
     height: 100%;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     background-image: url('../image/background.png');
+    background-attachment: fixed;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-color: #d9e3cb;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 
-
-.all {
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-}
-
-.main-container {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-}
 
 .logo {
     font-weight: 700;
@@ -36,36 +28,61 @@ body {
 }
 
 header {
+    background-color: #1a6656;
     width: 100%;
-    font-family: COPPERPLATE GOTHIC;
-    color: #45ddbc;
-    text-shadow: 1px 1px 1px #b5fae9, -1px -1px 1px #1a6656;
+    height: 83px;
+    position: fixed;
 }
 
 .header-inner {
+    width: 100%;
+    height: 83px;
+    font-family: COPPERPLATE GOTHIC;
+    color: #45ddbc;
+    text-shadow: 1px 1px 1px #b5fae9, -1px -1px 1px #1a6656;
     display: flex;
     justify-content: center;
     align-items: flex-start;
 }
 
 footer {
-    margin-top: auto;
-    width: 100%;
     display: flex;
     justify-content: center;
+    align-items: end;
+    width: 100%;
 }
 
 /* あまりの画面いっぱいにしたい広がる */
 .main-content {
+    display: flex;
     flex: 1;
+    /* min-height: 100vh; */
+    margin-top: 83px;
 }
 
+
+.main-page {
+    flex: 1;
+    height: 100%;
+}
 
 /* サイドメニュー */
 
 .menu-content {
     display: flex;
+    flex-direction: column; 
     width: 15%;
+    height: 100%;
+}
+
+.side {
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
     background-color: rgba(255, 255, 255, 0.5);
 }
 /* menu内の要素（ログアウトボタン除く）全体の配置 */
@@ -87,7 +104,11 @@ footer {
     display: flex;
     flex-direction: column;
     padding-top: 40px;
-    height: 80%;
+    height: 100%;
+}
+
+nav {
+    height: 70%;
 }
 
 .list {
@@ -107,3 +128,8 @@ li {
     border: 1px;
     cursor: pointer;
 }
+/* 
+.no-scroll {
+    overflow: hidden;
+    height: 100vh;
+} */

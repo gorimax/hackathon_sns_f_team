@@ -160,3 +160,7 @@ cython_debug/
 #.idea/
 
 /SNSApp/static/gen/*
+
+# DS_store
+.DS_Store
+**/.DS_Store
