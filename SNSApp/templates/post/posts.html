@@ -8,8 +8,20 @@
 
 {% block content %}
 <div class="page-post">
-    {% if posts and posts|length > 0 %}
+        <!-- フラッシュメッセージ -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flash-messages">
+        {% for category, message in messages %}
+        <div class="flash flash-{{ category }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
     <section class="post-list">
+    {% if posts and posts|length > 0 %}
         {% for post in posts %}
         <div class="post-whole">
             <div class="name">
@@ -23,7 +35,8 @@
                     <div class="post-top">
                         <div class="post-header">
                             <div class="post-time">{{ post.created_at }}</div>
-                            <button type="submit" class="bookmark">⭐︎</button>
+                            <!-- <button type="submit" class="bookmark">⭐︎</button> -->
+                            <div class="bookmark"></div>
                         </div>
                         <div class="post-body">
                             {{ post.content }}

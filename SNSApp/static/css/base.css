@@ -87,13 +87,6 @@ footer {
 }
 /* menu内の要素（ログアウトボタン除く）全体の配置 */
 
-.side {
-    display: flex;
-    width:15%;
-    min-height: 100vh;
-    position: fixed;
-}
-
 .menu-all {
     display: flex;
     flex-direction: column;
@@ -129,3 +122,43 @@ li {
     border: 1px;
     cursor: pointer;
 }
+
+/* mainの部分を真ん中に表示させるための要素 */
+.side2 {
+    width: 15%;
+    height: 100%;
+    right: 0;
+}
+
+
+/* フラッシュメッセージ */
+.flash-messages {
+    margin: 0;
+    padding: 0;
+}
+
+/* フラッシュメッセージのスタイル・デザイン（共通） */
+.flash {
+    text-align: center;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    line-height: 1.4;
+    border-left: 6px solid #ccc;
+    background: #f9f9f9;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+/* 成功のフラッシュメッセージのデザイン */
+.flash-success {
+    background: #e9f7ec;
+    border-left-color: #27ae60;
+    color: #1e824c;
+}
+/* エラーのフラッシュメッセージのデザイン */
+.flash-error {
+    background: #fdecea;
+    border-left-color: #e74c3c;
+    color: #c0392b;
+}
+
