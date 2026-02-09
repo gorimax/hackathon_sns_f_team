@@ -171,3 +171,17 @@ p {
 .modal-toggle:checked ~ .modal {
     display: block;
 }
+
+/* フラッシュメッセージ */
+.flash-messages{
+    margin: 0 auto;
+    max-width: 850px;
+    padding: 20px 10px 0;
+}
+
+
+a {
+  color: inherit;          /* 親要素の文字色を継承 */
+  text-decoration: none;   /* 下線を消す */
+  cursor: default;         /* マウスホバー時のポインター（指マーク）を消す（任意） */
+}

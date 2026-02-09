@@ -23,6 +23,10 @@
         <div class="main-page">
             {%block content %}{% endblock %}
         </div>
+        {% if request.path != "/login" and request.path != "/signup" %}
+        <div class="side2">
+        </div>
+        {% endif %}
     </main>
     {%include 'common/footer.html'%}
 </body>
