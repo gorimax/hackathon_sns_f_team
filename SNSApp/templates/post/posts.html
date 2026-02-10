@@ -36,7 +36,7 @@
                         <div class="post-header">
                             <div class="post-time">{{ post.created_at }}</div>
                             <!-- <button type="submit" class="bookmark">⭐︎</button> -->
-                            <div class="bookmark"></div>
+                            <div class="bookmark">⭐︎</div>
                         </div>
                         <div class="post-body">
                             {{ post.content }}
@@ -52,7 +52,7 @@
         <p>投稿がありません。</p>
     </div>
     {% endif %}
-    <section class="post-button">
+    <section class="post">
         <input type="checkbox" id="new-post" class="modal-toggle">
 
         <!-- 投稿フォームを開くボタン (label) -->
@@ -63,15 +63,21 @@
             <!-- 背景（閉じるボタンの役割も兼ねる） -->
             <label for="new-post" class="modal-overlay"></label>
             
-            <div class="modal-content">
-                <h2>投稿フォーム</h2>
-                <form action="/posts" method="post">
+            <div class="modal-card">
+                <div class="modal-content">
+                    <!-- <h2>投稿フォーム</h2> -->
+                    <div class="tab">プルダウンメニュー</div>
+                    <form class="post-form" action="/posts" method="post">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                    <textarea name="content" placeholder="内容を入力してください"></textarea>
-                    <button type="submit">送信</button>
-                </form>
-                <!-- 閉じるボタン（×印） -->
-                <label for="new-post" class="close-btn">&times;</label>
+                        <textarea name="content" rows="10" maxlength="500" placeholder="内容を入力してください"></textarea>
+                        <div class="post-btn">
+                            <button type="submit">送信</button>
+                        </div>
+                    </form>
+
+                    <!-- 閉じるボタン（×印） -->
+                    <label for="new-post" class="close-btn">&times;</label>
+                </div>
             </div>
         </div>
     </section>
