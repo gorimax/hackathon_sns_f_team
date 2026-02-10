@@ -9,7 +9,7 @@ import os
 
 # from models import User, Post, Comment
 # temp 
-from models import User, Post
+from models import User, Post#, Comment, Follow, Bookmark
 
 # 定数定義
 EMAIL_PATTERN = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
@@ -195,6 +195,27 @@ def create_comment(post_id):
     Comment.create(user_id, post_id, content)
     flash('コメントの投稿が完了しました','success')
     return redirect(url_for('post_detail_view', post_id=post_id))
+
+# コメント削除機能
+@app.route('/comments/<int:comment_id>/delete', methods=['POST']) # 削除時はPOSTメソッドを使う
+def delete_comment(comment_id): # comment_idを引数に渡しメソッドでコメントを探す時user_idに紐づいた
+    user_id = session.get('user_id') # ログインチェック
+    if user_id is None:
+        return redirect(url_for('login_view'))
+
+    comment = Comment.find_by_id(comment_id) # コメントの存在チェック
+    if comment is None:
+        abort(404) # コメントが見つからなければ404エラー
+
+    # 権限チェック: ログインユーザーがコメントの投稿者であるか
+    if comment['user_id'] != user_id:
+        flash('このコメントを削除することはできません', 'error')
+        # どこにリダイレクトするかは、コメントが削除される前のページ（例: 投稿詳細ページ）が良い
+        return redirect(url_for('post_detail_view', post_id=comment['post_id']))
+
+    Comment.delete(comment_id) # コメントの削除
+    flash('コメントが削除されました','success')
+    return redirect(url_for('post_detail_view', post_id=comment['post_id'])) # 投稿詳細ページにリダイレクト
 
 @app.route('/profile', methods=['GET'])
 def profile_view():
