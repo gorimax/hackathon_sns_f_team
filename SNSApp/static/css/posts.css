@@ -84,11 +84,6 @@ p {
 /* ここから投稿ボタン、投稿画面について */
 /* チェックボックスを非表示にする */
 
-.post-button {
-    position: fixed;
-    bottom: 10%;
-    right: 10%;
-}
 
 .modal-toggle {
     display: none;
@@ -96,11 +91,15 @@ p {
 
 /* 投稿ボタンの見た目 */
 .open-btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #007bff;
+    position: fixed;
+    bottom: 12%;
+    right: 12%;
+    padding: 10px 40px;
+    background-color: #1a6656;
     color: white;
-    border-radius: 5px;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 34px;
     cursor: pointer;
 }
 
@@ -117,43 +116,79 @@ p {
 
 /* オーバーレイ（半透明の黒背景） */
 .modal-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
+    display: flex;
+    position: fixed;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-/* モーダルの中身（投稿フォーム） */
-.modal-content {
-    position: absolute;
+/* モーダルのカード（投稿フォーム） */
+.modal-card {
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 500px;
-    box-sizing: border-box;
+    padding: 50px 30px 0px;
+    border-radius: 32px;
+    width: 100%;
+    height: 100%;
+    max-width: 600px;
+    max-height: 700px;
 }
 
-/* フォームの要素 */
-.modal-content h2 { margin-top: 0; }
-.modal-content input, .modal-content textarea {
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
     width: 100%;
-    margin-bottom: 15px;
-    padding: 10px;
-    box-sizing: border-box;
+    height: 100%;
 }
-.modal-content button {
+
+.tab {
+    font-size: 20px;
+    width: 70%;
+    height: 7%;
+    border-radius: 10px;
+    background-color: gray;
+    text-align: center;
+    margin: 5px auto 10px;
+}
+/* フォームの要素 */
+.post-form {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 90%;
+    height: 80%;
+}
+
+textarea {
     width: 100%;
+    height: 80%;
+    font-size: 16px;
+    margin: 0 auto 40px;
+    border-radius: 10px;
     padding: 10px;
+}
+
+.post-btn {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+}
+
+.modal-content button {
+    font-size: 20px;
+    font-weight: 600;
+    width: 200px;
+    height: 50px;
     background-color: #28a745;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 34px;
     cursor: pointer;
 }
 
@@ -169,7 +204,7 @@ p {
 
 /* ★★★ チェックボックスがONになったらモーダルを表示する ★★★ */
 .modal-toggle:checked ~ .modal {
-    display: block;
+    display: flex;
 }
 
 /* フラッシュメッセージ */
