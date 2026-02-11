@@ -71,32 +71,28 @@ footer {
 .menu-content {
     display: flex;
     flex-direction: column; 
-    width: 15%;
+    width: 20%;
     height: 100%;
 }
 
 .side {
     display: flex;
     flex-direction: column;
-    width: 15%;
-    height: 100%;
-    top: 0;
-    left: 0;
+    width: 14%;
+    height: 50%;
+    top: 40%;
+    left: 5%;
+    transform: translateY(-50%);
     position: fixed;
     background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
 }
 /* menu内の要素（ログアウトボタン除く）全体の配置 */
-
-.menu-all {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-}
 
 .menu {
     display: flex;
     flex-direction: column;
-    padding-top: 40px;
+    margin: 20px auto 0;
     height: 100%;
 }
 
@@ -107,25 +103,26 @@ nav {
 .list {
     display: flex;
     flex-direction: column;
-    margin-top: 30px;
     gap: 20px;
     list-style: none;
+    padding-left: 0;
 }
 
 li {
-    font-size: 17px;
+    font-size: 20px;
 }
 
 .logout {
     margin: auto;
     border-radius: 30px;
+    padding: 10px 20px;
     border: 1px;
     cursor: pointer;
 }
 
 /* mainの部分を真ん中に表示させるための要素 */
 .side2 {
-    width: 15%;
+    width: 20%;
     height: 100%;
     right: 0;
 }
