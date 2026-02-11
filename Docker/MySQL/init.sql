@@ -126,9 +126,9 @@ CREATE TABLE
 
 INSERT INTO users (user_name, email, password, profile, learning)
 VALUES 
-  ('山田太郎', 'taro@example.com', '937e8d5fbb48bd4949536cd65b8d35c426b80d2f830c5c308e2cdec422ae2244','温泉行きたい。','MySQLを少々。'),
-  ('鈴木二郎', 'jiro@example.com', '937e8d5fbb48bd4949536cd65b8d35c426b80d2f830c5c308e2cdec422ae2244','ヒートテック良き。','Pythonのさわりを。'),
-  ('田中花子', 'hanako@example.com', '937e8d5fbb48bd4949536cd65b8d35c426b80d2f830c5c308e2cdec422ae2244','濡れた髪のまま眠りたい。','');
+  ('山田太郎', 'taro@example.com', '937e8d5fbb48bd4949536cd65b8d35c426b80d2f830c5c308e2cdec422ae2244','学生です。AIに興味があります。','MySQL、python'),
+  ('鈴木二郎', 'jiro@example.com', '937e8d5fbb48bd4949536cd65b8d35c426b80d2f830c5c308e2cdec422ae2244','webシステム開発をしています','Ruby,htmlなど。'),
+  ('田中花子', 'hanako@example.com', '937e8d5fbb48bd4949536cd65b8d35c426b80d2f830c5c308e2cdec422ae2244','IT初心者です。','');
 
 INSERT INTO posts (user_id, content)
 VALUES
@@ -140,7 +140,7 @@ VALUES
 INSERT INTO comments (user_id, post_id, content)
 VALUES
     (2, 1, '応援しています！頑張ってください。'),
-    (1, 1, 'おっふ、サンキューです。');
+    (1, 1, 'ありがとうございます。');
 
 INSERT INTO tags (tag)
 VALUES
