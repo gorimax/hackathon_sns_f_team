@@ -30,11 +30,11 @@ class User:
             db_pool.release(conn)
 
     @classmethod
-    def get_user_info(cls, user_id):
+    def find_by_id(cls, user_id):
         conn = db_pool.get_conn()
         try:
             with conn.cursor() as cur:
-                sql = "SELECT * FROM users WHERE id=%s;"
+                sql = "SELECT * FROM users WHERE user_id=%s;"
                 cur.execute(sql, (user_id,))
                 user = cur.fetchone()
                 info = []
