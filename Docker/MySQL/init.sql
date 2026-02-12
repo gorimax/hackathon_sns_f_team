@@ -145,29 +145,34 @@ VALUES
 INSERT INTO tags (tag)
 VALUES
     ('html'),
-    ('Ruby');
+    ('python'),
+    ('flask'),
+    ('Ruby'),
+    ('css');
 
 INSERT INTO follow (user_id, followed_user_id)
 VALUES
     (3, 1),
-    (1, 2);
+    (1, 2),
+    (1, 3);
 
-INSERT INTO bookmark (user_id, post_id)
+INSERT INTO bookmark (user_id, post_id, comment_id)
 VALUES
-    (2, 3);
+    (2, 3, null),
+    (2, 1, null),
+    (3, 2, null),
+    (1, null, 1);
 
-INSERT INTO bookmark (user_id, comment_id)
+INSERT INTO good_actions (user_id, post_id, comment_id)
 VALUES
-    (1, 1);
-
-INSERT INTO good_actions (user_id, post_id)
-VALUES
-    (3, 2);
-
-INSERT INTO good_actions (user_id, comment_id)
-VALUES
-    (2, 1);
+    (3, 2, null),
+    (1, 3, null),
+    (2, null, 1),
+    (1, null, 2);
 
 INSERT INTO post_tags (post_id, tag_id)
 VALUES
-    (1, 1);
+    (1, 1),
+    (1, 3),
+    (1, 5),
+    (2, 4);
