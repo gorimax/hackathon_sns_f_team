@@ -131,3 +131,30 @@ input #new-comment .modal-toggle {
 .modal-toggle:checked ~ .modal {
     display: block;
 }
+
+.comment-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-radius: 27px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 14px 16px 12px;
+    min-height: 50px;
+    height: auto;
+}
+
+.name {
+    width: auto;
+    padding: 10px 0 0 20px;
+}
+
+.comment-body {
+    font-size: 15px;
+    text-align: left;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.bookmark {
+    justify-content: end;
+}

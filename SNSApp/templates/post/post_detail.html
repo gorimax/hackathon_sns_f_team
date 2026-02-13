@@ -9,10 +9,22 @@
 {% block content %}
 <!-- 全体の構成 -->
 <div class="detail-wrapper">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="flash">
+        <ul class="flashes">
+            {% for message in messages %}
+            <li>{{message}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    {% endwith %}
+
     <div class="main-column">
         <!-- 投稿の内容 -->
         <div class="post-detail-card">
-            <article>{{ post.content}}</article>
+            <article>{{ post.content }}</article>
             <!-- 削除などの追加 -->
             <div class="actions">
                 <input type="submit" value="削除" onclick="return confirm('投稿内容を削除してもよろしいですか？');">
@@ -25,6 +37,7 @@
 
             <div class="modal">
                 <!-- 背景 -->
+                <div class="modal-overlay"></div>
                 <div class="modal-content">
                     <h2>コメントフォーム</h2>
                     <form action="/post/1" method="post">
@@ -37,17 +50,55 @@
             </div>
         </section>
         <!--コメント一覧 -->
-        {#< section class="comment-section">
-            <h3>コメント</h3>
-            {% for comment in comments %}
-            <div class="commrnt">
-                <p class="commrent-user">{{ comment.user_name }}</p>
-                <p class="coment-body">{{ comment.comment }}</p>
-                <p class="comment-data">{{ comment.created_at }}</p>
+        <section class="comment-section">
+            <div class="name">
+                <span class="user">ユーザー名</span>
             </div>
-            {% else %}
+            <div class="comment-card">
+                <article>コメントです</article>
+                <div class="actions">
+                    <input type="submit" value="削除" onclick="return confirm('コメントを削除してもよろしいですか？');">
+                    <button type="submit" class="submit">★</button>
+                </div>
+            </div>
+            <div class="name">
+                <span class="user">ユーザー名</span>
+            </div>
+            <div class="comment-card">
+                <article>コメントです</article>
+                <div class="actions">
+                    <input type="submit" value="削除" onclick="return confirm('コメントを削除してもよろしいですか？');">
+                    <button type="submit" class="submit">★</button>
+                </div>
+            </div>
+            <div class="name">
+                <span class="user">ユーザー名</span>
+            </div>
+            <div class="comment-card">
+                <article>コメントです</article>
+                <div class="actions">
+                    <input type="submit" value="削除" onclick="return confirm('コメントを削除してもよろしいですか？');">
+                    <button type="submit" class="submit">★</button>
+                </div>
+            </div>
+            <div class="name">
+                <span class="comment-user">ユーザー名</span>
+            </div>
+            <div class="comment-card">
+                <article class="comment-body">コメントです</article>
+                <div class="actions">
+                    <input type="submit" value="削除" onclick="return confirm('コメントを削除してもよろしいですか？');">
+                    <button type="submit" class="bookmark">★</button>
+                </div>
+            </div>
+            {#{% for comment in comments %}
+            <div class="comment">
+                <p class="comment-user">{{ comment.user_name }}</p>
+                <p class="comment-body">{{ comment.comment }}</p>
+            </div>
+            {% else %}#}
             <p class="no-comment">まだコメントはありません</p>
-            </section>#}
+        </section>
 
     </div>
 </div>
