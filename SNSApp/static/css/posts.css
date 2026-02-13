@@ -214,9 +214,8 @@ textarea {
     padding: 20px 10px 0;
 }
 
-
-a {
-  color: inherit;          /* 親要素の文字色を継承 */
-  text-decoration: none;   /* 下線を消す */
-  cursor: default;         /* マウスホバー時のポインター（指マーク）を消す（任意） */
-}
+/* 
+.DetailNavigator {
+    color: inherit;          
+    text-decoration: none;       
+} */

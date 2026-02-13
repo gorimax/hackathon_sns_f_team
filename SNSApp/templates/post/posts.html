@@ -27,23 +27,23 @@
             <div class="name">
                 <span class="user">{{ post.user_name }}</span>
             </div>
-            <div class="post-card">
-                <div class="post-content">
-                    <div class="post-menu">
-                        <p>ぷる</p>
-                    </div>
-                    <div class="post-top">
-                        <div class="post-header">
-                            <div class="post-time">{{ post.created_at }}</div>
-                            <!-- <button type="submit" class="bookmark">⭐︎</button> -->
-                            <div class="bookmark">⭐︎</div>
+                <div class="post-card" data-url="{{ url_for('post_detail_view', post_id=post.post_id)}}">
+                    <div class="post-content">
+                        <div class="post-menu">
+                            <p>ぷる</p>
                         </div>
-                        <div class="post-body">
-                            {{ post.content }}
+                        <div class="post-top">
+                            <div class="post-header">
+                                <div class="post-time">{{ post.created_at }}</div>
+                                <button class="bookmark-btn">⭐︎</button>
+                            </div>
+                            <div class="post-body">
+                                {{ post.content }}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            <!-- </a> -->
         </div>
         {% endfor %}
     </section>
