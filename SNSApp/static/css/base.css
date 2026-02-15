@@ -6,7 +6,7 @@ body {
     display: flex;
     flex-direction: column;
     margin: 0 !important;
-    height: 100%;
+    min-height: 100vh;
     background-image: url('../image/background.png');
     background-attachment: fixed;
     background-size: cover;
