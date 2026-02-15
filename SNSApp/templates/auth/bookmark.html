@@ -5,9 +5,18 @@ Profile - TechShare
 {% endblock %}
 
 {% block page_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css')}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bookmark.css')}}">
 {% endblock %}
 
 {% block content %}
-<h1>ブックマーク</h1>
+<div class="container">
+    <h1>ブックマーク</h1>
+    <div class="content">
+        <div class="card">
+            <div class="card-body">
+                <p>ブックマークした投稿を表示するページです。</p>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

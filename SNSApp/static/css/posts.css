@@ -4,7 +4,6 @@
 
 .post-list {
     max-width: 800px;
-    min-height: 100vh;
     width: 100%;
     margin: 0 auto;
     display: flex;
@@ -64,9 +63,6 @@ p {
     display: flex;
     justify-content: space-between;
 }
-/* 
-.post-time {
-} */
 
 .bookmark {
     justify-content: flex-end;
