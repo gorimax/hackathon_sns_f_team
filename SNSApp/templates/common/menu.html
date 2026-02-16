@@ -2,10 +2,9 @@
 <aside class="menu">
     <nav>
         <ul class="list">
-            <!-- hrefの後ろは不確定 （相対パスで指定してる）-->
-            <li><a href="{{ url_for('posts_view')}}"><i class="fas fa-home" style="color: yellowgreen;"></i>ホーム</a></li>
-            <li><a href="{{ url_for('myposts_view')}}"><i class="fas fa-edit" style="color: yellowgreen;"></i>自身の投稿</a></li>
-            <li><a href="{{ url_for('profile_view')}}"><i class="fas fa-user" style="color: yellowgreen;"></i>プロフィール</a></li>
+             <li><a href="{{ url_for('posts_view')}}"><i class="fas fa-home" style="color: #1A6656;"></i>ホーム</a></li>
+            <li><a href="{{ url_for('myposts_view')}}"><i class="fas fa-edit" style="color: #1A6656;"></i>自身の投稿</a></li>
+            <li><a href="{{ url_for('profile_view')}}"><i class="fas fa-user" style="color: #1A6656;"></i>プロフィール</a></li>
         </ul>
     </nav>
     <button class="logout" onclick="location.href='{{url_for('logout')}}'">ログアウト</button> 
