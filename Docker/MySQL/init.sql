@@ -72,7 +72,7 @@ CREATE TABLE
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
 CREATE TABLE
-    bookmark (
+    bookmarks (
         bookmark_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
         user_id BIGINT UNSIGNED NOT NULL,
         post_id BIGINT UNSIGNED DEFAULT NULL,
@@ -156,7 +156,7 @@ VALUES
     (1, 2),
     (1, 3);
 
-INSERT INTO bookmark (user_id, post_id, comment_id)
+INSERT INTO bookmarks (user_id, post_id, comment_id)
 VALUES
     (2, 3, null),
     (2, 1, null),
