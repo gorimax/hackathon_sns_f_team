@@ -192,7 +192,7 @@ class Comment:
         conn = db_pool.get_conn()
         try:
             with conn.cursor() as cur:
-                sql = "SELECT * FROM comments WHERE post_id=%s ORDER BY created_at DESC;"
+                sql = "SELECT * FROM comments WHERE post_id=%s AND deleted_at IS NULL ORDER BY created_at DESC;"
                 cur.execute(sql, (post_id,))
                 comments = cur.fetchall()
             return comments
@@ -230,3 +230,70 @@ class Comment:
             abort(500)
         finally:
             db_pool.release(conn)
+
+class Tag:
+    @classmethod
+    def get_tags(cls):
+        conn = db_pool.get_conn()
+        try:
+            with conn.cursor() as cur:
+                sql = "SELECT * FROM tags;"
+                cur.execute(sql)
+                tags = cur.fetchall()
+            return tags
+        except pymysql.Error as e:
+            print(f'エラーが発生しています：{e}')
+            abort(500)
+        finally:
+            db_pool.release(conn)
+
+    @classmethod
+    def get_tags_post_id(cls, post_id):
+        conn = db_pool.get_conn()
+        try:
+            with conn.cursor() as cur:
+                sql = "SELECT * FROM tags WHERE post_id=%s;"
+                cur.exucute(sql, (post_id))
+                tag = cur.fetchone()
+                return tag
+        except pymysql.Error as e:
+            print(f'エラーが発生しています：{e}')
+            abort(500)
+        finally:
+            db_pool.release(conn)           
+
+class Follow:
+    # @classmethod
+    # def get_followers_of_user(cls, user_id):
+    #     sql = ""
+
+    @classmethod
+    def get_following_users(cls, user_id):
+        conn = db_pool.get_conn()
+        try:
+            with conn.cursor() as cur:
+                sql = "SELECT * FROM follow WHERE user_id=%s;"
+                cur.exucute(sql, (user_id))
+                follow = cur.fetchone()
+                return follow
+        except pymysql.Error as e:
+            print(f'エラーが発生しています：{e}')
+            abort(500)
+        finally:
+            db_pool.release(conn)         
+
+class Bookmark:
+    @classmethod
+    def get_by_user_id(cls, user_id):
+        conn = db_pool.get_conn()
+        try:
+            with conn.cursor() as cur:
+                sql = "SELECT * FROM bookmarks WHERE user_id=%s;"
+                cur.exucute(sql, (user_id))
+                bookmark = cur.fetchone()
+                return bookmark
+        except pymysql.Error as e:
+            print(f'エラーが発生しています：{e}')
+            abort(500)
+        finally:
+            db_pool.release(conn)          
