@@ -79,8 +79,8 @@ footer {
     display: flex;
     flex-direction: column;
     width: 14%;
-    height: 50%;
-    top: 40%;
+    height: 60%;
+    top: 45%;
     left: 5%;
     transform: translateY(-50%);
     position: fixed;

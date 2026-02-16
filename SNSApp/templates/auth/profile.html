@@ -6,8 +6,34 @@ Profile - TechShare
 
 {% block page_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css')}}">
+<link rel="stylesheet" href="{{ url_for('static',filename='css/profile.css')}}">
 {% endblock %}
 
 {% block content %}
-<h2>プロフィール</h2>
+<!-- プロフィールカード -->
+<main class="profile">
+    <div class="profile-card">
+        <!-- プロフィール内のヘッダー -->
+        <div class="profile-header">
+            <div class="profile-dock-wrap">
+                <div class="profile-dock">
+                    <h1 class="profile-name">マッチ</h1>
+                </div>
+            </div>
+        </div>
+        <!-- 使用技術 -->
+        <section class="technology">
+            <h2 class="technology-title">使用技術</h2>
+            <ul class="stack">
+                <li class="skill">html</li>
+                <li class="skill">css</li>
+                <li class="skill">python</li>
+            </ul>
+        </section>
+        <section class="self-introduction">
+            <h2>自己紹介</h2>
+            <p>raretechで学び希少型エンジニアに俺はなる！！</p>
+        </section>
+    </div>
+</main>
 {% endblock %}
