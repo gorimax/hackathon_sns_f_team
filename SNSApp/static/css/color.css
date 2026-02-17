@@ -1,13 +1,8 @@
 :root {
-    --text-color: #374151;
-    --button-bg: #92B294;
-    /* --bg: #f5f5f7;
-    --card-bg: #ffffff;
-    --accent: #2563eb;
-    --accent-soft: rgba(37, 99, 235, 0.08);
-    --text-main: #271117;
-    --text-sub: #6b7280;
-    --border-soft: #e5e7eb;
-    --danger: #ef4444;
-    --radius-lg: 16px; */
+    --primary: #2F6F5E;     
+    --primary-light: #4E8C7A; 
+    --accent: #2E9C5D;       
+    --bg-soft: #F4F8F6;      
+    --card: #FFFFFF;
+    --text-main: #2C3E3A;
 }
