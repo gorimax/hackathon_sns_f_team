@@ -7,7 +7,7 @@ import re
 import os
 
 # temp 
-from models import User, Post, Comment#, Follow, Bookmark
+from models import User, Post, Comment, Tag, Follow, Bookmark
 
 # 定数定義
 EMAIL_PATTERN = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"

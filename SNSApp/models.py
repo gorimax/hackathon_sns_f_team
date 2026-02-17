@@ -37,11 +37,7 @@ class User:
                 sql = "SELECT * FROM users WHERE user_id=%s;"
                 cur.execute(sql, (user_id,))
                 user = cur.fetchone()
-                info = []
-                for t in cls.target_info:
-                    info.append(user[t])
-
-            return info if user else None
+            return user
         except pymysql.Error as e:
             print(f'エラーが発生しています：{e}')
             abort(500)
