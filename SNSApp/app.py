@@ -6,8 +6,10 @@ import uuid
 import re
 import os
 
+
+from models import User, Post, Comment
 # temp 
-from models import User, Post, Comment#, Follow, Bookmark
+from models import User, Post, Comment, Follow, Bookmark
 
 # 定数定義
 EMAIL_PATTERN = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
@@ -121,12 +123,11 @@ def posts_view():
         return redirect(url_for('login'))
     else:
         posts = Post.get_all()
-        tags = Tag.get_tags()#タグをfor post文内で機能させるならここに配置
         for post in posts:
             post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M')
             post['user_name'] = User.get_name_by_id(post['user_id'])
-            post['tags'] = Tag.get_tags_post_id(post['id'])#タグに紐づいた各掲示板のidを取得、掲示板に正しいタグが表示される。
-        return render_template('post/posts.html', posts=posts, user_id=user_id,tag=tags)
+
+        return render_template('post/posts.html', posts=posts, user_id=user_id)
 
 
 # 投稿処理
@@ -222,7 +223,7 @@ def profile_view():
     if user_id is None: # ログインしてないなら
         return redirect(url_for('login')) # ログイン画面に飛ばす
     user = User.find_by_id(user_id) # user変数にUserテーブルから(user_id)ログインしてるユーザと同じIDのデータを代入する。
-    return render_template('auth/profile.html', user=user) # テンプレートフォルダを探しその中のprofileディレクトリ内の指定したhtmlを読み込みuser変数の情報をhtml内でuserという名前で使える
+    return render_template('profile/profile.html', user=user) # テンプレートフォルダを探しその中のprofileディレクトリ内の指定したhtmlを読み込みuser変数の情報をhtml内でuserという名前で使える
 
 @app.route('/myposts', methods=['GET'])
 def myposts_view():
