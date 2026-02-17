@@ -58,7 +58,7 @@ p {
 .post-tags {
     display: flex;
     flex-direction: column;
-    background-color: aqua;
+    background-color: blue;
     width: 15%;
     margin: 0 auto;
     gap: 5px;
