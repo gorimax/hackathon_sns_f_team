@@ -20,6 +20,7 @@
     </div>
     {% endif %}
     {% endwith %}
+    
     <section class="post-list">
     {% if posts and posts|length > 0 %}
         {% for post in posts %}
@@ -29,8 +30,12 @@
             </div>
                 <div class="post-card" data-url="{{ url_for('post_detail_view', post_id=post.post_id)}}">
                     <div class="post-content">
-                        <div class="post-menu">
-                            <p>ぷる</p>
+                        <div class="post-tags">
+                            {% for tag in post.tags %}
+                                <a  class="tag" href="{{ url_for('tag_posts', tag_id=tag.id) }}">
+                                    #{{ tag.name }}
+                                </a>
+                            {% endfor %}
                         </div>
                         <div class="post-top">
                             <div class="post-header">
@@ -46,17 +51,18 @@
             <!-- </a> -->
         </div>
         {% endfor %}
-    </section>
     {% else %}
     <div class="empty">
         <p>投稿がありません。</p>
     </div>
     {% endif %}
+    </section>
+
     <section class="post">
         <input type="checkbox" id="new-post" class="modal-toggle">
 
         <!-- 投稿フォームを開くボタン (label) -->
-        <label for="new-post" class="open-btn">投稿する</label>
+        <label class="open-btn" for="new-post">投稿する</label>
 
         <!-- モーダルウィンドウ本体 -->
         <div class="modal">
@@ -66,12 +72,23 @@
             <div class="modal-card">
                 <div class="modal-content">
                     <!-- <h2>投稿フォーム</h2> -->
-                    <div class="tab">プルダウンメニュー</div>
                     <form class="post-form" action="/posts" method="post">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                        <select name="tag_ids[]" id="tag-select" multiple>
+                            {% for tag in tags %}
+                            <option value="{{ tag.id }}">{{ tag.name }}</option>
+                            {% endfor %}
+                        </select>
+
+                        <div class="select-tag" id="selected-tags">
+                            <!-- 選択されたタグがここに表示される -->
+                        </div>
+
                         <textarea name="content" rows="10" maxlength="500" placeholder="内容を入力してください"></textarea>
+
                         <div class="post-btn">
-                            <button type="submit">送信</button>
+                            <button type="submit">投稿</button>
                         </div>
                     </form>
 

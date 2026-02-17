@@ -2,11 +2,11 @@
 <aside class="menu">
     <nav>
         <ul class="list">
-             <li><a href="{{ url_for('posts_view')}}"><i class="fas fa-home" style="color: #1A6656;"></i>ホーム</a></li>
-            <li><a href="{{ url_for('myposts_view')}}"><i class="fas fa-edit" style="color: #1A6656;"></i>自身の投稿</a></li>
-            <li><a href="{{ url_for('profile_view')}}"><i class="fas fa-user" style="color: #1A6656;"></i>プロフィール</a></li>
-            <li><a href="{{ url_for('my_followers')}}"><i class="fas fa-users" style="color: #1A6656;"></i>フォロワー</a></li>
-            <li><a href="{{ url_for('my_bookmark')}}"><i class="fas fa-star" style="color: #1A6656;"></i>ブックマーク</a></li>
+            <li><a href="{{ url_for('posts_view')}}"><i class="fas fa-home" ></i>ホーム</a></li>
+            <li><a href="{{ url_for('myposts_view')}}"><i class="fas fa-edit" ></i>自身の投稿</a></li>
+            <li><a href="{{ url_for('profile_view')}}"><i class="fas fa-user" ></i>プロフィール</a></li>
+            <li><a href="{{ url_for('my_followers')}}"><i class="fas fa-users" ></i>フォロワー</a></li>
+            <li><a href="{{ url_for('bookmark_view')}}"><i class="fas fa-star" ></i>ブックマーク</a></li>
         </ul>
     </nav>
     <button class="logout" onclick="location.href='{{url_for('logout')}}'">ログアウト</button> 

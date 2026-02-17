@@ -17,7 +17,6 @@ body {
 }
 
 
-
 .logo {
     font-weight: 700;
     font-size: 17px;
@@ -36,7 +35,7 @@ header {
 }
 
 .header-inner {
-    background-color: #1a6656;
+    background: var(--primary);
     width: 100%;
     height: 83px;
     position: fixed;
@@ -103,7 +102,7 @@ nav {
 .list {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 25px;
     list-style: none;
     padding-left: 0;
 }
@@ -118,6 +117,8 @@ li {
     padding: 10px 20px;
     border: 1px;
     cursor: pointer;
+    background: var(--primary-light);
+    color: white;
 }
 
 /* mainの部分を真ん中に表示させるための要素 */
@@ -159,29 +160,31 @@ li {
     color: #c0392b;
 }
 
-.menu a {
-  color: #0026ff58;          /* menu内の色の変更 */
-  text-decoration: none;   /* 下線を消す */
-  cursor: default;         /* マウスホバー時のポインター（指マーク）を消す（任意） */
-}
 
 .menu a {
-  padding-bottom: 5px;
-  position: relative;
+    font-size: 19px;
+    padding-bottom: 5px;
+    position: relative;
+    text-decoration: none; 
 }
 .menu a::before {
-  background:black;
-  content: '';
-  width: 100%;
-  height: 2px;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  transform-origin: right top;
-  transform: scale(0, 1);
-  transition: transform .3s;
+    background: var(--primary);
+    content: '';
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transform-origin: right top;
+    transform: scale(0, 1);
+    transition: transform .3s;
 }
 .menu a:hover::before {
-  transform-origin: left top;
-  transform: scale(1, 1);
+    transform-origin: left top;
+    transform: scale(1, 1);
+}
+
+.menu i {
+    color: var(--accent);
+    margin-right: 5px;
 }

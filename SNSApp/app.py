@@ -7,7 +7,7 @@ import re
 import os
 
 
-# from models import User, Post, Comment
+from models import User, Post, Comment
 # temp 
 from models import User, Post, Comment, Follow, Bookmark
 
@@ -238,21 +238,22 @@ def myposts_view():
 
 # ブックマーク機能
 @app.route('/bookmark', methods=['GET'])
-def my_bookmark():
-    user_id = session.get('user_id') # ここでセッションからuser_idを取得
-    if user_id is None: # ログインしてないなら
-        return redirect(url_for('login_view')) # ログイン画面に飛ばす
-    bookmark_records = Bookmark.get_by_user_id(user_id)# ブックマークをレコード('bookmark_id': 1,user_id: 3,post_id: 1)で管理する。その情報を bookmark_recordsに代入する。
-    bookmarked_posts = []#レコードの入れ物を作成する。
-    for record in bookmark_records:
-        # 各ブックマークレコードからpost_idを取得し、Postテーブルから投稿の詳細を取得
-        post = Post.find_by_id(record['post_id'])
-        # if postでpostが存在してるかを問い、post.get('deleted_at') is None:でdeleted_atカラムがnull (未削除) であることを確認
-        if post and post.get('deleted_at') is None: # post.get('deleted_at')でdeleted_atカラムの値を取得
-            post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M') # 日付の整形
-            bookmarked_posts.append(post) # 整形した投稿情報をリストに追加
-    # テンプレートに整形済みの投稿リストを渡す
-    return render_template('auth/bookmark.html', my_bookmarks=bookmarked_posts, user_id=user_id)
+def bookmark_view():
+    return render_template('auth/bookmark.html')
+    # user_id = session.get('user_id') # ここでセッションからuser_idを取得
+    # if user_id is None: # ログインしてないなら
+    #     return redirect(url_for('login_view')) # ログイン画面に飛ばす
+    # bookmark_records = Bookmark.get_by_user_id(user_id)# ブックマークをレコード('bookmark_id': 1,user_id: 3,post_id: 1)で管理する。その情報を bookmark_recordsに代入する。
+    # bookmarked_posts = []#レコードの入れ物を作成する。
+    # for record in bookmark_records:
+    #     # 各ブックマークレコードからpost_idを取得し、Postテーブルから投稿の詳細を取得
+    #     post = Post.find_by_id(record['post_id'])
+    #     # if postでpostが存在してるかを問い、post.get('deleted_at') is None:でdeleted_atカラムがnull (未削除) であることを確認
+    #     if post and post.get('deleted_at') is None: # post.get('deleted_at')でdeleted_atカラムの値を取得
+    #         post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M') # 日付の整形
+    #         bookmarked_posts.append(post) # 整形した投稿情報をリストに追加
+    # # テンプレートに整形済みの投稿リストを渡す
+    # return render_template('auth/bookmark.html', my_bookmarks=bookmarked_posts, user_id=user_id)
 
 # フォロワー一覧画面
 @app.route('/followers', methods=['GET'])

@@ -5,18 +5,43 @@ Profile - TechShare
 {% endblock %}
 
 {% block page_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css')}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/myposts.css')}}">
 {% endblock %}
 
 {% block content %}
-{% if myposts %}
-    {% for post in myposts %}
-        <div class="post">
-            <p>{{ post.content }}</p>
-            <p>{{ post.created_at }}</p>
+<section class="post-list">
+    {% if myposts %}
+        {% for post in myposts %}
+            <div class="post-whole">
+                <div class="name">
+                    <span class="user">{{ post.user_name }}</span>
+                </div>
+                    <div class="post-card" data-url="{{ url_for('post_detail_view', post_id=post.post_id)}}">
+                        <div class="post-content">
+                            <div class="post-tags">
+                                {% for tag in post.tags %}
+                                    <a  class="tag" href="{{ url_for('tag_posts', tag_id=tag.id) }}">
+                                        #{{ tag.name }}
+                                    </a>
+                                {% endfor %}
+                            </div>
+                            <div class="post-top">
+                                <div class="post-header">
+                                    <div class="post-time">{{ post.created_at }}</div>
+                                    <button class="bookmark-btn"><i class="far fa-star"></i></button>
+                                </div>
+                                <div class="post-body">
+                                    {{ post.content }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="empty">
+            <p>投稿がありません。</p>
         </div>
-    {% endfor %}
-{% else %}
-    <p>まだ投稿がありません</p>
-{% endif %}
+    {% endif %}
+</section>
 {% endblock %}
