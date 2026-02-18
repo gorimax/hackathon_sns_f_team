@@ -125,7 +125,7 @@ def posts_view():
         for post in posts:
             post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M')
             post['user_name'] = User.get_name_by_id(post['user_id'])
-            post['tags'] = Tag.get_tags_post_id(post['id'])#タグに紐づいた各掲示板のidを取得、掲示板に正しいタグが表示される。
+            post['tags'] = Tag.get_tags_post_id(post['post_id'])#タグに紐づいた各掲示板のidを取得、掲示板に正しいタグが表示される。
         return render_template('post/posts.html', posts=posts, user_id=user_id,tag=tags)
 
 
@@ -249,6 +249,7 @@ def my_bookmark():
         # if postでpostが存在してるかを問い、post.get('deleted_at') is None:でdeleted_atカラムがnull (未削除) であることを確認
         if post and post.get('deleted_at') is None: # post.get('deleted_at')でdeleted_atカラムの値を取得
             post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M') # 日付の整形
+            post['post_user'] = User.get_name_by_id(post['user_id']) # 投稿者の名前取得
             bookmarked_posts.append(post) # 整形した投稿情報をリストに追加
     # テンプレートに整形済みの投稿リストを渡す
     return render_template('auth/bookmark.html', my_bookmarks=bookmarked_posts, user_id=user_id)
@@ -273,7 +274,7 @@ def my_followers():
         'auth/followers.html', # テンプレートのパスは適宜調整
         following_users=following_users, # 自分がフォローしている人たち
         followers_of_user=followers_of_user, # 自分をフォローしている人たち
-        user_id=user_id # ログインユーザーのID
+        user_id=User.get_name_by_id(user_id) # ログインユーザーのID
     )
 
 @app.errorhandler(400)

@@ -10,15 +10,18 @@ Profile - TechShare
 
 
 {% block content %}
+{{ my_bookmarks }}
 <div class="bookmark-page">
     <div class="content">
         <h1>ブックマーク</h1>
+        <h2>ポスト</h2>
         {% if my_bookmarks %}
             {% for post in my_bookmarks %}
                 <div class="card">
                     <div class="card-body">
-                        <!-- {{ post.content }}
-                        {{ post.created_at }} -->
+                        {{ post.post_user }}
+                        {{ post.content }}
+                        {{ post.created_at }}
                     </div>
                 </div>
             {% endfor %}
@@ -63,5 +66,4 @@ Profile - TechShare
             <p>投稿がありません。</p>
         </div>
     {% endif %}
-</section>
-{% endblock %} -->
+</section> -->
