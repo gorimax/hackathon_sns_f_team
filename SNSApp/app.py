@@ -125,7 +125,7 @@ def posts_view():
         for post in posts:
             post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M')
             post['user_name'] = User.get_name_by_id(post['user_id'])
-            post['tags'] = Tag.get_tags_post_id(post['id'])#タグに紐づいた各掲示板のidを取得、掲示板に正しいタグが表示される。
+            post['tags'] = Tag.get_tags_post_id(post['post_id'])#タグに紐づいた各掲示板のidを取得、掲示板に正しいタグが表示される。
         return render_template('post/posts.html', posts=posts, user_id=user_id,tag=tags)
 
 
@@ -200,7 +200,7 @@ def create_comment(post_id):
 def delete_comment(comment_id): # comment_idを引数に渡しメソッドでコメントを探す時user_idに紐づいた
     user_id = session.get('user_id') # ログインチェック
     if user_id is None:
-        return redirect(url_for('login_view'))
+        return redirect(url_for('login'))
 
     comment = Comment.find_by_id(comment_id) # コメントの存在チェック
     if comment is None:
@@ -240,7 +240,7 @@ def myposts_view():
 def my_bookmark():
     user_id = session.get('user_id') # ここでセッションからuser_idを取得
     if user_id is None: # ログインしてないなら
-        return redirect(url_for('login_view')) # ログイン画面に飛ばす
+        return redirect(url_for('login')) # ログイン画面に飛ばす
     bookmark_records = Bookmark.get_by_user_id(user_id)# ブックマークをレコード('bookmark_id': 1,user_id: 3,post_id: 1)で管理する。その情報を bookmark_recordsに代入する。
     bookmarked_posts = []#レコードの入れ物を作成する。
     for record in bookmark_records:
@@ -249,6 +249,7 @@ def my_bookmark():
         # if postでpostが存在してるかを問い、post.get('deleted_at') is None:でdeleted_atカラムがnull (未削除) であることを確認
         if post and post.get('deleted_at') is None: # post.get('deleted_at')でdeleted_atカラムの値を取得
             post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M') # 日付の整形
+            post['post_user'] = User.get_name_by_id(post['user_id']) # 投稿者の名前取得
             bookmarked_posts.append(post) # 整形した投稿情報をリストに追加
     # テンプレートに整形済みの投稿リストを渡す
     return render_template('auth/bookmark.html', my_bookmarks=bookmarked_posts, user_id=user_id)
@@ -258,7 +259,7 @@ def my_bookmark():
 def my_followers():
     user_id = session.get('user_id')
     if user_id is None:
-        return redirect(url_for('login_view'))
+        return redirect(url_for('login'))
 
     # 1. ログインユーザーがフォローしているユーザーのリストを取得
     following_users = Follow.get_following_users(user_id) # models.pyのメソッド[get_following_users]を呼び出しfollowing_usersに代入する。
@@ -273,7 +274,7 @@ def my_followers():
         'auth/followers.html', # テンプレートのパスは適宜調整
         following_users=following_users, # 自分がフォローしている人たち
         followers_of_user=followers_of_user, # 自分をフォローしている人たち
-        user_id=user_id # ログインユーザーのID
+        user_id=User.get_name_by_id(user_id) # ログインユーザーのID
     )
 
 @app.errorhandler(400)

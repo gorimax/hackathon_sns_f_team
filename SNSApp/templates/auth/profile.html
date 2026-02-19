@@ -10,6 +10,7 @@ Profile - TechShare
 {% endblock %}
 
 {% block content %}
+{{ user }}
 <!-- プロフィールカード -->
 <main class="profile">
     <div class="profile-card">
@@ -17,22 +18,25 @@ Profile - TechShare
         <div class="profile-header">
             <div class="profile-dock-wrap">
                 <div class="profile-dock">
-                    <h1 class="profile-name">マッチ</h1>
+                    <!-- <h1 class="profile-name">マッチ</h1> -->
+                    <h1 class="profile-name">{{ user.user_name }}</h1>
                 </div>
             </div>
         </div>
         <!-- 使用技術 -->
         <section class="technology">
             <h2 class="technology-title">使用技術</h2>
-            <ul class="stack">
+            <!-- <ul class="stack">
                 <li class="skill">html</li>
                 <li class="skill">css</li>
                 <li class="skill">python</li>
-            </ul>
+            </ul> -->
+            <h3>{{ user.learning }}</h3>
         </section>
         <section class="self-introduction">
             <h2>自己紹介</h2>
-            <p>raretechで学び希少型エンジニアに俺はなる！！</p>
+            <!-- <p>raretechで学び希少型エンジニアに俺はなる！！</p> -->
+            <p>{{ user.profile }}</p>
         </section>
     </div>
 </main>

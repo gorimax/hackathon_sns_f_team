@@ -20,7 +20,7 @@
     </div>
     {% endif %}
     {% endwith %}
-    
+
     <section class="post-list">
     {% if posts and posts|length > 0 %}
         {% for post in posts %}
@@ -32,9 +32,9 @@
                     <div class="post-content">
                         <div class="post-tags">
                             {% for tag in post.tags %}
-                                <a  class="tag" href="{{ url_for('tag_posts', tag_id=tag.id) }}">
-                                    #{{ tag.name }}
-                                </a>
+                                <p>
+                                    #{{ tag.tag }}
+                                </p>
                             {% endfor %}
                         </div>
                         <div class="post-top">
@@ -74,10 +74,9 @@
                     <!-- <h2>投稿フォーム</h2> -->
                     <form class="post-form" action="/posts" method="post">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-
                         <select name="tag_ids[]" id="tag-select" multiple>
-                            {% for tag in tags %}
-                            <option value="{{ tag.id }}">{{ tag.name }}</option>
+                            {% for tag in tag %}
+                            <option value="{{ tag.id }}">{{ tag.tag }}</option>
                             {% endfor %}
                         </select>
 

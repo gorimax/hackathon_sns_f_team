@@ -9,5 +9,8 @@ Profile - TechShare
 {% endblock %}
 
 {% block content %}
+<p>ログインユーザー：{{ user_id }}</p>
 <h1>フォロワー</h1>
+<p>自分がフォローしている人たち：{{ following_users }}</p>
+<p>自分をフォローしている人たち：{{ followers_of_user }}</p>
 {% endblock %}
