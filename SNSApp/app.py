@@ -200,7 +200,7 @@ def create_comment(post_id):
 def delete_comment(comment_id): # comment_idを引数に渡しメソッドでコメントを探す時user_idに紐づいた
     user_id = session.get('user_id') # ログインチェック
     if user_id is None:
-        return redirect(url_for('login_view'))
+        return redirect(url_for('login'))
 
     comment = Comment.find_by_id(comment_id) # コメントの存在チェック
     if comment is None:
@@ -240,7 +240,7 @@ def myposts_view():
 def my_bookmark():
     user_id = session.get('user_id') # ここでセッションからuser_idを取得
     if user_id is None: # ログインしてないなら
-        return redirect(url_for('login_view')) # ログイン画面に飛ばす
+        return redirect(url_for('login')) # ログイン画面に飛ばす
     bookmark_records = Bookmark.get_by_user_id(user_id)# ブックマークをレコード('bookmark_id': 1,user_id: 3,post_id: 1)で管理する。その情報を bookmark_recordsに代入する。
     bookmarked_posts = []#レコードの入れ物を作成する。
     for record in bookmark_records:
@@ -259,7 +259,7 @@ def my_bookmark():
 def my_followers():
     user_id = session.get('user_id')
     if user_id is None:
-        return redirect(url_for('login_view'))
+        return redirect(url_for('login'))
 
     # 1. ログインユーザーがフォローしているユーザーのリストを取得
     following_users = Follow.get_following_users(user_id) # models.pyのメソッド[get_following_users]を呼び出しfollowing_usersに代入する。
