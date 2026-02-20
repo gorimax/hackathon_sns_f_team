@@ -262,21 +262,6 @@ def my_bookmark():
                            my_bookmarked_comments=bookmarked_comments, # コメントのリストを渡す
                            user_id=user_id)
 
-    #bookmarked_posts = []#レコードの入れ物を作成する。
-    bookmark_comment = []#追加
-    for record in bookmark_records:
-        # 各ブックマークレコードからpost_idを取得し、Postテーブルから投稿の詳細を取得
-        post = Post.find_by_id(record['post_id'])
-        comment = Comment.find_by_id(record['comment_id'])#追加
-
-        # if postでpostが存在してるかを問い、post.get('deleted_at') is None:でdeleted_atカラムがnull (未削除) であることを確認
-        if post and post.get('deleted_at') is None: # post.get('deleted_at')でdeleted_atカラムの値を取得
-            post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M') # 日付の整形
-            post['post_user'] = User.get_name_by_id(post['user_id']) # 投稿者の名前取得
-            bookmarked_posts.append(post) # 整形した投稿情報をリストに追加
-    # テンプレートに整形済みの投稿リストを渡す
-    return render_template('auth/bookmark.html', my_bookmarks=bookmarked_posts, user_id=user_id, comment_id=comment_id)
-
 # フォロワー一覧画面
 @app.route('/followers', methods=['GET'])
 def my_followers():
