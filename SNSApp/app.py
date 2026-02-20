@@ -242,17 +242,40 @@ def my_bookmark():
     if user_id is None: # ログインしてないなら
         return redirect(url_for('login')) # ログイン画面に飛ばす
     bookmark_records = Bookmark.get_by_user_id(user_id)# ブックマークをレコード('bookmark_id': 1,user_id: 3,post_id: 1)で管理する。その情報を bookmark_recordsに代入する。
-    bookmarked_posts = []#レコードの入れ物を作成する。
+    bookmarked_posts = []
+    bookmarked_comments = []
+
+    for record in bookmark_records:
+        if record.get('post_id'): # post_idが存在する場合（投稿のブックマーク）
+            post = Post.find_by_id(record['post_id'])
+            if post and post.get('deleted_at') is None:# もしpost_idが空でdeleted_atに追加（削除）されてなければ（掲示板が存在していたら）
+                post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M')
+                bookmarked_posts.append(post)# []リストにpost詳細を追加する
+        elif record.get('comment_id'): # comment_idが存在する場合（コメントのブックマーク）
+            comment = Comment.find_by_id(record['comment_id'])
+            if comment: # コメントが存在する場合のみ処理（削除されている可能性もあるため）
+                comment['created_at'] = comment['created_at'].strftime('%Y-%m-%d %H:%M')
+                bookmarked_comments.append(comment)
+
+    return render_template('auth/bookmark.html',
+                           my_bookmarks=bookmarked_posts,
+                           my_bookmarked_comments=bookmarked_comments, # コメントのリストを渡す
+                           user_id=user_id)
+
+    #bookmarked_posts = []#レコードの入れ物を作成する。
+    bookmark_comment = []#追加
     for record in bookmark_records:
         # 各ブックマークレコードからpost_idを取得し、Postテーブルから投稿の詳細を取得
         post = Post.find_by_id(record['post_id'])
+        comment = Comment.find_by_id(record['comment_id'])#追加
+
         # if postでpostが存在してるかを問い、post.get('deleted_at') is None:でdeleted_atカラムがnull (未削除) であることを確認
         if post and post.get('deleted_at') is None: # post.get('deleted_at')でdeleted_atカラムの値を取得
             post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M') # 日付の整形
             post['post_user'] = User.get_name_by_id(post['user_id']) # 投稿者の名前取得
             bookmarked_posts.append(post) # 整形した投稿情報をリストに追加
     # テンプレートに整形済みの投稿リストを渡す
-    return render_template('auth/bookmark.html', my_bookmarks=bookmarked_posts, user_id=user_id)
+    return render_template('auth/bookmark.html', my_bookmarks=bookmarked_posts, user_id=user_id, comment_id=comment_id)
 
 # フォロワー一覧画面
 @app.route('/followers', methods=['GET'])
