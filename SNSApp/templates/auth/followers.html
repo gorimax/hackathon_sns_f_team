@@ -5,12 +5,32 @@ Profile - TechShare
 {% endblock %}
 
 {% block page_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css')}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/follower.css')}}">
 {% endblock %}
 
 {% block content %}
-<p>ログインユーザー：{{ user_id }}</p>
-<h1>フォロワー</h1>
-<p>自分がフォローしている人たち：{{ following_users }}</p>
-<p>自分をフォローしている人たち：{{ followers_of_user }}</p>
+<div class="follower">
+    <div class="content">
+
+        <div class="follow-btn">
+            <button  class="btn-style" onclick="document.getElementById('followers').style.display = 'block'; document.getElementById('following').style.display = 'none';">
+                フォロワー
+            </button>
+
+            <button class="btn-style" onclick="document.getElementById('following').style.display = 'block'; document.getElementById('followers').style.display = 'none';">
+                フォロー
+            </button>
+        </div>
+
+        <div class="follow-list">
+            <div id="following" style="display: none;">
+                <p>自分がフォローしている人たち：{{ following_users }}</p>
+            </div>
+
+            <div id="followers" style="display: none;">
+                <p>自分をフォローしている人たち：{{ followers_of_user }}</p>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
