@@ -1,0 +1,45 @@
+.content {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.follow-btn {
+    display: flex;
+    height: 30px;
+    gap: 170px;
+    margin: 20px 50px;
+}
+
+.btn-style {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #92B294;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+    padding: 20px 30px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.btn-style:hover {
+    background-color: #4f7952;
+}
+
+.follow-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 70%;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+}
