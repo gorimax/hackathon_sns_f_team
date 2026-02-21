@@ -36,38 +36,105 @@ document.querySelectorAll('.bookmark-btn').forEach(btn => {
     });
 });
 
+// ==========================
+// 要素取得
+// ==========================
+const modalToggle = document.getElementById("new-post");
+const form = document.querySelector(".post-form");
+const checkboxes = document.querySelectorAll('input[name="tag_ids[]"]');
 
-// 投稿画面のタグ選択
-const select = document.getElementById("tag-select");
-const selectedTagsDiv = document.getElementById("selected-tags");
 
-select.addEventListener("change", function() {
 
-    selectedTagsDiv.innerHTML = ""; // 既存のタグをクリア
+function toggleCheckboxes() {
+    const box = document.getElementById("checkboxes");
+    box.style.display = box.style.display === "none" ? "block" : "none";
+}
 
-    const selectedOptions = Array.from(this.selectedOptions);
+/* ここが重要 */
+document.addEventListener("click", function(event) {
+    const multiselect = document.querySelector(".multiselect");
+    const checkboxes = document.getElementById("checkboxes");
 
-    // 何も選ばれていない場合
-    if (selectedOptions.length === 0){
-        const message = document.createElement("span");
-        message.classList.add("no-tag-message");
-        message.textContent = "タグを選択してください";
-        selectedTagsDiv.appendChild(message);
+    // クリックされた場所がマルチセレクトの外なら閉じる
+    if (!multiselect.contains(event.target)) {
+        checkboxes.style.display = "none";
+    }
+});
+
+function updateSelectedTags() {
+    const checked = document.querySelectorAll('input[name="tag_ids[]"]:checked');
+    const selectedDiv = document.getElementById("selected-tags");
+
+    if (checked.length > 3) {
+        alert("タグは最大3つまでです");
+        checked[checked.length - 1].checked = false;
         return;
     }
 
-    // 選択されている場合
-    selectedOptions.forEach(option => {
-        const tag = document.createElement("span");
-        tag.classList.add("tag-item");
-        tag.textContent = option.value;
-        selectedTagsDiv.appendChild(tag);
+    let names = [];
+    checked.forEach(cb => {
+        names.push(cb.parentElement.textContent.trim());
     });
 
+    selectedDiv.textContent = names.length > 0
+        ? names.join(", ")
+        : "タグを選択してください（最大3つ）";
+}
+
+
+let expanded = false;
+function showCheckboxes() {
+    let checkboxes = document.getElementById("checkboxes");
+    if (!expanded) {
+        checkboxes.style.display = "block";
+        expanded = true;
+    } else {
+        checkboxes.style.display = "none";
+        expanded = false;
+    }
+}
+
+
+// ==========================
+// 最大3つ制限 + 表示更新
+// ==========================
+checkboxes.forEach(cb => {
+    cb.addEventListener("change", function () {
+
+        const checked = document.querySelectorAll(
+            'input[name="tag_ids[]"]:checked'
+        );
+
+        if (checked.length > 3) {
+            alert("タグは最大3つまで選択できます");
+            this.checked = false;
+            return;
+        }
+
+        updateSelectedTags();
+    });
 });
-// document.querySelectorAll('.bookmark').forEach(btn => {
-//     btn.addEventListener('click', (e) => {
-//         e.stopPropagation(); // ← これ！
-//         // お気に入り処理
-//     });
-// });
+
+
+// ==========================
+// モーダル初期化
+// ==========================
+function resetModal() {
+
+    form.reset();
+
+    checkboxes.forEach(cb => cb.checked = false);
+
+    selectedTagsDiv.innerHTML =
+        '<span class="no-tag-message">タグ表示欄です</span>';
+}
+
+
+// ==========================
+// モーダル閉じたらリセット
+// ==========================
+modalToggle.addEventListener("change", function () {
+    if (!this.checked) {
+        resetModal();
+    }
+});
