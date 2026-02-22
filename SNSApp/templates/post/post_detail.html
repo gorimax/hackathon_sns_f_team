@@ -23,6 +23,22 @@
     <div class="main-column">
         <!-- 投稿の内容 -->
         <div class="detail-list">
+            <div class="post-header">
+                <div class="post-name">
+                    <a class="user" href="{{ url_for('user_profile_view', user_id=post['user_id'])}}"
+                        onclick="event.stopPropagation()">{{post['user_name']}}</a>
+                </div>
+                <div class="post-card-warp">
+                    <!-- タグ表示を追加 -->
+                    {% if tags and tags|length > 0 %}
+                    <div class="post-tags">
+                        {% for tag in tags %}
+                        <span class="tag">#{{ tag.tag }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
             <div class="post-detail-card">
                 <article>{{ post['content'] }}</article>
                 <!-- 削除などの追加 -->
@@ -31,11 +47,12 @@
                     <form action="{{ url_for('delete_post',post_id=post['post_id'])}}" method="post"
                         onsubmit="return confirm('投稿内容を削除してもよろしいですか？');">
                         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                        <button type="button" class="bookmark">
-                            <i class="far fa-star "></i>
-                        </button>
                         <button type="submit" class="delete">削除</button>
                     </form>
+                    {% else %}
+                    <button type="button" class="bookmark">
+                        <i class="far fa-star "></i>
+                    </button>
                     {% endif %}
                 </div>
             </div>
@@ -63,7 +80,8 @@
                 {% if comments and comments|length > 0 %}
                 {% for comment in comments %}
                 <div class="name">
-                    <span class="user">{{comment['user_name']}}</span>
+                    <a class="user" href="{{ url_for('user_profile_view', user_id=comment['user_id'])}}"
+                        onclick="event.stopPropagation()">{{comment['user_name']}}</a>
                 </div>
                 <div class="comment-card">
                     <article class="comment-body">
@@ -77,11 +95,12 @@
                         <form action="{{ url_for('delete_comment',comment_id=comment['comment_id'])}}" method="post"
                             onsubmit="return confirm('コメントを削除してもよろしいですか？')">
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                            <button type="button" class="bookmark">
-                                <i class="far fa-star "></i>
-                            </button>
                             <button type="submit" class="delete">削除</button>
                         </form>
+                        {% else %}
+                        <button type="button" class="bookmark">
+                            <i class="far fa-star "></i>
+                        </button>
                         {% endif %}
                     </div>
                 </div>

@@ -13,6 +13,7 @@
 }
 
 .post-detail-card {
+    position: relative;
     display: flex;
     flex-direction: column;
     background-color: #ffffff;
@@ -47,9 +48,27 @@ button.delete {
     border-radius: 5px;
     border: none;
     cursor: pointer;
-
 }
 
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* tagのデザイン */
+.post-tags {
+    padding-right: 25px;
+}
+
+.tag {
+    background-color: #1A6656;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    box-shadow: 0 3px 8px rgb(0,0,0,0.2,);
+}
 .open-btn {
     display: inline-block;
     padding: 10px 10px;
@@ -155,9 +174,10 @@ input #new-comment .modal-toggle {
     height: auto;
 }
 
-.name {
+.name,.post-name {
     width: auto;
-    padding: 10px 0 0 20px;
+    padding: 10px 0 5px 25px;
+    border: #28a745;
 }
 
 .comment-body {
