@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile - TechShare{% endblock %}
+
+{% block content %}
+<main class="profile">
+  <div class="profile-card">
+    <h1 class="profile-name">{{ user['user_name'] }}</h1>
+
+    {% if user.get('learning') %}
+      <section class="technology">
+        <h2 class="technology-title">学習中</h2>
+        <p>{{ user['learning'] }}</p>
+      </section>
+    {% endif %}
+
+    {% if user.get('profile') %}
+      <section class="self-introduction">
+        <h2>自己紹介</h2>
+        <p>{{ user['profile'] }}</p>
+      </section>
+    {% endif %}
+  </div>
+</main>
+{% endblock %}
