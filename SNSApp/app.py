@@ -324,8 +324,8 @@ def posts_by_tag(tag_id):
     tag_posts = Tag.find_by_id(tag_id)
     posts = []
     for tag_post in tag_posts:
-        posts.append(Post.get_post_by_post_id(tag_post.post_id))
-    return render_template("tag_posts.html", posts=posts, tag=tag)
+        posts.append(Post.get_post_by_post_id(tag_post['post_id']))
+    return render_template("auth/tag_posts.html", posts=posts, tag=tag)
 
 @app.errorhandler(400)
 def bad_request(error):

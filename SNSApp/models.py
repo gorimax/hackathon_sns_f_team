@@ -292,7 +292,8 @@ class Tag:
             with conn.cursor() as cur:
                 sql = "SELECT * from tags WHERE tag_id=%s;"
                 cur.execute(sql,(tag_id,))
-                conn.commit()
+                tag = cur.fetchone()
+                return tag
         except pymysql.Error as e:
             print(f'エラーが発生しています：{e}')
             abort(500)
@@ -304,9 +305,10 @@ class Tag:
         conn = db_pool.get_conn()
         try:
             with conn.cursor() as cur:
-                sql = "SELECT * from post_tags WHERE tag_id=%s;"
+                sql = "SELECT * FROM post_tags WHERE tag_id=%s;"
                 cur.execute(sql,(tag_id,))
-                conn.commit()
+                tag_posts = cur.fetchall()
+                return tag_posts
         except pymysql.Error as e:
             print(f'エラーが発生しています：{e}')
             abort(500)
