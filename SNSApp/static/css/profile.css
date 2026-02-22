@@ -37,7 +37,7 @@
     display: none;
 }
 
-/* ✅ checkboxがONならモーダル表示 */
+/* checkboxがONならモーダル表示 */
 .modal-toggle:checked+.open-btn+.modal {
     display: block;
 }
@@ -93,7 +93,7 @@
     resize: vertical;
 }
 
-.modal-submit {
+button.modal-submit {
     margin-top: 14px;
     width: 100%;
     padding: 10px 14px;
