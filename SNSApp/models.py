@@ -94,6 +94,19 @@ class User:
         finally:
             db_pool.release(conn)
 
+    @classmethod
+    def update_profile(cls, user_id, profile, learning):
+        conn =db_pool.get_conn()
+        try:
+            with conn.cursor() as cur:
+                sql = """UPDATE users SET profile = %s,learning = %s WHERE user_id = %s"""
+                cur.execute(sql,(profile, learning, user_id))
+            conn.commit()
+        except pymysql.Error as e:
+            print(f"エラーが発生しています: {e}")
+            conn.rollback()
+        finally:
+            db_pool.release(conn)
 class Post:
     @classmethod
     def get_all(cls):
@@ -162,6 +175,21 @@ class Post:
                 cur.execute(sql, (user_id))
                 post = cur.fetchall()
             return post
+        except pymysql.Error as e:
+            print(f'エラーが発生しています：{e}')
+            abort(500)
+        finally:
+            db_pool.release(conn)
+
+    @classmethod
+    def get_post_by_post_id(cls, post_id):
+        conn = db_pool.get_conn()
+        try:
+            with conn.cursor() as cur:
+                sql = "SELECT * FROM posts WHERE post_id=%s;"
+                cur.execute(sql, post_id)
+                last_id = cur.fetchone()
+                return last_id
         except pymysql.Error as e:
             print(f'エラーが発生しています：{e}')
             abort(500)
@@ -257,6 +285,33 @@ class Tag:
             abort(500)
         finally:
             db_pool.release(conn)           
+    @classmethod
+    def get_tag(cls, tag_id):
+        conn = db_pool.get_conn()
+        try:
+            with conn.cursor() as cur:
+                sql = "SELECT * from tags WHERE tag_id=%s;"
+                cur.execute(sql,(tag_id,))
+                conn.commit()
+        except pymysql.Error as e:
+            print(f'エラーが発生しています：{e}')
+            abort(500)
+        finally:
+            db_pool.release(conn)
+
+    @classmethod
+    def find_by_id(cls, tag_id):
+        conn = db_pool.get_conn()
+        try:
+            with conn.cursor() as cur:
+                sql = "SELECT * from post_tags WHERE tag_id=%s;"
+                cur.execute(sql,(tag_id,))
+                conn.commit()
+        except pymysql.Error as e:
+            print(f'エラーが発生しています：{e}')
+            abort(500)
+        finally:
+            db_pool.release(conn)
 
 class Follow:
     @classmethod

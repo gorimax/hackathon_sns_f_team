@@ -74,30 +74,31 @@
 
                     <!-- <h2>投稿フォーム</h2> -->
                     <form class="post-form" action="/posts" method="post">
-                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
-                    <!-- タグ選択 -->
-                    <div class="multiselect">
-                    <div class="selectBox" onclick="toggleCheckboxes()">
-                        <div id="selected-tags">
-                            タグを選択してください（最大3つ）
+                        <!-- タグ選択 -->
+                        <div class="multiselect">
+                            <div class="selectBox" onclick="toggleCheckboxes()">
+                                <div id="selected-tags">
+                                    タグを選択してください（最大3つ）
+                                </div>
+                            </div>
+
+                            <div id="checkboxes" style="display:none;">
+                                {% for tag in tag %}
+                                    <label>
+                                        <!-- valueのところのtag.idをtag.tag_idに変更 -->
+                                        <input type="checkbox"
+                                            name="tag_ids[]"
+                                            value="{{ tag.tag_id }}"
+                                            onchange="updateSelectedTags()">
+                                        {{ tag.tag }}
+                                    </label>
+                                {% endfor %}
+                            </div>
                         </div>
-                    </div>
 
-                    <div id="checkboxes" style="display:none;">
-                        {% for tag in tag %}
-                            <label>
-                                <input type="checkbox"
-                                    name="tag_ids[]"
-                                    value="{{ tag.id }}"
-                                    onchange="updateSelectedTags()">
-                                {{ tag.tag }}
-                            </label>
-                        {% endfor %}
-                    </div>
-                </div>
-
-                    <!-- 投稿内容 -->
+                      <!-- 投稿内容 -->
                         <textarea name="content" rows="10" maxlength="500" placeholder="内容を入力してください"></textarea>
 
                         <div class="post-btn">

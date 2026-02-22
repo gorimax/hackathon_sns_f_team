@@ -171,6 +171,9 @@ def post_detail_view(post_id):
     post = Post.find_by_id(post_id)
     if post is None:
         abort(404)
+    tags = []
+    tags = Tag.get_tags_post_id(post_id)
+    print("DEBUG tags:", tags, flush=True)
     post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M')
     post['user_name'] = User.get_name_by_id(post['user_id'])
 
@@ -179,7 +182,7 @@ def post_detail_view(post_id):
         comment['created_at'] = comment['created_at'].strftime('%Y-%m-%d %H:%M')
         comment['user_name'] = User.get_name_by_id(comment['user_id'])
 
-    return render_template('post/post_detail.html', post=post, comments = comments, user_id=user_id)
+    return render_template('post/post_detail.html', post=post, tags=tags, comments = comments, user_id=user_id)
 
 # コメント処理
 @app.route('/posts/<int:post_id>/comments', methods=['POST'])
@@ -223,6 +226,36 @@ def profile_view():
         return redirect(url_for('login')) # ログイン画面に飛ばす
     user = User.find_by_id(user_id) # user変数にUserテーブルから(user_id)ログインしてるユーザと同じIDのデータを代入する。
     return render_template('auth/profile.html', user=user) # テンプレートフォルダを探しその中のprofileディレクトリ内の指定したhtmlを読み込みuser変数の情報をhtml内でuserという名前で使える
+
+@app.route('/profile/update', methods=['POST'])
+def profile_update():
+    user_id = session.get('user_id')
+    print("session user_id:", user_id)
+    if user_id is None:
+        return redirect(url_for('login'))
+    
+    profile = request.form.get('profile', '').strip()
+    learning = request.form.get('learning', '').strip()
+
+    if len(learning) > 100:
+        flash('学習中技術は100文字以内で入力してください','error')
+        return redirect(url_for('profile_view'))
+
+    if len(profile) > 500:
+        flash('自己紹介は500文字以内で入力してください','error')
+        return redirect(url_for('profile_view'))
+    User.update_profile(user_id,profile,learning)
+
+    flash('プロフィールを更新しました', 'success')
+    return redirect(url_for('profile_view'))
+
+@app.route('/users/<int:user_id>', methods=['GET'])
+def user_profile_view(user_id):
+    user = User.find_by_id(user_id)
+    if user is None:
+        abort(404)
+
+    return render_template('auth/profile.html', user=user)
 
 @app.route('/myposts', methods=['GET'])
 def myposts_view():
@@ -284,6 +317,15 @@ def my_followers():
         followers_of_user=followers_of_user, # 自分をフォローしている人たち
         user_id=User.get_name_by_id(user_id) # ログインユーザーのID
     )
+
+@app.route('/tags/<int:tag_id>', methods=['GET'])
+def posts_by_tag(tag_id):
+    tag = Tag.get_tag(tag_id)
+    tag_posts = Tag.find_by_id(tag_id)
+    posts = []
+    for tag_post in tag_posts:
+        posts.append(Post.get_post_by_post_id(tag_post.post_id))
+    return render_template("tag_posts.html", posts=posts, tag=tag)
 
 @app.errorhandler(400)
 def bad_request(error):
