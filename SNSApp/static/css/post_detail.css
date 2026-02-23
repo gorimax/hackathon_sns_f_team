@@ -1,15 +1,20 @@
 * {
     box-sizing: border-box;
 }
+
+.main-content {
+    display: block;
+}
+
 .detail-wrapper {
     display: flex;
     max-width: 800px;
     min-height: 100vh;
     width: 100%;
-    display: flex;
+    margin: 0 auto;
     flex-direction: column;
     gap: 16px;
-    padding-top: 60px;
+    padding-top: 100px;
 }
 
 .post-detail-card {
@@ -22,6 +27,7 @@
     padding: 14px 16px 12px;
     min-height: 100px;
     height: auto;
+    z-index: 0;
 }
 
 .actions {
@@ -48,6 +54,7 @@ button.delete {
     border-radius: 5px;
     border: none;
     cursor: pointer;
+    z-index: 5;
 }
 
 .post-header {
@@ -67,8 +74,9 @@ button.delete {
     padding: 5px 12px;
     border-radius: 20px;
     font-size: 14px;
-    box-shadow: 0 3px 8px rgb(0,0,0,0.2,);
+    box-shadow: 0 3px 8px rgb(0, 0, 0, 0.2, );
 }
+
 .open-btn {
     display: inline-block;
     padding: 10px 10px;
@@ -90,7 +98,8 @@ button.delete {
 }
 
 .modal {
-    display: none; /* 非表示 */
+    display: none;
+    /* 非表示 */
     position: fixed;
     top: 0;
     left: 0;
@@ -105,6 +114,7 @@ button.delete {
     background-color: rgba(0, 0, 0, 0.5);
     cursor: pointer;
 }
+
 .modal-content {
     position: absolute;
     top: 50%;
@@ -128,7 +138,8 @@ input #new-comment .modal-toggle {
     display: none;
 }
 
-.modal-content input, .modal-content textarea {
+.modal-content input,
+.modal-content textarea {
     width: 100%;
     margin-bottom: 15px;
     padding: 10px;
@@ -158,8 +169,9 @@ input #new-comment .modal-toggle {
     cursor: pointer;
     color: #888;
 }
+
 /* ★★★ チェックボックスがONになったらモーダルを表示する ★★★ */
-.modal-toggle:checked ~ .modal {
+.modal-toggle:checked~.modal {
     display: block;
 }
 
@@ -174,7 +186,8 @@ input #new-comment .modal-toggle {
     height: auto;
 }
 
-.name,.post-name {
+.name,
+.post-name {
     width: auto;
     padding: 10px 0 5px 25px;
     border: #28a745;
@@ -190,10 +203,10 @@ input #new-comment .modal-toggle {
 .bookmark {
     justify-content: end;
     border: none;
-    background-color:transparent;
+    background-color: transparent;
 }
 
-.flash-messages{
+.flash-messages {
     margin: 0 auto;
     max-width: 850px;
     padding: 20px 10px 0;
