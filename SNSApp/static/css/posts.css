@@ -18,24 +18,41 @@
     gap: 5px;
 }
 
+/* 投稿カードの上の部分 */
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+}
+
 .name {
     width: auto;
     /* background-color: rgb(194, 194, 212); */
     padding: 0 0 0 20px;
 }
 
-
-.bookmark-btn {
-    border: none;
-    background-color:transparent;
+/* タグの表示範囲、タグの配置調整 */
+.post-tags {
+    display: flex;
+    padding-right: 25px;
+    gap: 5px;
 }
 
-/* このpタグは後消す。デザイン確かめるだけのもの */
-p {
-    margin: 0;
+/* タグの表示のデザイン調整 */
+.tag {
+    background-color: #1A6656;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    box-shadow: 0 3px 8px rgb(0,0,0,0.2,);
+    text-decoration: none; /* リンクの下線を消す */
 }
 
-/* フォームの見た目*/
+
+
+/* 投稿カードの見た目 */
+
 .post-card {
     display: flex;
     background-color: #ffffff;
@@ -45,54 +62,21 @@ p {
     cursor: pointer;
 }
 
-.post-card:hover {
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-}
-
 .post-content {
     display: flex;
-    flex: 1;
-    gap: 5px;
-}
-
-/* タグの表示範囲、タグの配置調整 */
-.post-tags {
-    display: flex;
     flex-direction: column;
-    background-color: aqua;
-    width: 15%;
-    margin: 0 auto;
-    gap: 5px;
-}
-
-/* タグの表示のデザイン調整 */
-.tag {
-    display: inline-block;
-    background-color: #e0e0e0;
-    color: #333;
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 12px;
-    text-decoration: none; /* リンクの下線を消す */
+    padding: 0 10px;
+    width: 100%;
+    gap: 8px;
 }
 
 .post-top {
     display: flex;
-    flex-direction: column;
-    flex: 1;
-    padding:5px 16px 5px;;
-}
-
-.post-header {
-    display: flex;
     justify-content: space-between;
 }
 
-.bookmark {
-    justify-content: flex-end;
-}
-
 .post-body {
+    padding: 0 10px;
     font-size: 15px;
     text-align: left;
     line-height: 1.6;
@@ -100,10 +84,18 @@ p {
     overflow-wrap: anywhere;
 }
 
+/* ブックマークの見た目 */
+/* .bookmark-btn {
+} */
+
+.post-card:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+
 
 /* ここから投稿ボタン、投稿画面について */
 /* チェックボックスを非表示にする */
-
 
 .modal-toggle {
     display: none;
@@ -311,13 +303,3 @@ textarea {
     padding: 20px 10px 0;
 }
 
-/* タグのデザイン */
-.tag {
-    display: inline-block;
-    background-color: #e0e0e0;
-    color: #333;
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 12px;
-    text-decoration: none; /* リンクの下線を消す */
-}
