@@ -72,6 +72,7 @@ def signup_process():
     user_id = User.create(name, email, hashed_password)
 
     session['user_id'] = user_id
+    session['user_name'] = name
 
     return redirect(url_for('posts_view'))
 
@@ -102,8 +103,19 @@ def login_process():
                 flash('メールアドレスorパスワードが違います','error')
             else:
                 session['user_id'] = user["user_id"]
+                session['user_name'] = user["user_name"]
                 return redirect(url_for('posts_view'))
     return redirect(url_for('login'))
+
+
+# ログインアカウントの判別
+@app.context_processor
+def login_user():
+    user_id = session.get("user_id")
+    if not user_id:
+        return {"login_user_name": None}
+
+    return {"login_user_name": User.get_name_by_id(user_id)}
 
 
 # ログアウト
@@ -221,17 +233,17 @@ def delete_comment(comment_id): # comment_idを引数に渡しメソッドでコ
 
 @app.route('/profile', methods=['GET'])
 def profile_view():
-    user_id = session.get('user_id') # ここでセッションからuser_idを取得
-    if user_id is None: # ログインしてないなら
+    login_user_id = session.get('user_id') # ここでセッションからuser_idを取得
+    if login_user_id is None: # ログインしてないなら
         return redirect(url_for('login')) # ログイン画面に飛ばす
-    user = User.find_by_id(user_id) # user変数にUserテーブルから(user_id)ログインしてるユーザと同じIDのデータを代入する。
-    return render_template('auth/profile.html', user=user) # テンプレートフォルダを探しその中のprofileディレクトリ内の指定したhtmlを読み込みuser変数の情報をhtml内でuserという名前で使える
+    user = User.find_by_id(login_user_id) # user変数にUserテーブルから(user_id)ログインしてるユーザと同じIDのデータを代入する。
+    return render_template('auth/profile.html', user=user, login_user_id=login_user_id) # テンプレートフォルダを探しその中のprofileディレクトリ内の指定したhtmlを読み込みuser変数の情報をhtml内でuserという名前で使える
+    
 
 @app.route('/profile/update', methods=['POST'])
 def profile_update():
-    user_id = session.get('user_id')
-    print("session user_id:", user_id)
-    if user_id is None:
+    login_user_id = session.get('user_id')
+    if login_user_id is None:
         return redirect(url_for('login'))
     
     profile = request.form.get('profile', '').strip()
@@ -244,18 +256,22 @@ def profile_update():
     if len(profile) > 500:
         flash('自己紹介は500文字以内で入力してください','error')
         return redirect(url_for('profile_view'))
-    User.update_profile(user_id,profile,learning)
+    User.update_profile(login_user_id,profile,learning)
 
     flash('プロフィールを更新しました', 'success')
     return redirect(url_for('profile_view'))
 
 @app.route('/users/<int:user_id>', methods=['GET'])
 def user_profile_view(user_id):
+    login_user_id = session.get('user_id')
+    if login_user_id is None:
+        return redirect(url_for('login'))
     user = User.find_by_id(user_id)
     if user is None:
         abort(404)
+    login_user_id = session.get('user_id')
 
-    return render_template('auth/profile.html', user=user)
+    return render_template('auth/profile.html', user=user, user_id=user_id, login_user_id=login_user_id)
 
 @app.route('/myposts', methods=['GET'])
 def myposts_view():
