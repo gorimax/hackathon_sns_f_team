@@ -11,16 +11,16 @@ Profile - TechShare
 
 {% block content %}
 {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    <div class="flash-messages">
-        {% for category, message in messages %}
-        <div class="flash flash-{{ category }}">
-            {{message}}
-        </div>
-        {% endfor %}
+{% if messages %}
+<div class="flash-messages">
+    {% for category, message in messages %}
+    <div class="flash flash-{{ category }}">
+        {{message}}
     </div>
-    {% endif %}
-    {% endwith %}
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
 <!-- プロフィールカード -->
 <main class="profile">
     <div class="profile-card">
@@ -43,6 +43,7 @@ Profile - TechShare
             <p>{{ user.profile }}</p>
         </section>
         <!-- modal -->
+        {% if user.user_id == login_user_id %}
         <section class="comment-btn">
             <input type="checkbox" id="profile-edit" class="modal-toggle">
 
@@ -73,7 +74,7 @@ Profile - TechShare
                 </div>
             </div>
         </section>
-
+        {% endif %}
     </div>
 </main>
 {% endblock %}
