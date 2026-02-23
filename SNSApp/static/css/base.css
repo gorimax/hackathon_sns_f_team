@@ -2,6 +2,15 @@
     box-sizing: border-box;
 }
 
+:root { --header-h: 83px; }   /* headerの高さに合わせて */
+
+header{
+  position: fixed;            /* もし base.css で fixed なら合わせる */
+  top: 0; left: 0; right: 0;
+  height: var(--header-h);
+  z-index: 10000;             /* 何より前 */
+}
+
 body {
     display: flex;
     flex-direction: column;
