@@ -10,60 +10,51 @@ Profile - TechShare
 
 
 {% block content %}
-{{ my_bookmarks }}
-<div class="bookmark-page">
-    <div class="content">
-        <h1>ブックマーク</h1>
-        <h2>ポスト</h2>
-        {% if my_bookmarks %}
-            {% for post in my_bookmarks %}
-                <div class="card">
-                    <div class="card-body">
-                        {{ post.post_user }}
-                        {{ post.content }}
-                        {{ post.created_at }}
-                    </div>
-                </div>
-            {% endfor %}
-        {% else %}
-            <p>まだブックマークした投稿がありません</p>
-        {% endif %}
-    </div>
-</div>
-{% endblock %}
-<!-- 
 <section class="post-list">
-    {% if myposts %}
-        {% for post in myposts %}
+    <h1>ブックマーク</h1>
+    {% if my_bookmarks %}
+            {% for post in my_bookmarks %}
             <div class="post-whole">
-                <div class="name">
-                    <span class="user">{{ post.user_name }}</span>
-                </div>
-                    <div class="post-card" data-url="{{ url_for('post_detail_view', post_id=post.post_id)}}">
-                        <div class="post-content">
-                            <div class="post-tags">
-                                {% for tag in post.tags %}
-                                    <a  class="tag" href="{{ url_for('tag_posts', tag_id=tag.id) }}">
-                                        #{{ tag.name }}
-                                    </a>
-                                {% endfor %}
-                            </div>
-                            <div class="post-top">
-                                <div class="post-header">
-                                    <div class="post-time">{{ post.created_at }}</div>
-                                    <button class="bookmark-btn"><i class="far fa-star"></i></button>
-                                </div>
-                                <div class="post-body">
-                                    {{ post.content }}
-                                </div>
-                            </div>
-                        </div>
+
+                <!-- 投稿の上の部分（名前とタグ） -->
+                <div class="post-header">
+
+                    <div class="name">
+                        <span class="user">{{ post.post_name }}</span>
                     </div>
+
+                    <div class="post-tags">
+                    {% for tag in post.tags %}
+                        <a class="tag" href="{{ url_for('posts_by_tag', tag_id=tag.tag_id)}}">
+                            #{{ tag.tag }}
+                        </a>
+                    {% endfor %}
+                    </div>
+
+                </div>
+
+                <!-- 投稿 -->
+                <div class="post-card" data-url="{{ url_for('post_detail_view', post_id=post.post_id)}}">
+                    <div class="post-content">
+
+                        <div class="post-top">
+                            <div class="post-time">{{ post.created_at }}</div>
+                            <button class="bookmark-btn"><i class="far fa-star"></i></button>
+                        </div>
+
+                        <div class="post-body">
+                            {{ post.content }}
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
-        {% endfor %}
+            {% endfor %}
     {% else %}
         <div class="empty">
-            <p>投稿がありません。</p>
+            <p>ブックマークした投稿がありません</p>
         </div>
     {% endif %}
-</section> -->
+</section>
+{% endblock %}
