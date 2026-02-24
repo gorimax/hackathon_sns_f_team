@@ -273,6 +273,7 @@ def user_profile_view(user_id):
 
     return render_template('auth/profile.html', user=user, user_id=user_id, login_user_id=login_user_id)
 
+# 自身の投稿表示機能
 @app.route('/myposts', methods=['GET'])
 def myposts_view():
     user_id = session.get('user_id') # ここでセッションからuser_idを取得
