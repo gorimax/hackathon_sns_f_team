@@ -18,84 +18,288 @@
     gap: 5px;
 }
 
-.name {
-    width: auto;
-    /* background-color: rgb(194, 194, 212); */
-    padding: 0 0 0 20px;
-}
-
-
-.bookmark-btn {
-    border: none;
-    background-color:transparent;
-}
-
-/* このpタグは後消す。デザイン確かめるだけのもの */
-p {
-    margin: 0;
-}
-
-/* フォームの見た目*/
-.post-card {
-    display: flex;
-    background-color: #ffffff;
-    border-radius: 27px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 14px 16px 12px;
-}
-
-.post-card:hover {
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-}
-
-.post-content {
-    display: flex;
-    flex: 1;
-    gap: 5px;
-}
-
-/* タグの表示範囲、タグの配置調整 */
-.post-tags {
-    display: flex;
-    flex-direction: column;
-    background-color: blue;
-    width: 15%;
-    margin: 0 auto;
-    gap: 5px;
-}
-
-/* タグの表示のデザイン調整 */
-.tag {
-    display: inline-block;
-    background-color: #e0e0e0;
-    color: #333;
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 12px;
-    text-decoration: none; /* リンクの下線を消す */
-}
-
-.post-top {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    padding:5px 16px 5px;;
-}
+/* 投稿カードの上の部分 */
 
 .post-header {
     display: flex;
     justify-content: space-between;
 }
 
-.bookmark {
-    justify-content: flex-end;
+.name {
+    width: auto;
+    /* background-color: rgb(194, 194, 212); */
+    padding: 0 0 0 20px;
+}
+
+/* タグの表示範囲、タグの配置調整 */
+.post-tags {
+    display: flex;
+    padding-right: 25px;
+    gap: 5px;
+}
+
+/* タグの表示のデザイン調整 */
+.tag {
+    background-color: #1A6656;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    box-shadow: 0 3px 8px rgb(0,0,0,0.2,);
+    text-decoration: none; /* リンクの下線を消す */
+}
+
+
+
+/* 投稿カードの見た目 */
+
+.post-card {
+    display: flex;
+    background-color: #ffffff;
+    border-radius: 27px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 14px 16px 12px;
+    cursor: pointer;
+}
+
+.post-content {
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+    width: 100%;
+    gap: 8px;
+}
+
+.post-top {
+    display: flex;
+    justify-content: space-between;
 }
 
 .post-body {
+    padding: 0 10px;
     font-size: 15px;
     text-align: left;
     line-height: 1.6;
     /* テキストの折り返し設定 */
     overflow-wrap: anywhere;
+}
+
+/* ブックマークの見た目 */
+/* .bookmark-btn {
+} */
+
+.post-card:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+
+
+/* ここから投稿ボタン、投稿画面について */
+/* チェックボックスを非表示にする */
+
+.modal-toggle {
+    display: none;
+}
+
+/* 投稿ボタンの見た目 */
+.open-btn {
+    position: fixed;
+    bottom: 12%;
+    right: 12%;
+    padding: 10px 40px;
+    background: var(--primary-light);
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 34px;
+    cursor: pointer;
+}
+
+.open-btn:hover {
+    background-color: #4f7952;
+}
+
+/* モーダルの背景（初期状態：非表示） */
+.modal {
+    display: none; /* 非表示 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+
+/* オーバーレイ（半透明の黒背景） */
+.modal-overlay {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* モーダルのカード（投稿フォーム） */
+.modal-card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 50px 30px;
+    border-radius: 32px;
+    width: 100%;
+    height: 100%;
+    max-width: 600px;
+    max-height: 700px;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+/* フォームの要素 */
+.post-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin: 0 auto;
+    width: 90%;
+    height: 100%;
+}
+
+
+/* タグ選択の全体コンテナ */
+.multiselect {
+    position: relative;
+    width: 100%;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* 選択ボックス（閉じてる時） */
+.selectBox {
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 10px;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.selectBox:hover {
+    border-color: #007bff;
+}
+
+
+/* idにcssをつける場合#を使う */
+/* 選択されたタグ表示部分 */
+#selected-tags {
+    color: #333;
+}
+
+/* チェックボックスドロップダウン */
+#checkboxes {
+    display: none;
+    position: absolute;
+    top: 110%;
+    left: 0;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    padding: 8px 0;
+}
+
+/* 各タグ行 */
+#checkboxes label {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+#checkboxes label:hover {
+    background: #f5f7fa;
+}
+
+/* チェックボックス */
+#checkboxes input[type="checkbox"] {
+    margin-right: 8px;
+    accent-color: #007bff; /* チェック色 */
+}
+
+textarea {
+    width: 100%;
+    height: 70%;
+    font-size: 16px;
+    margin: 0 auto 20px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.tag-item {
+    background: var(--accent);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    width: 28%;
+    font-size: 14px;
+}
+
+.post-btn {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    /* margin-bottom: 30px; */
+}
+
+.modal-content button {
+    font-size: 20px;
+    font-weight: 600;
+    width: 170px;
+    height: 50px;
+    background: var(--primary-light);
+    color: white;
+    border: none;
+    border-radius: 34px;
+    cursor: pointer;
+}
+
+.modal-content button:hover {
+    background-color: #4f7952;
+}
+
+/* 閉じるボタン（×印） */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #888;
+}
+
+/* ★★★ チェックボックスがONになったらモーダルを表示する ★★★ */
+.modal-toggle:checked ~ .modal {
+    display: flex;
+}
+
+/* フラッシュメッセージ */
+.flash-messages{
+    margin: 0 auto;
+    max-width: 850px;
+    padding: 20px 10px 0;
 }
 
