@@ -1,4 +1,10 @@
 <aside class="menu">
+    <div class="account-box">
+        <span class="account-name">
+            <div class="icon"><i class="fas fa-user-circle"></i></div>
+            {{ login_user_name or '' }}
+        </span>
+    </div>
     <nav>
         <ul class="list">
             <li><a href="{{ url_for('posts_view')}}"><i class="fas fa-home"></i>ホーム</a></li>
@@ -8,5 +14,7 @@
             <li><a href="{{ url_for('my_bookmark')}}"><i class="fas fa-star"></i>ブックマーク</a></li>
         </ul>
     </nav>
-    <button class="logout" onclick="location.href='{{url_for('logout')}}'">ログアウト</button>
+    <div class="logout">
+        <button class="logout-style" onclick="location.href='{{url_for('logout')}}'">ログアウト</button>
+    </div>
 </aside>

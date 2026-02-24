@@ -17,11 +17,6 @@
         {% if request.path != "/login" and request.path != "/signup" %}
         <div class="menu-content">
             <div class="side">
-                <div class="account-box">
-                <span class="account-name">
-                    {{ login_user_name or '' }}
-                </span>
-                </div>
                 <div class="menu-style">
                     {%include 'common/menu.html'%}
                 </div>
