@@ -13,22 +13,28 @@ Profile - TechShare
     <div class="content">
 
         <div class="follow-btn">
-            <button  class="btn-style" onclick="document.getElementById('followers').style.display = 'block'; document.getElementById('following').style.display = 'none';">
-                フォロワー
+            <button class="btn-style" onclick="document.getElementById('following').style.display = 'flex'; document.getElementById('followers').style.display = 'none';">
+                フォロー
             </button>
 
-            <button class="btn-style" onclick="document.getElementById('following').style.display = 'block'; document.getElementById('followers').style.display = 'none';">
-                フォロー
+            <button  class="btn-style" onclick="document.getElementById('followers').style.display = 'flex'; document.getElementById('following').style.display = 'none';">
+                フォロワー
             </button>
         </div>
 
         <div class="follow-list">
             <div id="following" style="display: none;">
-                <p>自分がフォローしている人たち：{{ following_users }}</p>
+                <p class="card-title">フォロー中</p>
+                <div class="user-card">
+                    <span class="user-name"><i class="far fa-user-circle"></i>{{ following_users }}</span>
+                </div>
             </div>
 
             <div id="followers" style="display: none;">
-                <p>自分をフォローしている人たち：{{ followers_of_user }}</p>
+                <p class="card-title">フォロワー</p>
+                <div class="user-card">
+                    <span class="user-name"><i class="far fa-user-circle"></i>{{ followers_of_user }}</span>
+                </div>
             </div>
         </div>
     </div>
