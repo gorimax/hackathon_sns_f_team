@@ -46,11 +46,31 @@
                 <!-- 削除などの追加 -->
                 <div class="actions">
                     {% if post['user_id'] == user_id %}
-                    <form action="{{ url_for('delete_post',post_id=post['post_id'])}}" method="post"
+                    <!-- <form action="{{ url_for('delete_post',post_id=post['post_id'])}}" method="post"
                         onsubmit="return confirm('投稿内容を削除してもよろしいですか？');">
                         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                         <button type="submit" class="delete">削除</button>
-                    </form>
+                    </form> -->
+                    <!-- 投稿削除モーダル -->
+                    <input type="checkbox" id="delete-post" class="modal-toggle">
+                    <label for="delete-post" class="delete">削除</label>
+
+                    <div class="modal">
+                        <!-- 背景 -->
+                        <label for="delete-post" class="modal-overlay"></label>
+
+                        <div class="modal-content">
+                            <h2>削除確認</h2>
+                            <p>この投稿を削除しますか？（取り消し不可）</p>
+
+                            <form action="{{ url_for('delete_post', post_id=post['post_id']) }}" method="post">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <button type="submit" class="delete">削除する</button>
+                            </form>
+
+                            <label for="delete-post" class="close-btn">&times;</label>
+                        </div>
+                    </div>
                     {% else %}
                     <button class="bookmark-btn" data-post-id="{{ post['post_id'] }}">
                         <i class="far fa-star "></i>
@@ -94,11 +114,32 @@
                     </div>
                     <div class="actions">
                         {% if comment['user_id'] == user_id %}
-                        <form action="{{ url_for('delete_comment',comment_id=comment['comment_id'])}}" method="post"
+                        <!-- <form action="{{ url_for('delete_comment',comment_id=comment['comment_id'])}}" method="post"
                             onsubmit="return confirm('コメントを削除してもよろしいですか？')">
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                             <button type="submit" class="delete">削除</button>
-                        </form>
+                        </form> -->
+                        <input type="checkbox" id="delete-comment-{{ comment['comment_id'] }}" class="modal-toggle">
+                        <label for="delete-comment-{{ comment['comment_id'] }}"
+                            class="delete">削除</label>
+
+                        <div class="modal">
+                            <label for="delete-comment-{{ comment['comment_id'] }}" class="modal-overlay"></label>
+
+                            <div class="modal-content">
+                                <h2>削除確認</h2>
+                                <p>このコメントを削除しますか？</p>
+
+                                <form action="{{ url_for('delete_comment', comment_id=comment['comment_id']) }}"
+                                    method="post">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                    <button type="submit" class="delete">削除する</button>
+                                </form>
+
+                                <label for="delete-comment-{{ comment['comment_id'] }}"
+                                    class="close-btn">&times;</label>
+                            </div>
+                        </div>
                         {% else %}
                         <button class="bookmark-btn" data-comment-id="{{ comment['comment_id'] }}">
                             <i class="far fa-star "></i>
