@@ -62,13 +62,18 @@
     padding: 5px 10px;
 }
 
+.user {
+    display: flex;
+    width: 100%;
+}
+
 .user-name {
     font-size: 16px;
 }
 
 .fa-user-circle {
     margin: 0 10px;
-    font-size: 23px;
+    font-size: 20px;
 }
 
 #following {
