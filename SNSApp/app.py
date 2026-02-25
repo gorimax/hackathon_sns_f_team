@@ -72,7 +72,6 @@ def signup_process():
     user_id = User.create(name, email, hashed_password)
 
     session['user_id'] = user_id
-    session['user_name'] = name
 
     return redirect(url_for('posts_view'))
 
@@ -103,10 +102,8 @@ def login_process():
                 flash('メールアドレスorパスワードが違います','error')
             else:
                 session['user_id'] = user["user_id"]
-                session['user_name'] = user["user_name"]
                 return redirect(url_for('posts_view'))
     return redirect(url_for('login'))
-
 
 # ログインアカウントの判別
 @app.context_processor
@@ -116,7 +113,6 @@ def login_user():
         return {"login_user_name": None}
 
     return {"login_user_name": User.get_name_by_id(user_id)}
-
 
 # ログアウト
 @app.route('/logout')
@@ -152,6 +148,10 @@ def create_post():
         flash('投稿内容が空です','error')
         return redirect(url_for('posts_view'))
     Post.create(user_id, content)
+    last_post_id = Post.get_last_post_id()['MAX(post_id)']
+    tags = request.form.getlist('tag_ids[]')
+    for tag_id in tags:
+        Tag.set_tag_for_post(last_post_id,tag_id)
     flash('投稿が完了しました','success')
     return redirect(url_for('posts_view'))
 
@@ -231,6 +231,7 @@ def delete_comment(comment_id): # comment_idを引数に渡しメソッドでコ
     flash('コメントが削除されました','success')
     return redirect(url_for('post_detail_view', post_id=comment['post_id'])) # 投稿詳細ページにリダイレクト
 
+#プロフィール表示画面
 @app.route('/profile', methods=['GET'])
 def profile_view():
     login_user_id = session.get('user_id') # ここでセッションからuser_idを取得
@@ -238,8 +239,8 @@ def profile_view():
         return redirect(url_for('login')) # ログイン画面に飛ばす
     user = User.find_by_id(login_user_id) # user変数にUserテーブルから(user_id)ログインしてるユーザと同じIDのデータを代入する。
     return render_template('auth/profile.html', user=user, login_user_id=login_user_id) # テンプレートフォルダを探しその中のprofileディレクトリ内の指定したhtmlを読み込みuser変数の情報をhtml内でuserという名前で使える
-    
 
+#プロフィール更新
 @app.route('/profile/update', methods=['POST'])
 def profile_update():
     login_user_id = session.get('user_id')
@@ -261,6 +262,7 @@ def profile_update():
     flash('プロフィールを更新しました', 'success')
     return redirect(url_for('profile_view'))
 
+#？？プロフィール表示画面？？
 @app.route('/users/<int:user_id>', methods=['GET'])
 def user_profile_view(user_id):
     login_user_id = session.get('user_id')
@@ -269,11 +271,10 @@ def user_profile_view(user_id):
     user = User.find_by_id(user_id)
     if user is None:
         abort(404)
-    login_user_id = session.get('user_id')
 
     return render_template('auth/profile.html', user=user, user_id=user_id, login_user_id=login_user_id)
 
-# 自身の投稿表示機能
+# 自身の投稿表示画面
 @app.route('/myposts', methods=['GET'])
 def myposts_view():
     user_id = session.get('user_id') # ここでセッションからuser_idを取得
@@ -312,6 +313,18 @@ def my_bookmark():
                            my_bookmarked_comments=bookmarked_comments, # コメントのリストを渡す
                            user_id=user_id)
 
+# ブックマーク付与機能
+@app.route('/bookmark/<int:post_id>', methods=['POST'])
+def set_bookmark_for_post(post_id):
+    print("post_id:", post_id)
+    user_id = session.get('user_id') # ここでセッションからuser_idを取得
+    if user_id is None: # ログインしてないなら
+        return redirect(url_for('login')) # ログイン画面に飛ばす
+    Bookmark.set_bookmark_for_post(user_id, post_id)# bookmarksテーブルにレコードを追加
+    bookmarked_posts = []
+    bookmarked_comments = []
+    return redirect(url_for('posts_view'))
+
 # フォロワー一覧画面
 @app.route('/followers', methods=['GET'])
 def my_followers():
@@ -335,13 +348,16 @@ def my_followers():
         user_id=User.get_name_by_id(user_id) # ログインユーザーのID
     )
 
+#タグ付けポスト一覧画面
 @app.route('/tags/<int:tag_id>', methods=['GET'])
 def posts_by_tag(tag_id):
     tag = Tag.get_tag(tag_id)
     tag_posts = Tag.find_by_id(tag_id)
     posts = []
     for tag_post in tag_posts:
-        posts.append(Post.get_post_by_post_id(tag_post['post_id']))
+        post = Post.get_post_by_post_id(tag_post['post_id'])
+        if post:
+            posts.append(Post.get_post_by_post_id(tag_post['post_id']))
     return render_template("auth/tag_posts.html", posts=posts, tag=tag)
 
 @app.errorhandler(400)
