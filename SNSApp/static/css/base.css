@@ -147,7 +147,10 @@ li {
     cursor: pointer;
     background: var(--primary-light);
     color: white;
+}
 
+.logout-style:hover {
+    background: #4f7952;
 }
 
 /* mainの部分を真ん中に表示させるための要素 */
