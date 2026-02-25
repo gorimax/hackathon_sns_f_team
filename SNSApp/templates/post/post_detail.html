@@ -33,7 +33,9 @@
                     {% if tags and tags|length > 0 %}
                     <div class="post-tags">
                         {% for tag in tags %}
-                        <span class="tag">#{{ tag.tag }}</span>
+                        <a class="tag" href="{{ url_for('posts_by_tag', tag_id=tag.tag_id)}}">
+                            #{{ tag.tag }}
+                        </a>
                         {% endfor %}
                     </div>
                     {% endif %}
@@ -50,7 +52,7 @@
                         <button type="submit" class="delete">削除</button>
                     </form>
                     {% else %}
-                    <button type="button" class="bookmark">
+                    <button class="bookmark-btn" data-post-id="{{ post['post_id'] }}">
                         <i class="far fa-star "></i>
                     </button>
                     {% endif %}
@@ -98,7 +100,7 @@
                             <button type="submit" class="delete">削除</button>
                         </form>
                         {% else %}
-                        <button type="button" class="bookmark">
+                        <button class="bookmark-btn" data-comment-id="{{ comment['comment_id'] }}">
                             <i class="far fa-star "></i>
                         </button>
                         {% endif %}

@@ -6,6 +6,10 @@
     display: block;
 }
 
+.header-inner {
+    z-index: 1000;
+}
+
 .detail-wrapper {
     display: flex;
     max-width: 800px;
@@ -28,6 +32,10 @@
     min-height: 100px;
     height: auto;
     z-index: 0;
+}
+
+.post-detail-card:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
 .actions {
@@ -65,26 +73,36 @@ button.delete {
 
 /* tagのデザイン */
 .post-tags {
+    display: flex;
     padding-right: 25px;
+    gap: 5px;
 }
 
 .tag {
-    background-color: #1A6656;
+    background-color: rgb(26, 102, 86, 0.5);
     color: white;
     padding: 5px 12px;
     border-radius: 20px;
     font-size: 14px;
-    box-shadow: 0 3px 8px rgb(0, 0, 0, 0.2, );
+    box-shadow: 0 3px 8px rgb(0, 0, 0, 0.2);
+}
+
+.tag:hover {
+    background: rgb(26, 102, 86, 0.7);
 }
 
 .open-btn {
     display: inline-block;
     padding: 10px 10px;
-    background-color: #1A6656;
-    color: #45DDBC;
+    background-color:  var(--primary);
+    color: white;
     border-radius: 5px;
     cursor: pointer;
     margin-top: 15px;
+}
+
+.open-btn:hover {
+    background-color: #4f7952;
 }
 
 .post-button {
@@ -186,10 +204,22 @@ input #new-comment .modal-toggle {
     height: auto;
 }
 
+.comment-card:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.user {
+    text-decoration: none;
+}
+
+.user:hover {
+    text-decoration: underline;
+}
+
 .name,
 .post-name {
     width: auto;
-    padding: 10px 0 5px 25px;
+    padding: 10px 0 10px 20px;
     border: #28a745;
 }
 
@@ -200,10 +230,8 @@ input #new-comment .modal-toggle {
     overflow-wrap: anywhere;
 }
 
-.bookmark {
+.bookmark-btn {
     justify-content: end;
-    border: none;
-    background-color: transparent;
 }
 
 .flash-messages {
