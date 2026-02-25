@@ -56,7 +56,7 @@
     cursor: pointer;
 }
 
-button.delete {
+.delete {
     background-color: #D9E3CA;
     color: #e7609e;
     border-radius: 5px;
