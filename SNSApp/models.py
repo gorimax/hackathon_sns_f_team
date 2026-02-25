@@ -99,7 +99,8 @@ class User:
         conn =db_pool.get_conn()
         try:
             with conn.cursor() as cur:
-                sql = """UPDATE users SET profile = %s,learning = %s WHERE user_id = %s"""
+                sql = """UPDATE users SET profile = %s,learning = %s
+                         WHERE user_id = %s"""
                 cur.execute(sql,(profile, learning, user_id))
             conn.commit()
         except pymysql.Error as e:
@@ -113,7 +114,9 @@ class Post:
         conn = db_pool.get_conn()
         try:
             with conn.cursor() as cur:
-                sql = "SELECT * FROM posts WHERE deleted_at IS NULL ORDER BY created_at DESC;"
+                sql = """SELECT * FROM posts
+                         WHERE deleted_at IS NULL
+                         ORDER BY created_at DESC;"""
                 cur.execute(sql)
                 posts = cur.fetchall()
             return posts
@@ -171,7 +174,9 @@ class Post:
         conn = db_pool.get_conn()
         try:
             with conn.cursor() as cur:
-                sql = 'SELECT * FROM posts WHERE user_id=%s AND deleted_at IS NULL ORDER BY post_id DESC;'
+                sql = """SELECT * FROM posts
+                         WHERE user_id=%s AND deleted_at IS NULL
+                         ORDER BY post_id DESC;"""
                 cur.execute(sql, (user_id))
                 post = cur.fetchall()
             return post
@@ -186,10 +191,26 @@ class Post:
         conn = db_pool.get_conn()
         try:
             with conn.cursor() as cur:
-                sql = "SELECT * FROM posts WHERE post_id=%s;"
+                sql = """SELECT * FROM posts
+                         WHERE post_id=%s AND deleted_at IS NULL;"""
                 cur.execute(sql, post_id)
                 last_id = cur.fetchone()
                 return last_id
+        except pymysql.Error as e:
+            print(f'エラーが発生しています：{e}')
+            abort(500)
+        finally:
+            db_pool.release(conn)
+
+    @classmethod
+    def get_last_post_id(cls):
+        conn = db_pool.get_conn()
+        try:
+            with conn.cursor() as cur:
+                sql = "SELECT MAX(post_id) FROM posts;"
+                cur.execute(sql)
+                last_post_id = cur.fetchone()
+                return last_post_id
         except pymysql.Error as e:
             print(f'エラーが発生しています：{e}')
             abort(500)
@@ -216,7 +237,9 @@ class Comment:
         conn = db_pool.get_conn()
         try:
             with conn.cursor() as cur:
-                sql = "SELECT * FROM comments WHERE post_id=%s AND deleted_at IS NULL ORDER BY created_at DESC;"
+                sql = """SELECT * FROM comments
+                         WHERE post_id=%s AND deleted_at IS NULL
+                         ORDER BY created_at DESC;"""
                 cur.execute(sql, (post_id,))
                 comments = cur.fetchall()
             return comments
@@ -231,7 +254,8 @@ class Comment:
         conn = db_pool.get_conn()
         try:
             with conn.cursor() as cur:
-                sql = "SELECT * FROM comments WHERE comment_id=%s AND deleted_at IS NULL;"
+                sql = """SELECT * FROM comments
+                         WHERE comment_id=%s AND deleted_at IS NULL;"""
                 cur.execute(sql, (comment_id,))
                 post = cur.fetchone()
             return post
@@ -276,7 +300,9 @@ class Tag:
         conn = db_pool.get_conn()
         try:
             with conn.cursor() as cur:
-                sql = """SELECT * FROM tags JOIN post_tags ON tags.tag_id=post_tags.tag_id WHERE post_id=%s;"""
+                sql = """SELECT * FROM tags JOIN post_tags
+                         ON tags.tag_id=post_tags.tag_id
+                         WHERE post_id=%s;"""
                 cur.execute(sql, (post_id))
                 tag = cur.fetchall()
                 return tag
@@ -305,10 +331,25 @@ class Tag:
         conn = db_pool.get_conn()
         try:
             with conn.cursor() as cur:
-                sql = "SELECT * FROM post_tags WHERE tag_id=%s;"
+                sql = """SELECT * FROM post_tags WHERE tag_id=%s
+                         ORDER BY post_id DESC;"""
                 cur.execute(sql,(tag_id,))
                 tag_posts = cur.fetchall()
                 return tag_posts
+        except pymysql.Error as e:
+            print(f'エラーが発生しています：{e}')
+            abort(500)
+        finally:
+            db_pool.release(conn)
+
+    @classmethod
+    def set_tag_for_post(cls, last_post_id, tag_id):
+        conn = db_pool.get_conn()
+        try:
+            with conn.cursor() as cur:
+                sql = "INSERT INTO post_tags (post_id, tag_id) VALUES (%s, %s);"
+                cur.execute(sql, (last_post_id, tag_id))
+                conn.commit()
         except pymysql.Error as e:
             print(f'エラーが発生しています：{e}')
             abort(500)
