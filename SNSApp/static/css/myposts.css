@@ -57,22 +57,24 @@ p {
 /* タグの表示範囲、タグの配置調整 */
 .post-tags {
     display: flex;
-    flex-direction: column;
-    background-color: blue;
-    width: 15%;
-    margin: 0 auto;
+    padding-right: 25px;
     gap: 5px;
+    justify-content: flex-end;
 }
 
 /* タグの表示のデザイン調整 */
 .tag {
-    display: inline-block;
-    background-color: #e0e0e0;
-    color: #333;
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 12px;
+    background-color: rgb(26, 102, 86, 0.5);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    box-shadow: 0 3px 8px rgb(0,0,0,0.2,);
     text-decoration: none; /* リンクの下線を消す */
+}
+
+.tag:hover {
+    background:  rgb(26, 102, 86, 0.7);
 }
 
 .post-top {
@@ -87,9 +89,9 @@ p {
     justify-content: space-between;
 }
 
-.bookmark {
+/* .bookmark {
     justify-content: flex-end;
-}
+} */
 
 .post-body {
     font-size: 15px;

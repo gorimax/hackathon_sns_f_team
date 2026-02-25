@@ -284,6 +284,7 @@ def myposts_view():
     posts = Post.get_by_user_id(user_id) # posts変数にPostテーブルから(user_id)ログインしてるユーザと同じIDのデータを代入する。
     for post in posts:
         post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M')# for文処理がないと/postsと同じ表示にならない
+        post['tags'] = Tag.get_tags_post_id(post['post_id']) 
     return render_template('post/myposts.html', myposts=posts) # テンプレートフォルダ内のpostディレクトリ配下のmypost.htmlを読み込みposts変数の情報をhtml内でmypostsという名前で使える
 
 # ブックマーク機能
