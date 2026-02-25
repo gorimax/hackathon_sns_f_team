@@ -262,6 +262,7 @@ def profile_update():
     flash('プロフィールを更新しました', 'success')
     return redirect(url_for('profile_view'))
 
+#？？プロフィール表示画面？？
 @app.route('/users/<int:user_id>', methods=['GET'])
 def user_profile_view(user_id):
     login_user_id = session.get('user_id')
@@ -311,6 +312,18 @@ def my_bookmark():
                            my_bookmarks=bookmarked_posts,
                            my_bookmarked_comments=bookmarked_comments, # コメントのリストを渡す
                            user_id=user_id)
+
+# ブックマーク付与機能
+@app.route('/bookmark/<int:post_id>', methods=['POST'])
+def set_bookmark_for_post(post_id):
+    print("post_id:", post_id)
+    user_id = session.get('user_id') # ここでセッションからuser_idを取得
+    if user_id is None: # ログインしてないなら
+        return redirect(url_for('login')) # ログイン画面に飛ばす
+    Bookmark.set_bookmark_for_post(user_id, post_id)# bookmarksテーブルにレコードを追加
+    bookmarked_posts = []
+    bookmarked_comments = []
+    return redirect(url_for('posts_view'))
 
 # フォロワー一覧画面
 @app.route('/followers', methods=['GET'])
