@@ -31,6 +31,15 @@
     padding: 0 0 0 20px;
 }
 
+/* usernameの下線のデザイン */
+.user {
+    text-decoration: none;
+}
+
+.user:hover {
+    text-decoration: underline;
+}
+
 /* タグの表示範囲、タグの配置調整 */
 .post-tags {
     display: flex;
