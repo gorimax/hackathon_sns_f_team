@@ -31,15 +31,6 @@
     padding: 0 0 0 20px;
 }
 
-/* usernameの下線のデザイン */
-.user {
-    text-decoration: none;
-}
-
-.user:hover {
-    text-decoration: underline;
-}
-
 /* タグの表示範囲、タグの配置調整 */
 .post-tags {
     display: flex;
@@ -49,7 +40,7 @@
 
 /* タグの表示のデザイン調整 */
 .tag {
-    background-color: rgb(26, 102, 86, 0.5);
+    background-color: #1A6656;
     color: white;
     padding: 5px 12px;
     border-radius: 20px;
@@ -58,9 +49,7 @@
     text-decoration: none; /* リンクの下線を消す */
 }
 
-.tag:hover {
-    background:  rgb(26, 102, 86, 0.7);
-}
+
 
 /* 投稿カードの見た目 */
 
@@ -118,7 +107,7 @@
     bottom: 12%;
     right: 12%;
     padding: 10px 40px;
-    background: var(--primary);
+    background: var(--primary-light);
     color: white;
     font-size: 20px;
     font-weight: 600;

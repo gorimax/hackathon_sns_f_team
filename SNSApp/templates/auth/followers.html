@@ -5,9 +5,48 @@ Profile - TechShare
 {% endblock %}
 
 {% block page_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css')}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/follower.css')}}">
 {% endblock %}
 
 {% block content %}
-<h1>フォロワー</h1>
+<div class="follower">
+    <div class="content">
+
+        <div class="follow-btn">
+            <button class="btn-style" onclick="document.getElementById('following').style.display = 'flex'; document.getElementById('followers').style.display = 'none';">
+                フォロー
+            </button>
+
+            <button  class="btn-style" onclick="document.getElementById('followers').style.display = 'flex'; document.getElementById('following').style.display = 'none';">
+                フォロワー
+            </button>
+        </div>
+
+        <div class="follow-list">
+            <div id="following" style="display: none;">
+                <p class="card-title">フォロー中</p>
+                {% for user in following_users %}
+                <div class="user-card">
+                    <span class="user">
+                        <i class="far fa-user-circle" id="icon"></i>
+                        <span class="user-name">{{ user.user_name }}</span>
+                    </span>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div id="followers" style="display: none;">
+                <p class="card-title">フォロワー</p>
+                {% for user in followers_of_user %}
+                <div class="user-card">
+                    <span class="user">
+                        <i class="far fa-user-circle" id="icon"></i>
+                        <span class="user-name">{{ user.user_name }}</span>
+                    </span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

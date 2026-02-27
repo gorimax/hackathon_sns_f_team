@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+
+{% block title %}post-detail - TechShare{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/post_detail.css') }}">
+{% endblock %}
+
+{% block content %}
+<!-- 全体の構成 -->
+<div class="detail-wrapper">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flash-messages">
+        {% for category, message in messages %}
+        <div class="flash flash-{{ category }}">
+            {{message}}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+    <div class="main-column">
+        <!-- 投稿の内容 -->
+        <div class="detail-list">
+            <div class="post-header">
+                <div class="post-name">
+                    <a class="user" href="{{ url_for('user_profile_view', user_id=post['user_id'])}}"
+                        onclick="event.stopPropagation()">{{post['user_name']}}</a>
+                </div>
+                <div class="post-card-warp">
+                    <!-- タグ表示を追加 -->
+                    {% if tags and tags|length > 0 %}
+                    <div class="post-tags">
+                        {% for tag in tags %}
+                        <a class="tag" href="{{ url_for('posts_by_tag', tag_id=tag.tag_id)}}">
+                            #{{ tag.tag }}
+                        </a>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="post-detail-card">
+                <article>{{ post['content'] }}</article>
+                <!-- 削除などの追加 -->
+                <div class="actions">
+                    {% if post['user_id'] == user_id %}
+                    <!-- <form action="{{ url_for('delete_post',post_id=post['post_id'])}}" method="post"
+                        onsubmit="return confirm('投稿内容を削除してもよろしいですか？');">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button type="submit" class="delete">削除</button>
+                    </form> -->
+                    <!-- 投稿削除モーダル -->
+                    <input type="checkbox" id="delete-post" class="modal-toggle">
+                    <label for="delete-post" class="delete">削除</label>
+
+                    <div class="modal">
+                        <!-- 背景 -->
+                        <label for="delete-post" class="modal-overlay"></label>
+
+                        <div class="modal-content">
+                            <h2>削除確認</h2>
+                            <p>この投稿を削除しますか？（取り消し不可）</p>
+
+                            <form action="{{ url_for('delete_post', post_id=post['post_id']) }}" method="post">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <button type="submit" class="delete">削除する</button>
+                            </form>
+
+                            <label for="delete-post" class="close-btn">&times;</label>
+                        </div>
+                    </div>
+                    {% else %}
+                    <button class="bookmark-btn" data-post-id="{{ post['post_id'] }}">
+                        <i class="far fa-star "></i>
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+            <!-- コメント投稿フォーム -->
+            <section class="comment-btn">
+                <input type="checkbox" id="new-comment" class="modal-toggle">
+                <label for="new-comment" class="open-btn">コメントをする</label>
+
+                <div class="modal">
+                    <!-- 背景 -->
+                    <label for="new-comment" class="modal-overlay"></label>
+                    <div class="modal-content">
+                        <h2>コメントフォーム</h2>
+                        <form action="{{ url_for('create_comment',post_id=post['post_id'])}}" method="post">
+                            <input type="hidden" name="csrf_token" value="{{csrf_token() }}">
+                            <textarea name="content" placeholder="内容を入力してください"></textarea>
+                            <button type="submit" class="delete">送信</button>
+                        </form>
+                        <label for="new-comment" class="close-btn">&times;</label>
+                    </div>
+                </div>
+            </section>
+            <!--コメント一覧 -->
+            <section class="comment-section">
+                {% if comments and comments|length > 0 %}
+                {% for comment in comments %}
+                <div class="name">
+                    <a class="user" href="{{ url_for('user_profile_view', user_id=comment['user_id'])}}"
+                        onclick="event.stopPropagation()">{{comment['user_name']}}</a>
+                </div>
+                <div class="comment-card">
+                    <article class="comment-body">
+                        {{comment['content']}}
+                    </article>
+                    <div class="comment-time">
+                        {{comment['created_at']}}
+                    </div>
+                    <div class="actions">
+                        {% if comment['user_id'] == user_id %}
+                        <!-- <form action="{{ url_for('delete_comment',comment_id=comment['comment_id'])}}" method="post"
+                            onsubmit="return confirm('コメントを削除してもよろしいですか？')">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <button type="submit" class="delete">削除</button>
+                        </form> -->
+                        <input type="checkbox" id="delete-comment-{{ comment['comment_id'] }}" class="modal-toggle">
+                        <label for="delete-comment-{{ comment['comment_id'] }}"
+                            class="delete">削除</label>
+
+                        <div class="modal">
+                            <label for="delete-comment-{{ comment['comment_id'] }}" class="modal-overlay"></label>
+
+                            <div class="modal-content">
+                                <h2>削除確認</h2>
+                                <p>このコメントを削除しますか？</p>
+
+                                <form action="{{ url_for('delete_comment', comment_id=comment['comment_id']) }}"
+                                    method="post">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                    <button type="submit" class="delete">削除する</button>
+                                </form>
+
+                                <label for="delete-comment-{{ comment['comment_id'] }}"
+                                    class="close-btn">&times;</label>
+                            </div>
+                        </div>
+                        {% else %}
+                        <button class="bookmark-btn" data-comment-id="{{ comment['comment_id'] }}">
+                            <i class="far fa-star "></i>
+                        </button>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <p class="no-comment">まだコメントはありません</p>
+                {% endif %}
+            </section>
+        </div>
+    </div>
+
+    {% endblock %}

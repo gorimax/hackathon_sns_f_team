@@ -26,6 +26,7 @@ CREATE TABLE
         learning TEXT DEFAULT NULL,
         created_at DATETIME (6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
         updated_at DATETIME (6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+        deleted_at DATETIME (6) DEFAULT NULL,
         PRIMARY KEY (user_id),
         UNIQUE KEY uq_users_email (email)
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
@@ -71,7 +72,7 @@ CREATE TABLE
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
 CREATE TABLE
-    bookmark (
+    bookmarks (
         bookmark_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
         user_id BIGINT UNSIGNED NOT NULL,
         post_id BIGINT UNSIGNED DEFAULT NULL,
@@ -125,9 +126,9 @@ CREATE TABLE
 
 INSERT INTO users (user_name, email, password, profile, learning)
 VALUES 
-  ('山田太郎', 'taro@example.com', '937e8d5fbb48bd4949536cd65b8d35c426b80d2f830c5c308e2cdec422ae2244','温泉行きたい。','MySQLを少々。'),
-  ('鈴木二郎', 'jiro@example.com', '937e8d5fbb48bd4949536cd65b8d35c426b80d2f830c5c308e2cdec422ae2244','ヒートテック良き。','Pythonのさわりを。'),
-  ('田中花子', 'hanako@example.com', '937e8d5fbb48bd4949536cd65b8d35c426b80d2f830c5c308e2cdec422ae2244','濡れた髪のまま眠りたい。','');
+  ('山田太郎', 'taro@example.com', '937e8d5fbb48bd4949536cd65b8d35c426b80d2f830c5c308e2cdec422ae2244','学生です。AIに興味があります。','MySQL、python'),
+  ('鈴木二郎', 'jiro@example.com', '937e8d5fbb48bd4949536cd65b8d35c426b80d2f830c5c308e2cdec422ae2244','webシステム開発をしています','Ruby,htmlなど。'),
+  ('田中花子', 'hanako@example.com', '937e8d5fbb48bd4949536cd65b8d35c426b80d2f830c5c308e2cdec422ae2244','IT初心者です。','');
 
 INSERT INTO posts (user_id, content)
 VALUES
@@ -139,34 +140,45 @@ VALUES
 INSERT INTO comments (user_id, post_id, content)
 VALUES
     (2, 1, '応援しています！頑張ってください。'),
-    (1, 1, 'おっふ、サンキューです。');
+    (1, 1, 'ありがとうございます。');
 
 INSERT INTO tags (tag)
 VALUES
     ('html'),
-    ('Ruby');
+    ('python'),
+    ('flask'),
+    ('Ruby'),
+    ('css'),
+    ('その他');
 
 INSERT INTO follow (user_id, followed_user_id)
 VALUES
     (3, 1),
-    (1, 2);
-
-INSERT INTO bookmark (user_id, post_id)
-VALUES
-    (2, 3);
-
-INSERT INTO bookmark (user_id, comment_id)
-VALUES
-    (1, 1);
-
-INSERT INTO good_actions (user_id, post_id)
-VALUES
-    (3, 2);
-
-INSERT INTO good_actions (user_id, comment_id)
-VALUES
+    (1, 2),
+    (1, 3),
+    (2, 3),
     (2, 1);
+
+INSERT INTO bookmarks (user_id, post_id, comment_id)
+VALUES
+    (2, 3, null),
+    (2, 1, null),
+    (3, 2, null),
+    (1, null, 1);
+
+INSERT INTO good_actions (user_id, post_id, comment_id)
+VALUES
+    (3, 2, null),
+    (1, 3, null),
+    (2, null, 1),
+    (1, null, 2);
 
 INSERT INTO post_tags (post_id, tag_id)
 VALUES
-    (1, 1);
+    (1, 1),
+    (1, 3),
+    (1, 5),
+    (2, 4),
+    (2, 6),
+    (3, 2),
+    (3, 6);

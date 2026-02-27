@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}TechShare{% endblock %}</title>
     <link rel="stylesheet" href="{{url_for('static', filename='css/base.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/color.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     {%block page_css %}{% endblock %}
 </head>
 
@@ -15,7 +17,9 @@
         {% if request.path != "/login" and request.path != "/signup" %}
         <div class="menu-content">
             <div class="side">
-                {%include 'common/menu.html'%}
+                <div class="menu-style">
+                    {%include 'common/menu.html'%}
+                </div>
             </div>
         </div>
         {% endif %}
@@ -23,8 +27,13 @@
         <div class="main-page">
             {%block content %}{% endblock %}
         </div>
+        {% if request.path != "/login" and request.path != "/signup" %}
+        <div class="side2">
+        </div>
+        {% endif %}
     </main>
     {%include 'common/footer.html'%}
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 
 </html>

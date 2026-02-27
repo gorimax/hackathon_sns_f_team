@@ -6,8 +6,75 @@ Profile - TechShare
 
 {% block page_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css')}}">
+<link rel="stylesheet" href="{{ url_for('static',filename='css/profile.css')}}">
 {% endblock %}
 
 {% block content %}
-<h2>プロフィール</h2>
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div class="flash-messages">
+    {% for category, message in messages %}
+    <div class="flash flash-{{ category }}">
+        {{message}}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+<!-- プロフィールカード -->
+<main class="profile">
+    <div class="profile-card">
+
+        <div class="profile-header">
+            <div class="profile-dock-wrap">
+                <div class="profile-dock">
+                    <h1 class="profile-name">{{ user.user_name }}</h1>
+                </div>
+            </div>
+        </div>
+
+        <section class="technology">
+            <h2 class="technology-title">学習中技術</h2>
+            <article class="skil">{{ user.learning }}</article>
+        </section>
+
+        <section class="self-introduction">
+            <h2>自己紹介</h2>
+            <p>{{ user.profile }}</p>
+        </section>
+        <!-- modal -->
+        {% if user.user_id == login_user_id %}
+        <section class="comment-btn">
+            <input type="checkbox" id="profile-edit" class="modal-toggle">
+
+            <label for="profile-edit" class="open-btn">編集</label>
+
+            <div class="modal">
+                <!-- 背景クリックで閉じる -->
+                <label for="profile-edit" class="modal-overlay"></label>
+
+                <div class="modal-content">
+                    <h2>プロフィール編集</h2>
+
+                    <form action="{{ url_for('profile_update') }}" method="post">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                        <label class="modal-label">学習中技術（100文字まで）</label>
+                        <textarea name="learning" maxlength="100" class="modal-textarea"
+                            placeholder="例：HTML , CSS , Python">{{ user.learning or '' }}</textarea>
+
+                        <label class="modal-label">自己紹介（500文字まで）</label>
+                        <textarea name="profile" maxlength="500" class="modal-textarea"
+                            placeholder="自己紹介を書いてね">{{ user.profile or '' }}</textarea>
+                        <button type="submit" class="modal-submit">保存</button>
+                    </form>
+
+                    <!-- ×ボタンで閉じる -->
+                    <label for="profile-edit" class="close-btn">&times;</label>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+    </div>
+</main>
 {% endblock %}

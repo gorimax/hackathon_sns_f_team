@@ -5,9 +5,57 @@ Profile - TechShare
 {% endblock %}
 
 {% block page_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css')}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bookmark.css')}}">
 {% endblock %}
 
+
 {% block content %}
-<h1>ブックマーク</h1>
+<section class="post-list">
+    {% if my_bookmarks %}
+            {% for post in my_bookmarks %}
+            <div class="post-whole">
+                <!-- 投稿の上の部分（名前とタグ） -->
+                <div class="post-header">
+
+                <div class="name">
+                    <div class="post-name">
+                        <a class="user" href="{{ url_for('user_profile_view', user_id=post['user_id'])}}"
+                            onclick="event.stopPropagation()">{{post['user_name']}}</a>
+                    </div>
+                </div>
+
+                    <div class="post-tags">
+                    {% for tag in post.tags %}
+                        <a class="tag" href="{{ url_for('posts_by_tag', tag_id=tag.tag_id)}}">
+                            #{{ tag.tag }}
+                        </a>
+                    {% endfor %}
+                    </div>
+
+                </div>
+
+                <!-- 投稿 -->
+                <div class="post-card" data-url="{{ url_for('post_detail_view', post_id=post.post_id)}}">
+                    <div class="post-content">
+
+                        <div class="post-top">
+                            <div class="post-time">{{ post.created_at }}</div>
+                            <button class="bookmark-btn"><i class="far fa-star"></i></button>
+                        </div>
+
+                        <div class="post-body">
+                            {{ post.content }}
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+    {% else %}
+        <div class="empty">
+            <p>ブックマークした投稿がありません</p>
+        </div>
+    {% endif %}
+</section>
 {% endblock %}

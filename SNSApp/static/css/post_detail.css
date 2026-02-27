@@ -1,0 +1,241 @@
+* {
+    box-sizing: border-box;
+}
+
+.main-content {
+    display: block;
+}
+
+.header-inner {
+    z-index: 1000;
+}
+
+.detail-wrapper {
+    display: flex;
+    max-width: 800px;
+    min-height: 100vh;
+    width: 100%;
+    margin: 0 auto;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 100px;
+}
+
+.post-detail-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-radius: 27px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 14px 16px 12px;
+    min-height: 100px;
+    height: auto;
+    z-index: 0;
+}
+
+.post-detail-card:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.actions {
+    margin-top: auto;
+    align-self: flex-end;
+}
+
+.comment-time {
+    align-self: flex-end;
+    order: -1;
+}
+
+.actions input {
+    background-color: #D9E3CA;
+    color: #e7609e;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.delete {
+    background-color: #D9E3CA;
+    color: #e7609e;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    z-index: 5;
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* tagのデザイン */
+.post-tags {
+    display: flex;
+    padding-right: 25px;
+    gap: 5px;
+}
+
+.tag {
+    background-color: rgb(26, 102, 86, 0.5);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    box-shadow: 0 3px 8px rgb(0, 0, 0, 0.2);
+}
+
+.tag:hover {
+    background: rgb(26, 102, 86, 0.7);
+}
+
+.open-btn {
+    display: inline-block;
+    padding: 10px 10px;
+    background-color:  var(--primary);
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.open-btn:hover {
+    background-color: #4f7952;
+}
+
+.post-button {
+    position: fixed;
+    bottom: 10%;
+    right: 10%;
+}
+
+.modal-toggle {
+    display: none;
+}
+
+.modal {
+    display: none;
+    /* 非表示 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    box-sizing: border-box;
+}
+
+/* フォームの要素 */
+.modal-content h2 {
+    margin-top: 0;
+    text-align: center;
+}
+
+input #new-comment .modal-toggle {
+    display: none;
+}
+
+.modal-content input,
+.modal-content textarea {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.modal-content button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.comment-btn {
+    text-align: right;
+}
+
+/* 閉じるボタン（×印） */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #888;
+}
+
+/* ★★★ チェックボックスがONになったらモーダルを表示する ★★★ */
+.modal-toggle:checked~.modal {
+    display: block;
+}
+
+.comment-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-radius: 27px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 14px 16px 12px;
+    min-height: 50px;
+    height: auto;
+}
+
+.comment-card:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+a {
+    text-decoration: none;
+}
+
+.user:hover {
+    text-decoration: underline;
+}
+
+.name,
+.post-name {
+    width: auto;
+    padding: 10px 0 10px 20px;
+    border: #28a745;
+}
+
+.comment-body {
+    font-size: 15px;
+    text-align: left;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.bookmark-btn {
+    justify-content: end;
+}
+
+.flash-messages {
+    margin: 0 auto;
+    max-width: 850px;
+    padding: 20px 10px 0;
+}

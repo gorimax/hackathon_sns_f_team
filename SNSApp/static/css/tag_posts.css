@@ -1,0 +1,102 @@
+* {
+    box-sizing: border-box;
+}
+
+.tag-title {
+    padding-left: 20px;
+
+}
+.tag-page {
+    display: flex;
+    flex-direction: column;
+}
+
+.post-list {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 30px;
+}
+
+.post-whole {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* 投稿カードの上の部分 */
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.name {
+    width: auto;
+    /* background-color: rgb(194, 194, 212); */
+    padding: 0 0 0 20px;
+}
+
+/* タグの表示範囲、タグの配置調整 */
+.post-tags {
+    display: flex;
+    padding-right: 25px;
+    gap: 5px;
+}
+
+/* タグの表示のデザイン調整 */
+.tag {
+    background-color: #1A6656;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    box-shadow: 0 3px 8px rgb(0,0,0,0.2,);
+    text-decoration: none; /* リンクの下線を消す */
+}
+
+
+
+/* 投稿カードの見た目 */
+
+.post-card {
+    display: flex;
+    background-color: #ffffff;
+    border-radius: 27px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 14px 16px 12px;
+    cursor: pointer;
+}
+
+.post-content {
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+    width: 100%;
+    gap: 8px;
+}
+
+.post-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-body {
+    padding: 0 10px;
+    font-size: 15px;
+    text-align: left;
+    line-height: 1.6;
+    /* テキストの折り返し設定 */
+    overflow-wrap: anywhere;
+}
+
+/* ブックマークの見た目 */
+/* .bookmark-btn {
+} */
+
+.post-card:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}

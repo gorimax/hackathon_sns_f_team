@@ -10,39 +10,50 @@
 
 {% block content %}
 
-<div class="main">
-    <div class="card-container">
-        <div class="auth-wrapper">
-            <div class="card">
-                <h2 class="auth-title">サインアップ</h2>
-                <form class="auth-form" method="post" action="">
-                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                    <div>
-                        <label>ユーザー名</label>
-                        <input type="text" placeholder="ユーザー名" name="name">
-                    </div>
-
-                    <div>
-                        <label>メールアドレス</label>
-                        <input type="text" placeholder="メールアドレス" name="email">
-                    </div>
-
-                    <div>
-                        <label>パスワード</label>
-                        <input type="password" placeholder="パスワード" name="password">
-                    </div>
-
-                    <div>
-                        <label>パスワード(確認用)</label>
-                        <input type="password" placeholder="パスワード(確認用)" name="password_confirmation">
-                    </div>
-
-                    <div class="auth-button-container">
-                        <button class="auth-button" type="submit">SIGNUP</button>
-
-                        <a class="auth-link" href="{{url_for('login')}}">ログインはこちら</a>
-                </form>
+<!-- <div class="main"> -->
+<div class="card-container">
+    <div class="auth-wrapper">
+        <div class="card">
+            <h2 class="auth-title">サインアップ</h2>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                <div class="flash flash-{{ category }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
             </div>
+            {% endif %}
+            {% endwith %}
+            <form class="auth-form" method="post" action="">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <div>
+                    <label>ユーザー名</label>
+                    <input type="text" placeholder="ユーザー名" name="name">
+                </div>
+
+                <div>
+                    <label>メールアドレス</label>
+                    <input type="text" placeholder="メールアドレス" name="email">
+                </div>
+
+                <div>
+                    <label>パスワード</label>
+                    <input type="password" placeholder="パスワード" name="password">
+                </div>
+
+                <div>
+                    <label>パスワード(確認用)</label>
+                    <input type="password" placeholder="パスワード(確認用)" name="password_confirmation">
+                </div>
+
+                <div class="auth-button-container">
+                    <button class="auth-button" type="submit">SIGNUP</button>
+
+                    <a class="auth-link" href="{{url_for('login')}}">ログインはこちら</a>
+                </div>
+            </form>
         </div>
     </div>
 </div>

@@ -7,8 +7,15 @@ body {
     flex-direction: column;
     margin: 0 !important;
     min-height: 100vh;
+    background-image: url('../image/background.png');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #d9e3cb;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
 
 .logo {
     font-weight: 700;
@@ -28,22 +35,20 @@ header {
 }
 
 .header-inner {
-    background-color: #1a6656;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    background: var(--primary);
     width: 100%;
     height: 83px;
     position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 footer {
     display: flex;
     justify-content: center;
     align-items: end;
-    height: 20px;
-    position: fixed;
-    bottom: 5px;
+    margin-top: 20px;
     width: 100%;
 }
 
@@ -51,66 +56,170 @@ footer {
 .main-content {
     display: flex;
     flex: 1;
-    padding-bottom: 25px;
+    /* min-height: 100vh; */
 }
-
 
 .main-page {
     flex: 1;
-    min-height: 100vh;
-    background-image: url('../image/background.png');
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
 }
 
 /* サイドメニュー */
 
 .menu-content {
     display: flex;
-    flex-direction: column; 
-    width: 15%;
-    height: 100vh;
+    flex-direction: column;
+    width: 20%;
 }
 
 .side {
     display: flex;
     flex-direction: column;
-    width: 15%;
-    height: 100vh;
-    top: 0;
-    left: 0;
+    width: 14%;
+    height: 65%;
+    top: 45%;
+    left: 5%;
+    transform: translateY(-50%);
     position: fixed;
-    background-color: rgba(255, 255, 255, 0.5);
 }
 
-/* menu内の要素（ログアウトボタン除く）全体の配置 */
+.account-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    margin-bottom: 15px;
+    left: 5%;
+}
+
+.account-name {
+    text-align: center;
+    font-size: 18px;
+    width: 100%;
+    background: #45ddbc;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.menu-style {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    height: 80%;
+}
+
+/* menu内の要素全体の配置 */
 .menu {
     display: flex;
     flex-direction: column;
-    padding-top: 40px;
+    padding: 20px 20px 0;
     height: 100%;
 }
 
 nav {
-    height: 70%;
+    height: 65%;
+    padding-left: 20px;
 }
 
 .list {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 25px;
     list-style: none;
+    padding-left: 0;
 }
 
 li {
-    font-size: 17px;
+    font-size: 20px;
 }
 
 .logout {
-    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 25%;
+}
+
+.logout-style {
+    width: 60%;
     border-radius: 30px;
+    padding: 8px 18px;
     border: 1px;
     cursor: pointer;
+    background: var(--primary-light);
+    color: white;
+}
+
+.logout-style:hover {
+    background: #4f7952;
+}
+
+/* mainの部分を真ん中に表示させるための要素 */
+.side2 {
+    width: 20%;
+    right: 0;
+}
+
+
+/* フラッシュメッセージ */
+.flash-messages {
+    margin: 0;
+    padding: 0;
+}
+
+/* フラッシュメッセージのスタイル・デザイン（共通） */
+.flash {
+    text-align: center;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    line-height: 1.4;
+    border-left: 6px solid #ccc;
+    background: #f9f9f9;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* 成功のフラッシュメッセージのデザイン */
+.flash-success {
+    background: #e9f7ec;
+    border-left-color: #27ae60;
+    color: #1e824c;
+}
+
+/* エラーのフラッシュメッセージのデザイン */
+.flash-error {
+    background: #fdecea;
+    border-left-color: #e74c3c;
+    color: #c0392b;
+}
+
+
+.menu a {
+    font-size: 19px;
+    padding-bottom: 5px;
+    position: relative;
+    text-decoration: none;
+}
+
+.menu a::before {
+    background: var(--primary);
+    content: '';
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transform-origin: right top;
+    transform: scale(0, 1);
+    transition: transform .3s;
+}
+
+.menu a:hover::before {
+    transform-origin: left top;
+    transform: scale(1, 1);
+}
+
+.menu i {
+    color: var(--accent);
+    margin-right: 5px;
 }
