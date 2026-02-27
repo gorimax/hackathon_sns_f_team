@@ -191,8 +191,9 @@ class Post:
         conn = db_pool.get_conn()
         try:
             with conn.cursor() as cur:
-                sql = """SELECT * FROM posts
-                         WHERE post_id=%s AND deleted_at IS NULL;"""
+                sql = """SELECT posts.*,users.user_name FROM posts JOIN users
+                         ON posts.user_id=users.user_id 
+                         WHERE post_id=%s AND posts.deleted_at IS NULL;"""
                 cur.execute(sql, post_id)
                 last_id = cur.fetchone()
                 return last_id

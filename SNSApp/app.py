@@ -302,6 +302,7 @@ def my_bookmark():
             post = Post.find_by_id(record['post_id'])
             if post and post.get('deleted_at') is None:# もしpost_idが空でdeleted_atに追加（削除）されてなければ（掲示板が存在していたら）
                 post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M')
+                post['user_name'] = User.get_name_by_id(post['user_id'])
                 bookmarked_posts.append(post)# []リストにpost詳細を追加する
         elif record.get('comment_id'): # comment_idが存在する場合（コメントのブックマーク）
             comment = Comment.find_by_id(record['comment_id'])

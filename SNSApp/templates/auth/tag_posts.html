@@ -16,12 +16,14 @@
     {% if posts and posts|length > 0 %}
         {% for post in posts %}
         <div class="post-whole">
-
             <!-- 投稿の上の部分（名前とタグ） -->
             <div class="post-header">
 
                 <div class="name">
-                    <span class="user">{{ post.user_name }}</span>
+                    <div class="post-name">
+                        <a class="user" href="{{ url_for('user_profile_view', user_id=post['user_id'])}}"
+                            onclick="event.stopPropagation()">{{post['user_name']}}</a>
+                    </div>
                 </div>
 
                 <div class="post-tags">
